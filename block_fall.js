@@ -16,7 +16,7 @@ var BlockFall = Class.extend({
 	$("#drawCanvas").css('z-index', '1000000000');
     },
 
-    drawSquare: function(x, y, color) {
+    drawBlock: function(x, y, color) {
 	this.context.fillStyle = color;
 	this.context.fillRect(x, y, 20, 20);
 
@@ -26,16 +26,22 @@ var BlockFall = Class.extend({
 
     drawBorder: function() {
         for (var i = 0; i < 16; i++)
-            this.drawSquare(i * 20, 0, "grey");
+            this.drawBlock(i * 20, 0, "grey");
 
         for (var i = 0; i < 16; i++)
-            this.drawSquare(i * 20, 500, "grey");
+            this.drawBlock(i * 20, 500, "grey");
 
         for (var i = 1; i < 25; i++)
-            this.drawSquare(0, i * 20, "grey");
+            this.drawBlock(0, i * 20, "grey");
 
         for (var i = 1; i < 25; i++)
-            this.drawSquare(300, i * 20, "grey");
+            this.drawBlock(300, i * 20, "grey");
+    },
 
+    drawSquare: function(x, y) {
+	var square = new Square(x, y);
+	var blocks = square.drawShape();
+	for (var i = 0; i < blocks.length; i++)
+	    this.drawBlock.apply(this, blocks[i]);
     }
 });

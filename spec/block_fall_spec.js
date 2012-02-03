@@ -9,9 +9,9 @@ describe("BlockFall", function() {
 	expect($('#drawCanvas').length).toEqual(1);
     });
 
-    it("draw a square", function() {
+    it("draw a block", function() {
 	sinon.spy(blockFall.context, "fillRect");
-	blockFall.drawSquare(20, 20, "red");
+	blockFall.drawBlock(20, 20, "red");
 	expect(blockFall.context.fillRect.calledOnce).toBeTruthy();
 	sinon.spy(blockFall.context.fillRect.restore());
     });
@@ -20,6 +20,13 @@ describe("BlockFall", function() {
 	sinon.spy(blockFall.context, "fillRect");
 	blockFall.drawBorder();
 	expect(blockFall.context.fillRect.callCount).toEqual(80);
+	sinon.spy(blockFall.context.fillRect.restore());
+    });
+
+    it("draw a square", function() {
+	sinon.spy(blockFall.context, "fillRect");
+	blockFall.drawSquare(20, 20);
+	expect(blockFall.context.fillRect.callCount).toEqual(4);
 	sinon.spy(blockFall.context.fillRect.restore());
     });
 
