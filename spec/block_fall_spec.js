@@ -9,6 +9,13 @@ describe("BlockFall", function() {
 	expect($('#drawCanvas').length).toEqual(1);
     });
 
+    it("can draw the background", function() {
+	sinon.spy(blockFall.context, "fillRect");
+	blockFall.drawBackground();
+	expect(blockFall.context.fillRect.calledOnce).toBeTruthy();
+	sinon.spy(blockFall.context.fillRect.restore());
+    });
+
     it("draw a block", function() {
 	sinon.spy(blockFall.context, "fillRect");
 	blockFall.drawBlock(20, 20, "red");
