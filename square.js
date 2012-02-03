@@ -6,7 +6,7 @@ var Square = Class.extend({
     },
 
     drawShape: function() {
-	return [[this.x, this.y, "blue"], [this.x + 20, this.y, "blue"], [this.x, this.y + 20, "blue"], [this.x + 20, this.y + 20, "blue"]];
+	return [[new Grid(this.x, this.y), "blue"], [new Grid(this.x + 1, this.y), "blue"], [new Grid(this.x, this.y + 1), "blue"], [new Grid(this.x + 1, this.y + 1), "blue"]];
     }
 
 });

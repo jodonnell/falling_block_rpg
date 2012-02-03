@@ -4,8 +4,12 @@ var Grid = Class.extend({
 	this.y = y;
     },
 
-    toPos: function() {
-	return [this.x * 20, this.y * 20];
+    getX: function() {
+	return this.x * 20;
+    },
+    
+    getY: function() {
+	return this.y * 20;
     }
 
 });

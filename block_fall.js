@@ -19,7 +19,9 @@ var BlockFall = Class.extend({
 	$("#drawCanvas").css('z-index', '1000000000');
     },
 
-    drawBlock: function(x, y, color) {
+    drawBlock: function(grid, color) {
+	var x = grid.getX();
+	var y = grid.getY();
 	this.context.fillStyle = color;
 	this.context.fillRect(x, y, 20, 20);
 
@@ -29,16 +31,16 @@ var BlockFall = Class.extend({
 
     drawBorder: function() {
         for (var i = 0; i < 16; i++)
-            this.drawBlock(i * 20, 0, "grey");
+            this.drawBlock(new Grid(i, 0), "grey");
 
         for (var i = 0; i < 16; i++)
-            this.drawBlock(i * 20, this.RIGHT_BOUND - 20, "grey");
+            this.drawBlock(new Grid(i, 25), "grey");
 
         for (var i = 1; i < 25; i++)
-            this.drawBlock(0, i * 20, "grey");
+            this.drawBlock(new Grid(0, i), "grey");
 
         for (var i = 1; i < 25; i++)
-            this.drawBlock(this.BOTTOM_BOUND - 20, i * 20, "grey");
+            this.drawBlock(new Grid(15, i), "grey");
     },
 
     drawSquare: function(x, y) {

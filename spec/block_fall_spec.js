@@ -18,7 +18,7 @@ describe("BlockFall", function() {
 
     it("draw a block", function() {
 	sinon.spy(blockFall.context, "fillRect");
-	blockFall.drawBlock(20, 20, "red");
+	blockFall.drawBlock(new Grid(1, 1), "red");
 	expect(blockFall.context.fillRect.calledOnce).toBeTruthy();
 	sinon.spy(blockFall.context.fillRect.restore());
     });
@@ -32,7 +32,7 @@ describe("BlockFall", function() {
 
     it("draw a square", function() {
 	sinon.spy(blockFall.context, "fillRect");
-	blockFall.drawSquare(20, 20);
+	blockFall.drawSquare(2, 2);
 	expect(blockFall.context.fillRect.callCount).toEqual(4);
 	sinon.spy(blockFall.context.fillRect.restore());
     });
