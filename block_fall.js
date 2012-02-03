@@ -16,7 +16,11 @@ var BlockFall = Class.extend({
 	$("#drawCanvas").css('z-index', '1000000000');
     },
 
-    drawSquare: function() {
-	this.context.fillRect(50, 25, 20, 20);
+    drawSquare: function(x, y, color) {
+	this.context.fillStyle = color;
+	this.context.fillRect(x, y, 20, 20);
+
+	this.context.strokeStyle = "black";
+	this.context.strokeRect(x, y, 20, 20);
     }
 });
