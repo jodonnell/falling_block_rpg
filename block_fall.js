@@ -25,7 +25,17 @@ var BlockFall = Class.extend({
     },
 
     drawBorder: function() {
-        for (var i = 0; i < 20; i++)
+        for (var i = 0; i < 16; i++)
             this.drawSquare(i * 20, 0, "grey");
+
+        for (var i = 0; i < 16; i++)
+            this.drawSquare(i * 20, 500, "grey");
+
+        for (var i = 1; i < 25; i++)
+            this.drawSquare(0, i * 20, "grey");
+
+        for (var i = 1; i < 25; i++)
+            this.drawSquare(300, i * 20, "grey");
+
     }
 });

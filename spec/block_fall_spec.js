@@ -19,7 +19,7 @@ describe("BlockFall", function() {
     it("draws the border", function() {
 	sinon.spy(blockFall.context, "fillRect");
 	blockFall.drawBorder();
-	expect(blockFall.context.fillRect.callCount).toEqual(20);
+	expect(blockFall.context.fillRect.callCount).toEqual(80);
 	sinon.spy(blockFall.context.fillRect.restore());
     });
 
