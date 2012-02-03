@@ -22,5 +22,10 @@ var BlockFall = Class.extend({
 
 	this.context.strokeStyle = "black";
 	this.context.strokeRect(x, y, 20, 20);
+    },
+
+    drawBorder: function() {
+        for (var i = 0; i < 20; i++)
+            this.drawSquare(i * 20, 0, "grey");
     }
 });
