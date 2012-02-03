@@ -1,6 +1,7 @@
 var BlockFall = Class.extend({
     init: function() {
 	this.createCanvas();
+	this.context = $('#drawCanvas').get(0).getContext("2d");
     },
 
     createCanvas: function() {
@@ -13,5 +14,9 @@ var BlockFall = Class.extend({
 	$("#drawCanvas").css('top', '0px');
 	$("#drawCanvas").css('left', '0px');
 	$("#drawCanvas").css('z-index', '1000000000');
+    },
+
+    drawSquare: function() {
+	this.context.fillRect(50, 25, 20, 20);
     }
 });
