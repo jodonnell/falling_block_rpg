@@ -5,6 +5,7 @@ var BlockFall = Class.extend({
     init: function() {
 	this.createCanvas();
 	this.context = $('#drawCanvas').get(0).getContext("2d");
+	this.shapes = [];
     },
 
     createCanvas: function() {
@@ -16,7 +17,7 @@ var BlockFall = Class.extend({
 	$("#drawCanvas").css('position', 'absolute');
 	$("#drawCanvas").css('top', '0px');
 	$("#drawCanvas").css('left', '0px');
-	$("#drawCanvas").css('z-index', '1000000000');
+	$("#drawCanvas").css('z-index', '-1');
     },
 
     drawBlock: function(grid, color) {
@@ -43,9 +44,16 @@ var BlockFall = Class.extend({
             this.drawBlock(new Grid(15, i), "grey");
     },
 
-    drawSquare: function(x, y) {
-	var square = new Square(x, y);
-	var blocks = square.drawShape();
+    createSquare: function() {
+	this.shapes.push(new Square(new Grid(7, 1)));
+    },
+
+    drawShapes: function(x, y) {
+	for (var i = 0; i < this.shapes.length; i++)
+	    this.drawBlocks(this.shapes[i].drawShape());
+    },
+
+    drawBlocks: function(blocks) {
 	for (var i = 0; i < blocks.length; i++)
 	    this.drawBlock.apply(this, blocks[i]);
     },

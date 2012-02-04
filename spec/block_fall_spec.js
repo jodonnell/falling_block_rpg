@@ -9,6 +9,12 @@ describe("BlockFall", function() {
 	expect($('#drawCanvas').length).toEqual(1);
     });
 
+    it("should be able to create a square", function() {
+	blockFall.createSquare();
+	expect(blockFall.shapes.length).toEqual(1);
+    });
+
+
     describe("drawing operations", function() {
 	beforeEach(function() {
 	    sinon.spy(blockFall.context, "fillRect");
@@ -34,7 +40,8 @@ describe("BlockFall", function() {
 	});
 
 	it("draw a square", function() {
-	    blockFall.drawSquare(2, 2);
+	    blockFall.createSquare();
+	    blockFall.drawShapes();
 	    expect(blockFall.context.fillRect.callCount).toEqual(4);
 	});
     });

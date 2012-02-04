@@ -1,12 +1,11 @@
 var Square = Class.extend({
-    init: function(x, y) {
-	this.x = x;
-	this.y = y;
+    init: function(grid) {
+	this.grid = grid;
 	this.color = 'blue';
     },
 
     drawShape: function() {
-	return [[new Grid(this.x, this.y), "blue"], [new Grid(this.x + 1, this.y), "blue"], [new Grid(this.x, this.y + 1), "blue"], [new Grid(this.x + 1, this.y + 1), "blue"]];
+	return [[this.grid, "blue"], [this.grid.right(), "blue"], [this.grid.bottom(), "blue"], [this.grid.bottomRight(), "blue"]];
     }
 
 });
