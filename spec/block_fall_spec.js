@@ -21,10 +21,24 @@ describe("BlockFall", function() {
     });
 
     it("shold stop blocks when they hit the ground", function() {
-	for (var i = 0; i <= 40; i++)
+	for (var i = 0; i <= 23; i++)
 	    blockFall.fall();
 
 	expect(blockFall.shapes[0].grid.y).toEqual(23);
+    });
+
+    it("shold stop blocks when they land on other blocks", function() {
+	for (var i = 0; i <= 80; i++)
+	    blockFall.fall();
+
+	expect(blockFall.shapes[1].grid.y).toEqual(21);
+    });
+
+    it("shold let you move right or left", function() {
+	for (var i = 0; i <= 80; i++)
+	    blockFall.fall();
+
+	expect(blockFall.shapes[1].grid.y).toEqual(21);
     });
 
 
@@ -53,7 +67,6 @@ describe("BlockFall", function() {
 	});
 
 	it("draw a square", function() {
-	    blockFall.createSquare();
 	    blockFall.drawShapes();
 	    expect(blockFall.context.fillRect.callCount).toEqual(4);
 	});

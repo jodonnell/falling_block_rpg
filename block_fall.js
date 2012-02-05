@@ -75,10 +75,19 @@ var BlockFall = Class.extend({
     },
 
     fall: function() {
-	if (this.lastShape().grid.isAtBottom())
+	if (this.lastShape().grid.isAtBottom() || this.doesBottomCollide())
 	    this.createSquare();
 	else
     	    this.lastShape().fall();
+    },
+
+    doesBottomCollide: function() {
+	this.lastShape().grid
+	for (var i = 0; i < this.shapes.length - 1; i++) {
+	    if (this.lastShape().isShapeBelow(this.shapes[i]))
+		return true;
+	}
+	return false;
     },
 
     lastShape: function() {
