@@ -22,6 +22,10 @@ var Grid = Class.extend({
 
     bottomRight: function() {
 	return new Grid(this.x + 1, this.y + 1);
+    },
+
+    isAtBottom: function() {
+	return this.y == 23;
     }
 
 });

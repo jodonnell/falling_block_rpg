@@ -14,6 +14,21 @@ describe("BlockFall", function() {
 	expect(blockFall.shapes.length).toEqual(1);
     });
 
+    it("should have shapes fall every 1/3 of a second", function() {
+	blockFall.createSquare();
+	for (var i = 0; i <= 20; i++)
+	    blockFall.update();	    
+	expect(blockFall.shapes[0].grid.y).toEqual(2);
+    });
+
+    it("shold stop blocks when they hit the ground", function() {
+	blockFall.createSquare();
+	for (var i = 0; i <= 40; i++)
+	    blockFall.fall();
+
+	expect(blockFall.shapes[0].grid.y).toEqual(23);
+    });
+
 
     describe("drawing operations", function() {
 	beforeEach(function() {

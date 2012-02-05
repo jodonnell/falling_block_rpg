@@ -6,6 +6,7 @@ var BlockFall = Class.extend({
 	this.createCanvas();
 	this.context = $('#drawCanvas').get(0).getContext("2d");
 	this.shapes = [];
+	this.frameSkipCounter = 0;
     },
 
     createCanvas: function() {
@@ -61,6 +62,20 @@ var BlockFall = Class.extend({
     drawScreen: function() {
 	this.drawBackground();
 	this.drawBorder();
+	this.drawShapes();
+    },
+
+    update: function() {
+	this.frameSkipCounter++;
+	if ((this.frameSkipCounter % 20) == 0)
+	    this.fall();
+	if (this.frameSkipCounter == 60)
+	    this.frameSkipCounter = 0;
+    },
+
+    fall: function() {
+	if (!this.shapes[0].grid.isAtBottom())
+    	    this.shapes[0].fall();
     },
 
     drawBackground: function() {

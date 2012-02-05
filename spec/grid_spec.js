@@ -9,4 +9,14 @@ describe("Grid", function() {
 	expect(grid.getY()).toEqual(20);
 
     });
+
+    it("should know if it is at the bottom of the grid", function() {
+	var grid = new Grid(0, 0);
+	expect(grid.isAtBottom()).toBeFalsy();
+
+	grid = new Grid(1, 23);
+	expect(grid.isAtBottom()).toBeTruthy();
+
+    });
+
 });

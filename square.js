@@ -6,6 +6,10 @@ var Square = Class.extend({
 
     drawShape: function() {
 	return [[this.grid, "blue"], [this.grid.right(), "blue"], [this.grid.bottom(), "blue"], [this.grid.bottomRight(), "blue"]];
+    },
+
+    fall: function() {
+	this.grid = this.grid.bottom();
     }
 
 });
