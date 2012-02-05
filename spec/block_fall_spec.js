@@ -34,11 +34,9 @@ describe("BlockFall", function() {
 	expect(blockFall.shapes[1].grid.y).toEqual(21);
     });
 
-    it("shold let you move right or left", function() {
-	for (var i = 0; i <= 80; i++)
-	    blockFall.fall();
-
-	expect(blockFall.shapes[1].grid.y).toEqual(21);
+    it("shold let you move right", function() {
+	blockFall.moveRight();
+	expect(blockFall.lastShape().grid.x).toEqual(8);
     });
 
 

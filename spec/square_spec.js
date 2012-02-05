@@ -10,6 +10,17 @@ describe("Square", function() {
 	expect(square.grid.y).toEqual(2);
     });
 
+    it("can move right", function() {
+	square.moveRight();
+	expect(square.grid.x).toEqual(2);
+    });
+
+    it("can move left", function() {
+	square = new Square(new Grid(2,1));
+	square.moveLeft();
+	expect(square.grid.x).toEqual(1);
+    });
+
     it("can give you the occupied squares", function() {
 	expect(square.occupiedSquares().length).toEqual(4);
     });

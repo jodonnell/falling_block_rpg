@@ -15,6 +15,14 @@ var Square = Class.extend({
     fall: function() {
 	this.grid = this.grid.bottom();
     },
+
+    moveRight: function() {
+	this.grid = this.grid.right();
+    },
+
+    moveLeft: function() {
+	this.grid = this.grid.left();
+    },
     
     isShapeBelow: function(other) {
 	var occupiedSquares = other.occupiedSquares();

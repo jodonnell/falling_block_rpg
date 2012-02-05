@@ -94,6 +94,16 @@ var BlockFall = Class.extend({
 	return this.shapes[this.shapes.length - 1];
     },
 
+    moveRight: function() {
+	if ((this.frameSkipCounter % 20) == 0)
+	    this.lastShape().moveRight();
+    },
+
+    moveLeft: function() {
+	if ((this.frameSkipCounter % 20) == 0)
+	    this.lastShape().moveLeft();
+    },
+
     drawBackground: function() {
 	this.context.fillStyle = "black";
 	this.context.fillRect(0, 0, this.BOTTOM_BOUND, this.RIGHT_BOUND);
