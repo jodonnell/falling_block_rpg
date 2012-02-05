@@ -39,8 +39,13 @@ window.onEachFrame(function() {
 	game_engine.moveRight();
     if (control.isMovingLeft())
 	game_engine.moveLeft();
+
     game_engine.drawScreen(); 
-    game_engine.update()
+
+    if (control.isMovingDown())
+	game_engine.update(true);
+    else
+	game_engine.update(false);
 
 });
 

@@ -7,6 +7,9 @@ var BlockFall = Class.extend({
 	this.context = $('#drawCanvas').get(0).getContext("2d");
 	this.shapes = [];
 	this.frameSkipCounter = 0;
+
+	this.isMovingLeft = false;
+	this.isMovingRight = false;
 	this.createSquare();
     },
 
@@ -66,10 +69,23 @@ var BlockFall = Class.extend({
 	this.drawShapes();
     },
 
-    update: function() {
+    update: function(speedFall) {
 	this.frameSkipCounter++;
-	if ((this.frameSkipCounter % 20) == 0)
+	if ((this.frameSkipCounter % 20) == 0 || speedFall)
 	    this.fall();
+
+	if ((this.frameSkipCounter % 20) == 0 && this.isMovingRight && !this.doesRightCollide()) {
+	    this.lastShape().moveRight();
+	    this.isMovingRight = false;
+	    this.isMovingLeft = false;
+	}
+
+	if ((this.frameSkipCounter % 20) == 0 && this.isMovingLeft && !this.doesLeftCollide()) {
+	    this.lastShape().moveLeft();
+	    this.isMovingRight = false;
+	    this.isMovingLeft = false;
+	}
+
 	if (this.frameSkipCounter == 60)
 	    this.frameSkipCounter = 0;
     },
@@ -82,9 +98,24 @@ var BlockFall = Class.extend({
     },
 
     doesBottomCollide: function() {
-	this.lastShape().grid
 	for (var i = 0; i < this.shapes.length - 1; i++) {
 	    if (this.lastShape().isShapeBelow(this.shapes[i]))
+		return true;
+	}
+	return false;
+    },
+
+    doesRightCollide: function() {
+	for (var i = 0; i < this.shapes.length - 1; i++) {
+	    if (this.lastShape().isShapeToRight(this.shapes[i]))
+		return true;
+	}
+	return false;
+    },
+
+    doesLeftCollide: function() {
+	for (var i = 0; i < this.shapes.length - 1; i++) {
+	    if (this.lastShape().isShapeToLeft(this.shapes[i]))
 		return true;
 	}
 	return false;
@@ -95,13 +126,13 @@ var BlockFall = Class.extend({
     },
 
     moveRight: function() {
-	if ((this.frameSkipCounter % 20) == 0)
-	    this.lastShape().moveRight();
+	this.isMovingRight = true;
+	this.isMovingLeft = false;
     },
 
     moveLeft: function() {
-	if ((this.frameSkipCounter % 20) == 0)
-	    this.lastShape().moveLeft();
+	this.isMovingRight = false;
+	this.isMovingLeft = true;
     },
 
     drawBackground: function() {

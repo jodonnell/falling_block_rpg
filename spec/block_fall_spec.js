@@ -20,23 +20,34 @@ describe("BlockFall", function() {
 	expect(blockFall.shapes[0].grid.y).toEqual(2);
     });
 
-    it("shold stop blocks when they hit the ground", function() {
+    it("should stop blocks when they hit the ground", function() {
 	for (var i = 0; i <= 23; i++)
 	    blockFall.fall();
 
 	expect(blockFall.shapes[0].grid.y).toEqual(23);
     });
 
-    it("shold stop blocks when they land on other blocks", function() {
+    it("should stop blocks when they land on other blocks", function() {
 	for (var i = 0; i <= 80; i++)
 	    blockFall.fall();
 
 	expect(blockFall.shapes[1].grid.y).toEqual(21);
     });
 
-    it("shold let you move right", function() {
+    it("should let you move right", function() {
 	blockFall.moveRight();
+	for (var i = 0; i <= 20; i++)
+	    blockFall.update();
 	expect(blockFall.lastShape().grid.x).toEqual(8);
+    });
+
+    it("should not let you move right through wall", function() {
+	for (var i = 0; i <= 20; i++) {
+	    blockFall.moveRight();
+	    for (var j = 0; j <= 20; j++)
+		blockFall.update();
+	}
+	expect(blockFall.lastShape().grid.x).toEqual(13);
     });
 
 
