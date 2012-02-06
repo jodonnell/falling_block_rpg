@@ -50,7 +50,11 @@ var BlockFall = Class.extend({
     },
 
     createSquare: function() {
-	this.shapes.push(new Square(new Grid(7, 1)));
+	var randomNumber = Math.floor(Math.random()*2);
+	if (randomNumber === 1)
+	    this.shapes.push(new Square(new Grid(7, 1)));
+	else
+	    this.shapes.push(new J(new Grid(7, 1)));
     },
 
     drawShapes: function(x, y) {
