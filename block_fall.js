@@ -74,18 +74,6 @@ var BlockFall = Class.extend({
 	if ((this.frameSkipCounter % 20) == 0 || speedFall)
 	    this.fall();
 
-	if ((this.frameSkipCounter % 20) == 0 && this.isMovingRight && !this.doesRightCollide()) {
-	    this.lastShape().moveRight();
-	    this.isMovingRight = false;
-	    this.isMovingLeft = false;
-	}
-
-	if ((this.frameSkipCounter % 20) == 0 && this.isMovingLeft && !this.doesLeftCollide()) {
-	    this.lastShape().moveLeft();
-	    this.isMovingRight = false;
-	    this.isMovingLeft = false;
-	}
-
 	if (this.frameSkipCounter == 60)
 	    this.frameSkipCounter = 0;
     },
@@ -126,13 +114,13 @@ var BlockFall = Class.extend({
     },
 
     moveRight: function() {
-	this.isMovingRight = true;
-	this.isMovingLeft = false;
+	if (!this.doesRightCollide())
+	    this.lastShape().moveRight();
     },
 
     moveLeft: function() {
-	this.isMovingRight = false;
-	this.isMovingLeft = true;
+	if (!this.doesLeftCollide())
+	    this.lastShape().moveLeft();
     },
 
     drawBackground: function() {

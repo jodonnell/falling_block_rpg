@@ -36,18 +36,29 @@ describe("BlockFall", function() {
 
     it("should let you move right", function() {
 	blockFall.moveRight();
-	for (var i = 0; i <= 20; i++)
-	    blockFall.update();
 	expect(blockFall.lastShape().grid.x).toEqual(8);
     });
 
     it("should not let you move right through wall", function() {
-	for (var i = 0; i <= 20; i++) {
+	for (var i = 0; i <= 20; i++)
 	    blockFall.moveRight();
-	    for (var j = 0; j <= 20; j++)
-		blockFall.update();
-	}
 	expect(blockFall.lastShape().grid.x).toEqual(13);
+    });
+
+    it("should have right collision detection", function() {
+	blockFall.shapes.push(new Square(new Grid(9, 1)));
+	blockFall.shapes.push(new Square(new Grid(7, 1)));
+	blockFall.moveRight();
+
+	expect(blockFall.lastShape().grid.x).toEqual(7);
+    });
+
+    it("should have left collision detection", function() {
+	blockFall.shapes.push(new Square(new Grid(5, 1)));
+	blockFall.shapes.push(new Square(new Grid(7, 1)));
+	blockFall.moveLeft();
+
+	expect(blockFall.lastShape().grid.x).toEqual(7);
     });
 
 
