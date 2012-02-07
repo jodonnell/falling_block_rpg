@@ -17,7 +17,7 @@ var Shape = Class.extend({
     },
 
     moveRight: function() {
-        if (this.grid.x < 13)
+        if (!this.isAtRightBound())
             this.grid = this.grid.right();
     },
 
@@ -59,5 +59,21 @@ var Shape = Class.extend({
 
     rotate: function() {
         this.isRotated = true;
+    },
+
+    isAtBottom: function() {
+        for (var i = 0; i < this.occupiedSquares().length; i++) {
+            if (this.occupiedSquares()[i].y == 24)
+                return true;
+        }
+        return false;
+    },
+
+    isAtRightBound: function() {
+        for (var i = 0; i < this.occupiedSquares().length; i++) {
+            if (this.occupiedSquares()[i].x == 14)
+                return true;
+        }
+        return false;
     }
 });

@@ -28,10 +28,6 @@ var Grid = Class.extend({
         return new Grid(this.x + 1, this.y + 1);
     },
 
-    isAtBottom: function() {
-        return this.y == 23;
-    },
-
     isEqual: function(other) {
         return other.x === this.x && other.y === this.y;
     }

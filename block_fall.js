@@ -104,7 +104,7 @@ var BlockFall = Class.extend({
     },
 
     isShapeLocked: function() {
-        return this.lastShape().grid.isAtBottom() || this.doesBottomCollide();
+        return this.lastShape().isAtBottom() || this.doesBottomCollide();
     },
 
     doesBottomCollide: function() {
