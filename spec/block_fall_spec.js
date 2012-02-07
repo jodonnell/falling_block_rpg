@@ -16,22 +16,25 @@ describe("BlockFall", function() {
 
     it("should have shapes fall every 1/3 of a second", function() {
         for (var i = 0; i <= 20; i++)
-            blockFall.update();
+            blockFall.update(false);
         expect(blockFall.shapes[0].grid.y).toEqual(2);
     });
 
     it("should stop blocks when they hit the ground", function() {
-        for (var i = 0; i <= 23; i++)
-            blockFall.fall();
+        for (var i = 0; i <= 24; i++)
+            blockFall.fall(false);
 
         expect(blockFall.shapes[0].grid.y).toEqual(23);
     });
 
     it("should stop blocks when they land on other blocks", function() {
-        for (var i = 0; i <= 80; i++)
-            blockFall.fall();
+        for (var i = 0; i <= 25; i++)
+            blockFall.fall(false);
+        blockFall.createJ();
+        for (var i = 0; i <= 25; i++)
+            blockFall.fall(false);
 
-        expect(blockFall.shapes[1].grid.y).toEqual(21);
+        expect(blockFall.shapes[1].grid.y).toEqual(22);
     });
 
     it("should let you move right", function() {

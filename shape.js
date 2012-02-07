@@ -8,7 +8,7 @@ var Shape = Class.extend({
     },
 
     occupiedSquares: function() {
-        return [this.grid, this.grid.right(), this.grid.bottom(), this.grid.bottomRight()];
+        // must override
     },
 
     fall: function() {

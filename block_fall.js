@@ -52,9 +52,17 @@ var BlockFall = Class.extend({
     createShape: function() {
         var randomNumber = Math.floor(Math.random()*2);
         if (randomNumber === 1)
-            this.shapes.push(new Square(new Grid(7, 1)));
+            this.createSquare();
         else
-            this.shapes.push(new J(new Grid(7, 1)));
+            this.createJ();
+    },
+
+    createJ: function() {
+        this.shapes.push(new J(new Grid(7, 1)));
+    },
+
+    createSquare: function() {
+        this.shapes.push(new Square(new Grid(7, 1)));
     },
 
     drawShapes: function(x, y) {
@@ -75,18 +83,26 @@ var BlockFall = Class.extend({
 
     update: function(speedFall) {
         this.frameSkipCounter++;
-        if ((this.frameSkipCounter % 20) == 0 || speedFall)
-            this.fall();
+        this.fall(speedFall);
+
+        if (this.isShapeLocked())
+            this.createShape();
 
         if (this.frameSkipCounter == 60)
             this.frameSkipCounter = 0;
     },
 
-    fall: function() {
-        if (this.lastShape().grid.isAtBottom() || this.doesBottomCollide())
-            this.createShape();
-        else
+    shouldFall: function(speedFall) {
+        return ((this.frameSkipCounter % 20) == 0 || speedFall) && !this.isShapeLocked();
+    },
+
+    fall: function(speedFall) {
+        if (this.shouldFall(speedFall))
             this.lastShape().fall();
+    },
+
+    isShapeLocked: function() {
+        return this.lastShape().grid.isAtBottom() || this.doesBottomCollide();
     },
 
     doesBottomCollide: function() {
