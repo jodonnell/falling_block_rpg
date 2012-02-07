@@ -10,7 +10,7 @@ var BlockFall = Class.extend({
 
         this.isMovingLeft = false;
         this.isMovingRight = false;
-        this.createSquare();
+        this.createShape();
     },
 
     createCanvas: function() {
@@ -49,7 +49,7 @@ var BlockFall = Class.extend({
             this.drawBlock(new Grid(15, i), "grey");
     },
 
-    createSquare: function() {
+    createShape: function() {
         var randomNumber = Math.floor(Math.random()*2);
         if (randomNumber === 1)
             this.shapes.push(new Square(new Grid(7, 1)));
@@ -84,7 +84,7 @@ var BlockFall = Class.extend({
 
     fall: function() {
         if (this.lastShape().grid.isAtBottom() || this.doesBottomCollide())
-            this.createSquare();
+            this.createShape();
         else
             this.lastShape().fall();
     },

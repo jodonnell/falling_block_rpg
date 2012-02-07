@@ -10,13 +10,13 @@ describe("BlockFall", function() {
     });
 
     it("should be able to create a square", function() {
-        blockFall.createSquare();
+        blockFall.createShape();
         expect(blockFall.shapes.length).toEqual(2);
     });
 
     it("should have shapes fall every 1/3 of a second", function() {
         for (var i = 0; i <= 20; i++)
-            blockFall.update();	    
+            blockFall.update();
         expect(blockFall.shapes[0].grid.y).toEqual(2);
     });
 
