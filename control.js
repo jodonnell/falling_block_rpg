@@ -28,15 +28,15 @@ var Control = Class.extend({
     },
 
     isMovingRight: function() {
-	var old_right = this.right;
-	this.right = 0;
-	return old_right;
+        var old_right = this.right;
+        this.right = 0;
+        return old_right;
     },
 
     isMovingLeft: function() {
-	var old_left = this.left;
-	this.left = 0;
-	return old_left;
+        var old_left = this.left;
+        this.left = 0;
+        return old_left;
     },
 
     isMovingDown: function() {

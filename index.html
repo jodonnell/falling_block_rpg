@@ -13,45 +13,44 @@
   </head>
   <body>
     <script type="text/javascript">
-      var game_engine = new window.BlockFall();
+var game_engine = new window.BlockFall();
 
 (function() {
-  var onEachFrame;
-  if (window.webkitRequestAnimationFrame) {
-    onEachFrame = function(cb) {
-      var _cb = function() { cb(); webkitRequestAnimationFrame(_cb); }
-      _cb();
-    };
-  } else if (window.mozRequestAnimationFrame) {
-    onEachFrame = function(cb) {
-      var _cb = function() { cb(); mozRequestAnimationFrame(_cb); }
-      _cb();
-    };
-  } else {
-    onEachFrame = function(cb) {
-      setInterval(cb, 1000 / 60);
+    var onEachFrame;
+    if (window.webkitRequestAnimationFrame) {
+        onEachFrame = function(cb) {
+            var _cb = function() { cb(); webkitRequestAnimationFrame(_cb); }
+            _cb();
+        };
+    } else if (window.mozRequestAnimationFrame) {
+        onEachFrame = function(cb) {
+            var _cb = function() { cb(); mozRequestAnimationFrame(_cb); }
+            _cb();
+        };
+    } else {
+        onEachFrame = function(cb) {
+            setInterval(cb, 1000 / 60);
+        }
     }
-  }
-  
-  window.onEachFrame = onEachFrame;
+    
+    window.onEachFrame = onEachFrame;
 })();
+
 var control = new Control();
 window.onEachFrame(function() {
     if (control.isMovingRight())
-	game_engine.moveRight();
+        game_engine.moveRight();
     if (control.isMovingLeft())
-	game_engine.moveLeft();
+        game_engine.moveLeft();
 
     game_engine.drawScreen(); 
 
     if (control.isMovingDown())
-	game_engine.update(true);
+        game_engine.update(true);
     else
-	game_engine.update(false);
+        game_engine.update(false);
 
 });
-
-
 
     </script>
   </body>
