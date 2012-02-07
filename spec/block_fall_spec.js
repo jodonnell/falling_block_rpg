@@ -11,7 +11,7 @@ describe("BlockFall", function() {
 
     it("should be able to create a square", function() {
         blockFall.createShape();
-        expect(blockFall.shapes.length).toEqual(2);
+        expect(blockFall.shapes.length).toEqual(1);
     });
 
     it("should have shapes fall every 1/3 of a second", function() {
@@ -21,6 +21,7 @@ describe("BlockFall", function() {
     });
 
     it("should stop blocks when they hit the ground", function() {
+        blockFall.createSquare();
         for (var i = 0; i <= 24; i++)
             blockFall.fall(false);
 
@@ -28,8 +29,10 @@ describe("BlockFall", function() {
     });
 
     it("should stop blocks when they land on other blocks", function() {
+        blockFall.createSquare();
         for (var i = 0; i <= 25; i++)
             blockFall.fall(false);
+
         blockFall.createJ();
         for (var i = 0; i <= 25; i++)
             blockFall.fall(false);
@@ -38,11 +41,13 @@ describe("BlockFall", function() {
     });
 
     it("should let you move right", function() {
+        blockFall.createSquare();
         blockFall.moveRight();
         expect(blockFall.lastShape().grid.x).toEqual(8);
     });
 
     it("should not let you move right through wall", function() {
+        blockFall.createSquare();
         for (var i = 0; i <= 20; i++)
             blockFall.moveRight();
         expect(blockFall.lastShape().grid.x).toEqual(13);
@@ -90,6 +95,7 @@ describe("BlockFall", function() {
         });
 
         it("draw a square", function() {
+            blockFall.createSquare();
             blockFall.drawShapes();
             expect(blockFall.context.fillRect.callCount).toEqual(4);
         });

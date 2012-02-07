@@ -10,7 +10,6 @@ var BlockFall = Class.extend({
 
         this.isMovingLeft = false;
         this.isMovingRight = false;
-        this.createShape();
     },
 
     createCanvas: function() {
@@ -83,6 +82,9 @@ var BlockFall = Class.extend({
 
     update: function(speedFall) {
         this.frameSkipCounter++;
+        if (this.shapes.length == 0)
+            this.createShape();
+
         this.fall(speedFall);
 
         if (this.isShapeLocked())
