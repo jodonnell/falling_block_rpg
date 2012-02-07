@@ -71,7 +71,8 @@ describe("BlockFall", function() {
 
     it("lets you rotate", function() {
         blockFall.createJ();
-        expect(blockFall.lastShape().shape).toEqual([]);
+        blockFall.rotate();
+        expect(blockFall.lastShape().occupiedSquares()[3].y).toEqual(3);
     });
 
 

@@ -148,5 +148,9 @@ var BlockFall = Class.extend({
     drawBackground: function() {
         this.context.fillStyle = "black";
         this.context.fillRect(0, 0, this.BOTTOM_BOUND, this.RIGHT_BOUND);
+    },
+
+    rotate: function() {
+        this.lastShape().rotate();
     }
 });

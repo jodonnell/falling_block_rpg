@@ -1,6 +1,7 @@
 var Shape = Class.extend({
     init: function(grid) {
         this.grid = grid;
+        this.isRotated = false;
     },
 
     drawShape: function() {
@@ -54,5 +55,9 @@ var Shape = Class.extend({
             array.push([this.occupiedSquares()[i], this.color]);
         }
         return array;
+    },
+
+    rotate: function() {
+        this.isRotated = true;
     }
 });
