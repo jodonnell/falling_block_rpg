@@ -1,7 +1,7 @@
 var Shape = Class.extend({
     init: function(grid) {
         this.grid = grid;
-        this.isRotated = false;
+        this.rotatedPosition = 0;
     },
 
     drawShape: function() {
@@ -58,7 +58,9 @@ var Shape = Class.extend({
     },
 
     rotate: function() {
-        this.isRotated = true;
+        this.rotatedPosition++;
+        if (this.rotatedPosition === 4)
+            this.rotatedPosition = 0;
     },
 
     isAtBottom: function() {
