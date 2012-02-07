@@ -1,7 +1,5 @@
 var Square = Shape.extend({
-    drawShape: function() {
-        return [[this.grid, "blue"], [this.grid.right(), "blue"], [this.grid.bottom(), "blue"], [this.grid.bottomRight(), "blue"]];
-    },
+    color: "blue",
 
     occupiedSquares: function() {
         return [this.grid, this.grid.right(), this.grid.bottom(), this.grid.bottomRight()];

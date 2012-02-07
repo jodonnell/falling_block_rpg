@@ -46,6 +46,13 @@ var Shape = Class.extend({
             }
         return false;
 
-    }
+    },
 
+    drawShape: function() {
+        var array = [];
+        for (var i = 0; i < this.occupiedSquares().length; i++) {
+            array.push([this.occupiedSquares()[i], this.color]);
+        }
+        return array;
+    }
 });
