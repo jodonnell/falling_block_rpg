@@ -42,6 +42,9 @@ window.onEachFrame(function() {
         game_engine.moveRight();
     if (control.isMovingLeft())
         game_engine.moveLeft();
+    if (control.isRotating())
+        game_engine.rotate();
+
 
     game_engine.drawScreen(); 
 

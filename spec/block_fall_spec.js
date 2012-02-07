@@ -69,6 +69,11 @@ describe("BlockFall", function() {
         expect(blockFall.lastShape().grid.x).toEqual(7);
     });
 
+    it("lets you rotate", function() {
+        blockFall.createJ();
+        expect(blockFall.lastShape().shape).toEqual([]);
+    });
+
 
     describe("drawing operations", function() {
         beforeEach(function() {

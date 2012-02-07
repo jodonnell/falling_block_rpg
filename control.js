@@ -1,5 +1,6 @@
 var Control = Class.extend({
     LEFT_KEY: 37,
+    UP_KEY: 38,
     RIGHT_KEY: 39,
     DOWN_KEY: 40,
 
@@ -7,6 +8,7 @@ var Control = Class.extend({
         this.left = 0;
         this.right = 0;
         this.down = 0;
+        this.up = 0;
         this.getKey();
     },
 
@@ -14,6 +16,7 @@ var Control = Class.extend({
         $(document).keydown( $.proxy( function(event) {
             switch (event.keyCode) {
             case this.LEFT_KEY: this.left = 1; break;
+            case this.UP_KEY: this.up = 1; break;
             case this.RIGHT_KEY: this.right = 1; break;
             case this.DOWN_KEY: this.down = 1; break;
             }
@@ -22,6 +25,7 @@ var Control = Class.extend({
             switch (event.keyCode) {
             case this.LEFT_KEY: ; break;
             case this.RIGHT_KEY: ; break;
+            case this.UP_KEY: ; break;
             case this.DOWN_KEY: this.down = 0; break;
             }
         }, this));
@@ -37,6 +41,12 @@ var Control = Class.extend({
         var old_left = this.left;
         this.left = 0;
         return old_left;
+    },
+
+    isRotating: function() {
+        var old_up = this.up;
+        this.up = 0;
+        return old_up;
     },
 
     isMovingDown: function() {
