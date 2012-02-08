@@ -1,7 +1,6 @@
 var BlockFall = Class.extend({
     init: function() {
         this.createCanvas();
-        this.context = $('#drawCanvas').get(0).getContext("2d");
         this.shapes = [];
         this.frameSkipCounter = 0;
 
@@ -23,16 +22,6 @@ var BlockFall = Class.extend({
         $("#drawCanvas").css('z-index', '-1');
     },
 
-    drawBlock: function(grid, color) {
-        var x = grid.getX();
-        var y = grid.getY();
-        this.context.fillStyle = color;
-        this.context.fillRect(x, y, 20, 20);
-
-        this.context.strokeStyle = "black";
-        this.context.strokeRect(x, y, 20, 20);
-    },
-
     createShape: function() {
         var randomNumber = Math.floor(Math.random()*2);
         if (randomNumber === 1)
@@ -49,20 +38,10 @@ var BlockFall = Class.extend({
         this.shapes.push(new Square(new Grid(7, 1)));
     },
 
-    drawShapes: function(x, y) {
-        for (var i = 0; i < this.shapes.length; i++)
-            this.drawBlocks(this.shapes[i].drawShape());
-    },
-
-    drawBlocks: function(blocks) {
-        for (var i = 0; i < blocks.length; i++)
-            this.drawBlock.apply(this, blocks[i]);
-    },
-
     drawScreen: function() {
         this.draw.background();
         this.draw.border();
-        this.drawShapes();
+        this.draw.shapes(this.shapes);
     },
 
     update: function(speedFall) {
