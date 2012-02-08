@@ -3,11 +3,13 @@ describe("Draw", function() {
 
     beforeEach(function() {
         draw = new Draw();
-        sinon.spy(draw.context, "fillRect");
+        sinon.stub(draw.context, "fillRect");
+        sinon.stub(draw.context, "strokeRect");
     });
 
     afterEach(function() {
-        sinon.spy(draw.context.fillRect.restore());
+        sinon.stub(draw.context.fillRect.restore());
+        sinon.stub(draw.context.strokeRect.restore());
     });
 
     it("draws the border", function() {
