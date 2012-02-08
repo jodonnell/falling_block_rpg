@@ -21,13 +21,6 @@ describe("Square", function() {
         expect(square.grid.x).toEqual(1);
     });
 
-    it("is at bottom", function() {
-        expect(square.isAtBottom()).toBeFalsy();
-
-        square = new Square(new Grid(1,23));
-        expect(square.isAtBottom()).toBeTruthy();
-    });
-
     it("can give you the occupied squares", function() {
         expect(square.occupiedSquares().length).toEqual(4);
     });

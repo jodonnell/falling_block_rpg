@@ -54,7 +54,7 @@ var BlockFall = Class.extend({
     },
 
     isFallingShapeLocked: function() {
-        return this.fallingShape().isAtBottom() || this.collisionDetection.doesBottomCollide(this.fallingShape(), this.lockedShapes());
+        return this.collisionDetection.isAtBottom(this.fallingShape()) || this.collisionDetection.doesBottomCollide(this.fallingShape(), this.lockedShapes());
     },
 
     fallingShape: function() {
@@ -66,12 +66,12 @@ var BlockFall = Class.extend({
     },
 
     moveRight: function() {
-        if (!this.collisionDetection.doesRightCollide(this.fallingShape(), this.lockedShapes()))
+        if (!this.collisionDetection.doesRightCollide(this.fallingShape(), this.lockedShapes()) && !this.collisionDetection.isAtRightBound(this.fallingShape()))
             this.fallingShape().moveRight();
     },
 
     moveLeft: function() {
-        if (!this.collisionDetection.doesLeftCollide(this.fallingShape(), this.lockedShapes()))
+        if (!this.collisionDetection.doesLeftCollide(this.fallingShape(), this.lockedShapes()) && !this.collisionDetection.isAtLeftBound(this.fallingShape()))
             this.fallingShape().moveLeft();
     },
 

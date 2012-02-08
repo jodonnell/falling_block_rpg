@@ -26,6 +26,30 @@ var CollisionDetection = Class.extend({
         return false;
     },
 
+    isAtBottom: function(falling) {
+        for (var i = 0; i < falling.occupiedSquares().length; i++) {
+            if (falling.occupiedSquares()[i].y == 24)
+                return true;
+        }
+        return false;
+    },
+
+    isAtRightBound: function(falling) {
+        for (var i = 0; i < falling.occupiedSquares().length; i++) {
+            if (falling.occupiedSquares()[i].x == 14)
+                return true;
+        }
+        return false;
+    },
+
+    isAtLeftBound: function(falling) {
+        for (var i = 0; i < falling.occupiedSquares().length; i++) {
+            if (falling.occupiedSquares()[i].x == 1)
+                return true;
+        }
+        return false;
+    },
+
     // private
     isShapeBelow: function(falling, other) {
         return this.collisionDetection(falling, other, function(grid) { return grid.bottom() });
