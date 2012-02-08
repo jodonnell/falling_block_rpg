@@ -16,7 +16,6 @@ var BlockFall = Class.extend({
         $("#drawCanvas").css('position', 'absolute');
         $("#drawCanvas").css('top', '0px');
         $("#drawCanvas").css('left', '0px');
-        $("#drawCanvas").css('z-index', '-1');
     },
 
     createShape: function() {
