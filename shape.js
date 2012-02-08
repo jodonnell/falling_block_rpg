@@ -22,7 +22,7 @@ var Shape = Class.extend({
     },
 
     moveLeft: function() {
-        if (this.grid.x > 1)
+        if (!this.isAtLeftBound())
             this.grid = this.grid.left();
     },
     
@@ -77,5 +77,14 @@ var Shape = Class.extend({
                 return true;
         }
         return false;
+    },
+
+    isAtLeftBound: function() {
+        for (var i = 0; i < this.occupiedSquares().length; i++) {
+            if (this.occupiedSquares()[i].x == 1)
+                return true;
+        }
+        return false;
     }
+
 });

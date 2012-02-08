@@ -24,6 +24,14 @@ describe("J", function() {
         expect(j.isAtBottom()).toBeTruthy();
     });
 
+    it("cannot go through right wall", function() {
+        j = new J(new Grid(2,1));
+        j.moveLeft();
+
+        expect(j.grid.x).toEqual(2);
+    });
+    
+
     it("can rotate", function() {
         expect(j.occupiedSquares()).toContainGrid(new Grid(6, 1));
 
