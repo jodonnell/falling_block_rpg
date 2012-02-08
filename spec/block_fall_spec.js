@@ -69,4 +69,20 @@ describe("BlockFall", function() {
 
         expect(blockFall.fallingShape().grid.x).toEqual(7);
     });
+
+    it("should have a falling shape", function() {
+        var lastShape = new Square(new Grid(7, 1));
+        blockFall.addShape(new Square(new Grid(5, 1)));
+        blockFall.addShape(lastShape);
+
+        expect(blockFall.fallingShape()).toEqual(lastShape);
+    });
+
+    it("should have some locked shapes", function() {
+        var firstShape = new Square(new Grid(5, 1));
+        blockFall.addShape(firstShape);
+        blockFall.addShape(new Square(new Grid(7, 1)));
+
+        expect(blockFall.lockedShapes()).toEqual([firstShape]);
+    });
 });

@@ -84,6 +84,10 @@ var BlockFall = Class.extend({
         return this.shapes[this.shapes.length - 1];
     },
 
+    lockedShapes: function() {
+        return this.shapes.slice(0, this.shapes.length - 1);
+    },
+
     moveRight: function() {
         if (!this.doesRightCollide())
             this.fallingShape().moveRight();
