@@ -6,6 +6,7 @@ var BlockFall = Class.extend({
 
         this.draw = new Draw();
         this.createShape = new CreateShape();
+        this.collisionDetection = new CollisionDetection();
     },
 
     createCanvas: function() {
@@ -53,31 +54,7 @@ var BlockFall = Class.extend({
     },
 
     isShapeLocked: function() {
-        return this.fallingShape().isAtBottom() || this.doesBottomCollide();
-    },
-
-    doesBottomCollide: function() {
-        for (var i = 0; i < this.shapes.length - 1; i++) {
-            if (this.fallingShape().isShapeBelow(this.shapes[i]))
-                return true;
-        }
-        return false;
-    },
-
-    doesRightCollide: function() {
-        for (var i = 0; i < this.shapes.length - 1; i++) {
-            if (this.fallingShape().isShapeToRight(this.shapes[i]))
-                return true;
-        }
-        return false;
-    },
-
-    doesLeftCollide: function() {
-        for (var i = 0; i < this.shapes.length - 1; i++) {
-            if (this.fallingShape().isShapeToLeft(this.shapes[i]))
-                return true;
-        }
-        return false;
+        return this.fallingShape().isAtBottom() || this.collisionDetection.doesBottomCollide(this.fallingShape(), this.lockedShapes());
     },
 
     fallingShape: function() {
@@ -89,12 +66,12 @@ var BlockFall = Class.extend({
     },
 
     moveRight: function() {
-        if (!this.doesRightCollide())
+        if (!this.collisionDetection.doesRightCollide(this.fallingShape(), this.lockedShapes()))
             this.fallingShape().moveRight();
     },
 
     moveLeft: function() {
-        if (!this.doesLeftCollide())
+        if (!this.collisionDetection.doesLeftCollide(this.fallingShape(), this.lockedShapes()))
             this.fallingShape().moveLeft();
     },
 
