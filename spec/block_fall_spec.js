@@ -10,7 +10,7 @@ describe("BlockFall", function() {
     });
 
     it("should be able to create a square", function() {
-        blockFall.createShape();
+        blockFall.addShape();
         expect(blockFall.shapes.length).toEqual(1);
     });
 
@@ -21,7 +21,7 @@ describe("BlockFall", function() {
     });
 
     it("should stop blocks when they hit the ground", function() {
-        blockFall.createSquare();
+        blockFall.addShape(blockFall.createShape.o());
         for (var i = 0; i <= 24; i++)
             blockFall.fall(false);
 
@@ -29,11 +29,11 @@ describe("BlockFall", function() {
     });
 
     it("should stop blocks when they land on other blocks", function() {
-        blockFall.createSquare();
+        blockFall.addShape(blockFall.createShape.o());
         for (var i = 0; i <= 25; i++)
             blockFall.fall(false);
 
-        blockFall.createJ();
+        blockFall.addShape(blockFall.createShape.j());
         blockFall.moveRight();
         for (var i = 0; i <= 25; i++)
             blockFall.fall(false);
@@ -42,13 +42,13 @@ describe("BlockFall", function() {
     });
 
     it("should let you move right", function() {
-        blockFall.createSquare();
+        blockFall.addShape(blockFall.createShape.o());
         blockFall.moveRight();
         expect(blockFall.lastShape().grid.x).toEqual(8);
     });
 
     it("should not let you move right through wall", function() {
-        blockFall.createSquare();
+        blockFall.addShape(blockFall.createShape.o());
         for (var i = 0; i <= 20; i++)
             blockFall.moveRight();
         expect(blockFall.lastShape().grid.x).toEqual(13);

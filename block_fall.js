@@ -5,6 +5,7 @@ var BlockFall = Class.extend({
         this.frameSkipCounter = 0;
 
         this.draw = new Draw();
+        this.createShape = new CreateShape();
     },
 
     createCanvas: function() {
@@ -18,20 +19,8 @@ var BlockFall = Class.extend({
         $("#drawCanvas").css('left', '0px');
     },
 
-    createShape: function() {
-        var randomNumber = Math.floor(Math.random()*2);
-        if (randomNumber === 1)
-            this.createSquare();
-        else
-            this.createJ();
-    },
-
-    createJ: function() {
-        this.shapes.push(new J(new Grid(7, 1)));
-    },
-
-    createSquare: function() {
-        this.shapes.push(new Square(new Grid(7, 1)));
+    addShape: function(shape) {
+        this.shapes.push(shape);
     },
 
     drawScreen: function() {
@@ -43,12 +32,12 @@ var BlockFall = Class.extend({
     update: function(speedFall) {
         this.frameSkipCounter++;
         if (this.shapes.length == 0)
-            this.createShape();
+            this.addShape(this.createShape.randomShape());
 
         this.fall(speedFall);
 
         if (this.isShapeLocked())
-            this.createShape();
+            this.addShape(this.createShape.randomShape());
 
         if (this.frameSkipCounter == 60)
             this.frameSkipCounter = 0;
