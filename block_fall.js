@@ -49,16 +49,16 @@ var BlockFall = Class.extend({
 
     fall: function(speedFall) {
         if (this.shouldFall(speedFall))
-            this.lastShape().fall();
+            this.fallingShape().fall();
     },
 
     isShapeLocked: function() {
-        return this.lastShape().isAtBottom() || this.doesBottomCollide();
+        return this.fallingShape().isAtBottom() || this.doesBottomCollide();
     },
 
     doesBottomCollide: function() {
         for (var i = 0; i < this.shapes.length - 1; i++) {
-            if (this.lastShape().isShapeBelow(this.shapes[i]))
+            if (this.fallingShape().isShapeBelow(this.shapes[i]))
                 return true;
         }
         return false;
@@ -66,7 +66,7 @@ var BlockFall = Class.extend({
 
     doesRightCollide: function() {
         for (var i = 0; i < this.shapes.length - 1; i++) {
-            if (this.lastShape().isShapeToRight(this.shapes[i]))
+            if (this.fallingShape().isShapeToRight(this.shapes[i]))
                 return true;
         }
         return false;
@@ -74,27 +74,27 @@ var BlockFall = Class.extend({
 
     doesLeftCollide: function() {
         for (var i = 0; i < this.shapes.length - 1; i++) {
-            if (this.lastShape().isShapeToLeft(this.shapes[i]))
+            if (this.fallingShape().isShapeToLeft(this.shapes[i]))
                 return true;
         }
         return false;
     },
 
-    lastShape: function() {
+    fallingShape: function() {
         return this.shapes[this.shapes.length - 1];
     },
 
     moveRight: function() {
         if (!this.doesRightCollide())
-            this.lastShape().moveRight();
+            this.fallingShape().moveRight();
     },
 
     moveLeft: function() {
         if (!this.doesLeftCollide())
-            this.lastShape().moveLeft();
+            this.fallingShape().moveLeft();
     },
 
     rotate: function() {
-        this.lastShape().rotate();
+        this.fallingShape().rotate();
     }
 });
