@@ -1,4 +1,4 @@
-var Square = Shape.extend({
+var O = Shape.extend({
     color: "blue",
 
     occupiedSquares: function() {

@@ -27,8 +27,8 @@ describe("Draw", function() {
         expect(draw.context.fillRect.calledOnce).toBeTruthy();
     });
 
-    it("draw a square", function() {
-        draw.shapes([new Square(new Grid(7, 1))]);
+    it("draw an o", function() {
+        draw.shapes([new O(new Grid(7, 1))]);
         expect(draw.context.fillRect.callCount).toEqual(4);
     });
 

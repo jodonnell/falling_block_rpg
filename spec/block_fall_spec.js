@@ -9,7 +9,7 @@ describe("BlockFall", function() {
         expect($('#drawCanvas').length).toEqual(1);
     });
 
-    it("should be able to create a square", function() {
+    it("should be able to create a o", function() {
         blockFall.addShape();
         expect(blockFall.shapes.length).toEqual(1);
     });
@@ -55,17 +55,17 @@ describe("BlockFall", function() {
     });
 
     it("should have a falling shape", function() {
-        var lastShape = new Square(new Grid(7, 1));
-        blockFall.addShape(new Square(new Grid(5, 1)));
+        var lastShape = new O(new Grid(7, 1));
+        blockFall.addShape(new O(new Grid(5, 1)));
         blockFall.addShape(lastShape);
 
         expect(blockFall.fallingShape()).toEqual(lastShape);
     });
 
     it("should have some locked shapes", function() {
-        var firstShape = new Square(new Grid(5, 1));
+        var firstShape = new O(new Grid(5, 1));
         blockFall.addShape(firstShape);
-        blockFall.addShape(new Square(new Grid(7, 1)));
+        blockFall.addShape(new O(new Grid(7, 1)));
 
         expect(blockFall.lockedShapes()).toEqual([firstShape]);
     });

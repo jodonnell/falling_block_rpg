@@ -15,6 +15,6 @@ var CreateShape = Class.extend({
     },
 
     o: function() {
-        return new Square(new Grid(7, 1));
+        return new O(new Grid(7, 1));
     }
 });
