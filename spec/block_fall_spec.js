@@ -54,22 +54,6 @@ describe("BlockFall", function() {
         expect(blockFall.fallingShape().grid.x).toEqual(13);
     });
 
-    it("should have right collision detection", function() {
-        blockFall.shapes.push(new Square(new Grid(9, 1)));
-        blockFall.shapes.push(new Square(new Grid(7, 1)));
-        blockFall.moveRight();
-
-        expect(blockFall.fallingShape().grid.x).toEqual(7);
-    });
-
-    it("should have left collision detection", function() {
-        blockFall.shapes.push(new Square(new Grid(5, 1)));
-        blockFall.shapes.push(new Square(new Grid(7, 1)));
-        blockFall.moveLeft();
-
-        expect(blockFall.fallingShape().grid.x).toEqual(7);
-    });
-
     it("should have a falling shape", function() {
         var lastShape = new Square(new Grid(7, 1));
         blockFall.addShape(new Square(new Grid(5, 1)));
