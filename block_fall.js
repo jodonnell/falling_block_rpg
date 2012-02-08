@@ -37,8 +37,10 @@ var BlockFall = Class.extend({
 
         this.fall(speedFall);
 
-        if (this.isFallingShapeLocked())
+        if (this.isFallingShapeLocked()) {
+            this.completedLines();
             this.addShape(this.createShape.randomShape());
+        }
 
         if (this.frameSkipCounter == 60)
             this.frameSkipCounter = 0;
@@ -77,5 +79,9 @@ var BlockFall = Class.extend({
 
     rotate: function() {
         this.fallingShape().rotate();
+    },
+
+    completedLines: function() {
+
     }
 });

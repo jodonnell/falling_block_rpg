@@ -69,4 +69,16 @@ describe("BlockFall", function() {
 
         expect(blockFall.lockedShapes()).toEqual([firstShape]);
     });
+
+    it("should be able to remove completed lines", function() {
+        blockFall.addShape(new O(new Grid(1, 1)));
+        blockFall.addShape(new O(new Grid(3, 1)));
+        blockFall.addShape(new O(new Grid(5, 1)));
+        blockFall.addShape(new O(new Grid(7, 1)));
+        blockFall.addShape(new O(new Grid(9, 1)));
+        blockFall.addShape(new O(new Grid(11, 1)));
+        blockFall.addShape(new O(new Grid(13, 1)));
+        blockFall.completedLines();
+        expect(blockFall.shapes.length).toEqual(0);
+    });
 });
