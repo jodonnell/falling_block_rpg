@@ -19,16 +19,16 @@ describe("J", function() {
         j.rotate();
         expect(j.isAtBottom()).toBeFalsy();
 
-        j = new J(new Grid(1,22));
+        j = new J(new Grid(1,23));
         j.rotate();
         expect(j.isAtBottom()).toBeTruthy();
     });
 
     it("can rotate", function() {
-        expect(j.occupiedSquares()).toContainGrid(new Grid(7, 1));
+        expect(j.occupiedSquares()).toContainGrid(new Grid(6, 1));
 
         j.rotate();
-        expect(j.occupiedSquares()).toContainGrid(new Grid(5, 3));
+        expect(j.occupiedSquares()).toContainGrid(new Grid(4, 2));
 
         j.rotate();
         expect(j.occupiedSquares()).toContainGrid(new Grid(4, 1));

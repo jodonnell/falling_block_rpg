@@ -24,6 +24,10 @@ var Grid = Class.extend({
         return new Grid(this.x, this.y + 1);
     },
 
+    top: function() {
+        return new Grid(this.x, this.y - 1);
+    },
+
     bottomRight: function() {
         return new Grid(this.x + 1, this.y + 1);
     },

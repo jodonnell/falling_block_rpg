@@ -34,6 +34,7 @@ describe("BlockFall", function() {
             blockFall.fall(false);
 
         blockFall.createJ();
+        blockFall.moveRight();
         for (var i = 0; i <= 25; i++)
             blockFall.fall(false);
 
@@ -68,13 +69,6 @@ describe("BlockFall", function() {
 
         expect(blockFall.lastShape().grid.x).toEqual(7);
     });
-
-    it("lets you rotate", function() {
-        blockFall.createJ();
-        blockFall.rotate();
-        expect(blockFall.lastShape().occupiedSquares()[3].y).toEqual(3);
-    });
-
 
     describe("drawing operations", function() {
         beforeEach(function() {
