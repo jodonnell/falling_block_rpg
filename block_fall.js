@@ -4,9 +4,6 @@ var BlockFall = Class.extend({
         this.shapes = [];
         this.frameSkipCounter = 0;
 
-        this.isMovingLeft = false;
-        this.isMovingRight = false;
-
         this.draw = new Draw();
     },
 
