@@ -31,30 +31,4 @@ describe("Square", function() {
     it("can give you the occupied squares", function() {
         expect(square.occupiedSquares().length).toEqual(4);
     });
-
-    it("can do some basic bottom collision detection", function() {
-        var squareNoCollide = new Square(new Grid(1,5));
-        expect(square.isShapeBelow(squareNoCollide)).toBeFalsy();
-
-        var squareCollide = new Square(new Grid(1,3));
-        expect(square.isShapeBelow(squareCollide)).toBeTruthy();
-    });
-
-    it("can do some basic right collision detection", function() {
-        var squareNoCollide = new Square(new Grid(5,1));
-        expect(square.isShapeToRight(squareNoCollide)).toBeFalsy();
-
-        var squareCollide = new Square(new Grid(3,1));
-        expect(square.isShapeToRight(squareCollide)).toBeTruthy();
-    });
-
-    it("can do some basic left collision detection", function() {
-        square = new Square(new Grid(5,1));
-        var squareNoCollide = new Square(new Grid(1,1));
-        expect(square.isShapeToLeft(squareNoCollide)).toBeFalsy();
-
-        var squareCollide = new Square(new Grid(3,1));
-        expect(square.isShapeToLeft(squareCollide)).toBeTruthy();
-    });
-
 });
