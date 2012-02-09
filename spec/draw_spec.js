@@ -32,4 +32,9 @@ describe("Draw", function() {
         expect(draw.context.fillRect.callCount).toEqual(4);
     });
 
+    it("draw next piece", function() {
+        draw.nextShape(new O(new Block(14, 1)));
+        expect(draw.context.fillRect.callCount).toEqual(22);
+    });
+
 });

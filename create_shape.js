@@ -1,5 +1,6 @@
 var CreateShape = Class.extend({
     init: function() {
+        this.nextBlock = null;
     },
 
     randomShape: function() {
@@ -18,6 +19,14 @@ var CreateShape = Class.extend({
             return this.z();
         else
             return this.j();
+    },
+
+    createNextBlock: function() {
+        this.nextBlock = this.randomShape();
+    },
+
+    newBlock: function() {
+        return this.nextBlock;
     },
 
     j: function() {

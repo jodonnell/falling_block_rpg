@@ -27,10 +27,13 @@ var BlockFall = Class.extend({
     },
 
     drawScreen: function() {
+        if (!this.fallingShape)
+            return;
+
         this.draw.background();
         this.draw.border();
-        if (this.fallingShape)
-            this.draw.shapes(this.fallingShape);
+        this.draw.nextShape(this.createShape.newBlock());
+        this.draw.shapes(this.fallingShape);
 
         for (var i = 0; i < this.blocks.length; i++)
             this.draw.block(this.blocks[i]);
@@ -47,8 +50,10 @@ var BlockFall = Class.extend({
     },
 
     process: function(speedFall) {
-        if (!this.fallingShape)
+        if (!this.fallingShape) {
             this.fallingShape = this.createShape.randomShape();
+            this.createShape.createNextBlock();
+        }
 
         this.fall(speedFall);
 
@@ -56,7 +61,8 @@ var BlockFall = Class.extend({
             this.gameOver = this.isGameOver();
             this.breakIntoBlocks();
             this.completedLines();
-            this.fallingShape = this.createShape.randomShape();
+            this.fallingShape = this.createShape.newBlock();
+            this.createShape.createNextBlock();
         }
     },
 

@@ -44,5 +44,25 @@ var Draw = Class.extend({
 
     shapes: function(shape) {
         this.blocks(shape.drawShape());
+    },
+
+    nextShape: function(shape) {
+        this.context.fillStyle = "black";
+        this.context.fillRect(this.RIGHT_BOUND, 0, 100, 100);
+
+        for (var i = this.rightBorder + 1; i <= this.rightBorder + 6; i++)
+            this.block(new Block(i, 0, "grey"));
+
+        for (var i = this.rightBorder + 1; i <= this.rightBorder + 6; i++)
+            this.block(new Block(i, 4, "grey"));
+
+        for (var i = 0; i <= 4; i++)
+            this.block(new Block(this.rightBorder + 6, i, "grey"));
+        
+
+        var oldX = shape.block.x;
+        shape.block.x = 13;
+        this.shapes(shape);
+        shape.block.x = oldX;
     }
 });
