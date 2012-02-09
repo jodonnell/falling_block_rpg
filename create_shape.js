@@ -3,11 +3,13 @@ var CreateShape = Class.extend({
     },
 
     randomShape: function() {
-        var randomNumber = Math.floor(Math.random()*3);
+        var randomNumber = Math.floor(Math.random()*4);
         if (randomNumber === 1)
             return this.o();
         else if (randomNumber === 2)
             return this.l();
+        else if (randomNumber === 3)
+            return this.t();
         else
             return this.j();
     },
@@ -22,5 +24,9 @@ var CreateShape = Class.extend({
 
     l: function() {
         return new L(new Block(7, 1, "green"));
+    },
+    
+    t: function() {
+        return new T(new Block(7, 2, "orange"));
     }
 });
