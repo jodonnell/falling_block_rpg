@@ -59,7 +59,6 @@ var Draw = Class.extend({
         for (var i = 0; i <= 4; i++)
             this.block(new Block(this.rightBorder + 6, i, "grey"));
         
-
         var oldX = shape.block.x;
         shape.block.x = 13;
         this.shapes(shape);
@@ -67,6 +66,9 @@ var Draw = Class.extend({
     },
 
     score: function(score) {
+        this.context.fillStyle = "white";
+        this.context.fillRect(this.RIGHT_BOUND + 5, 105, 100, 100);
+
         this.context.fillStyle = "black";
         this.context.font = "bold 18px sans-serif";
         this.context.fillText(score, 248, 125);
