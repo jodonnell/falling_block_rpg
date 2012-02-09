@@ -1,4 +1,4 @@
-var Grid = Class.extend({
+var Block = Class.extend({
     init: function(x, y, color) {
         this.x = x;
         this.y = y;
@@ -14,23 +14,23 @@ var Grid = Class.extend({
     },
 
     right: function() {
-        return new Grid(this.x + 1, this.y, this.color);
+        return new Block(this.x + 1, this.y, this.color);
     },
 
     left: function() {
-        return new Grid(this.x - 1, this.y, this.color);
+        return new Block(this.x - 1, this.y, this.color);
     },
 
     bottom: function() {
-        return new Grid(this.x, this.y + 1, this.color);
+        return new Block(this.x, this.y + 1, this.color);
     },
 
     top: function() {
-        return new Grid(this.x, this.y - 1, this.color);
+        return new Block(this.x, this.y - 1, this.color);
     },
 
     bottomRight: function() {
-        return new Grid(this.x + 1, this.y + 1, this.color);
+        return new Block(this.x + 1, this.y + 1, this.color);
     },
 
     isEqual: function(other) {

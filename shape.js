@@ -1,6 +1,6 @@
 var Shape = Class.extend({
-    init: function(grid) {
-        this.grid = grid;
+    init: function(block) {
+        this.block = block;
         this.rotatedPosition = 0;
     },
 
@@ -9,15 +9,15 @@ var Shape = Class.extend({
     },
 
     fall: function() {
-        this.grid = this.grid.bottom();
+        this.block = this.block.bottom();
     },
 
     moveRight: function() {
-        this.grid = this.grid.right();
+        this.block = this.block.right();
     },
 
     moveLeft: function() {
-        this.grid = this.grid.left();
+        this.block = this.block.left();
     },
     
     drawShape: function() {

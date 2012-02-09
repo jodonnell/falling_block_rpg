@@ -11,10 +11,10 @@ var CreateShape = Class.extend({
     },
 
     j: function() {
-        return new J(new Grid(7, 1, "red"));
+        return new J(new Block(7, 1, "red"));
     },
 
     o: function() {
-        return new O(new Grid(7, 1, "blue"));
+        return new O(new Block(7, 1, "blue"));
     }
 });

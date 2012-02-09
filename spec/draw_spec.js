@@ -18,7 +18,7 @@ describe("Draw", function() {
     });
 
     it("draw a block", function() {
-        draw.block(new Grid(1, 1), "red");
+        draw.block(new Block(1, 1), "red");
         expect(draw.context.fillRect.calledOnce).toBeTruthy();
     });
 
@@ -28,7 +28,7 @@ describe("Draw", function() {
     });
 
     it("draw an o", function() {
-        draw.shapes(new O(new Grid(7, 1)));
+        draw.shapes(new O(new Block(7, 1)));
         expect(draw.context.fillRect.callCount).toEqual(4);
     });
 

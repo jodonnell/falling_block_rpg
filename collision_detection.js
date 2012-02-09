@@ -3,15 +3,15 @@ var CollisionDetection = Class.extend({
     },
 
     doesLeftCollide: function(falling, lockedBlocks) {
-        return this.collisionDetection2(falling, lockedBlocks, function(grid) { return grid.left() });
+        return this.collisionDetection2(falling, lockedBlocks, function(block) { return block.left() });
     },
 
     doesRightCollide: function(falling, lockedBlocks) {
-        return this.collisionDetection2(falling, lockedBlocks, function(grid) { return grid.right() });
+        return this.collisionDetection2(falling, lockedBlocks, function(block) { return block.right() });
     },
 
     doesBottomCollide: function(falling, lockedBlocks) {
-        return this.collisionDetection2(falling, lockedBlocks, function(grid) { return grid.bottom() });
+        return this.collisionDetection2(falling, lockedBlocks, function(block) { return block.bottom() });
         for (var i = 0; i < locked.length; i++) {
             if (this.isShapeBelow(falling, locked[i]))
                 return true;
@@ -45,15 +45,15 @@ var CollisionDetection = Class.extend({
 
     // private
     isShapeBelow: function(falling, other) {
-        return this.collisionDetection(falling, other, function(grid) { return grid.bottom() });
+        return this.collisionDetection(falling, other, function(block) { return block.bottom() });
     },
 
     isShapeToRight: function(falling, other) {
-        return this.collisionDetection(falling, other, function(grid) { return grid.right() });
+        return this.collisionDetection(falling, other, function(block) { return block.right() });
     },
 
     isShapeToLeft: function(falling, other) {
-        return this.collisionDetection(falling, other, function(grid) { return grid.left() });
+        return this.collisionDetection(falling, other, function(block) { return block.left() });
     },
 
     collisionDetection: function(falling, other, direction) {
