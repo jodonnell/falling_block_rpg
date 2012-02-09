@@ -6,10 +6,10 @@ var Draw = Class.extend({
         this.context = $('#drawCanvas').get(0).getContext("2d");
     },
 
-    block: function(grid, color) {
+    block: function(grid) {
         var x = grid.getX();
         var y = grid.getY();
-        this.context.fillStyle = color;
+        this.context.fillStyle = grid.color;
         this.context.fillRect(x, y, 20, 20);
 
         this.context.strokeStyle = "black";
@@ -23,16 +23,16 @@ var Draw = Class.extend({
 
     border: function() {
         for (var i = 0; i < 16; i++)
-            this.block(new Grid(i, 0), "grey");
+            this.block(new Grid(i, 0, "grey"));
 
         for (var i = 0; i < 16; i++)
-            this.block(new Grid(i, 25), "grey");
+            this.block(new Grid(i, 25, "grey"));
 
         for (var i = 1; i < 25; i++)
-            this.block(new Grid(0, i), "grey");
+            this.block(new Grid(0, i, "grey"));
 
         for (var i = 1; i < 25; i++)
-            this.block(new Grid(15, i), "grey");
+            this.block(new Grid(15, i, "grey"));
     },
 
     background: function() {

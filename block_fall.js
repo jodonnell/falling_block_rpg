@@ -27,13 +27,8 @@ var BlockFall = Class.extend({
         if (this.fallingShape)
             this.draw.shapes(this.fallingShape);
 
-
-        var array = [];
-        for (var i = 0; i < this.blocks.length; i++) {
-            array.push([this.blocks[i], "red"]);
-        }
-
-        this.draw.blocks(array);
+        for (var i = 0; i < this.blocks.length; i++)
+            this.draw.block(this.blocks[i]);
     },
 
     update: function(speedFall) {

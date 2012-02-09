@@ -1,7 +1,8 @@
 var Grid = Class.extend({
-    init: function(x, y) {
+    init: function(x, y, color) {
         this.x = x;
         this.y = y;
+        this.color = color;
     },
 
     getX: function() {
@@ -13,23 +14,23 @@ var Grid = Class.extend({
     },
 
     right: function() {
-        return new Grid(this.x + 1, this.y);
+        return new Grid(this.x + 1, this.y, this.color);
     },
 
     left: function() {
-        return new Grid(this.x - 1, this.y);
+        return new Grid(this.x - 1, this.y, this.color);
     },
 
     bottom: function() {
-        return new Grid(this.x, this.y + 1);
+        return new Grid(this.x, this.y + 1, this.color);
     },
 
     top: function() {
-        return new Grid(this.x, this.y - 1);
+        return new Grid(this.x, this.y - 1, this.color);
     },
 
     bottomRight: function() {
-        return new Grid(this.x + 1, this.y + 1);
+        return new Grid(this.x + 1, this.y + 1, this.color);
     },
 
     isEqual: function(other) {
