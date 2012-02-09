@@ -3,7 +3,7 @@ var CreateShape = Class.extend({
     },
 
     randomShape: function() {
-        var randomNumber = Math.floor(Math.random()*5);
+        var randomNumber = Math.floor(Math.random()*6);
         if (randomNumber === 1)
             return this.o();
         else if (randomNumber === 2)
@@ -12,6 +12,8 @@ var CreateShape = Class.extend({
             return this.t();
         else if (randomNumber === 4)
             return this.i();
+        else if (randomNumber === 5)
+            return this.s();
         else
             return this.j();
     },
@@ -34,5 +36,10 @@ var CreateShape = Class.extend({
 
     i: function() {
         return new I(new Block(7, 1, "magenta"));
+    },
+
+    s: function() {
+        return new S(new Block(7, 2, "brown"));
     }
+
 });
