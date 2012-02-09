@@ -3,20 +3,15 @@ var CollisionDetection = Class.extend({
     },
 
     doesLeftCollide: function(falling, lockedBlocks) {
-        return this.collisionDetection2(falling, lockedBlocks, function(block) { return block.left() });
+        return this.collisionDetection(falling, lockedBlocks, function(block) { return block.left() });
     },
 
     doesRightCollide: function(falling, lockedBlocks) {
-        return this.collisionDetection2(falling, lockedBlocks, function(block) { return block.right() });
+        return this.collisionDetection(falling, lockedBlocks, function(block) { return block.right() });
     },
 
     doesBottomCollide: function(falling, lockedBlocks) {
-        return this.collisionDetection2(falling, lockedBlocks, function(block) { return block.bottom() });
-        for (var i = 0; i < locked.length; i++) {
-            if (this.isShapeBelow(falling, locked[i]))
-                return true;
-        }
-        return false;
+        return this.collisionDetection(falling, lockedBlocks, function(block) { return block.bottom() });
     },
 
     isAtBottom: function(falling) {
@@ -43,31 +38,7 @@ var CollisionDetection = Class.extend({
         return false;
     },
 
-    // private
-    isShapeBelow: function(falling, other) {
-        return this.collisionDetection(falling, other, function(block) { return block.bottom() });
-    },
-
-    isShapeToRight: function(falling, other) {
-        return this.collisionDetection(falling, other, function(block) { return block.right() });
-    },
-
-    isShapeToLeft: function(falling, other) {
-        return this.collisionDetection(falling, other, function(block) { return block.left() });
-    },
-
-    collisionDetection: function(falling, other, direction) {
-        var occupiedSquares = other.occupiedSquares();
-        for (var i = 0; i < occupiedSquares.length; i++)
-            for (var j = 0; j < falling.occupiedSquares().length; j++) {
-                if (occupiedSquares[i].isEqual(direction(falling.occupiedSquares()[j])))
-                    return true;
-            }
-        return false;
-
-    },
-
-    collisionDetection2: function(falling, lockedBlocks, direction) {
+    collisionDetection: function(falling, lockedBlocks, direction) {
         for (var i = 0; i < lockedBlocks.length; i++) {
             for (var j = 0; j < falling.occupiedSquares().length; j++) {
                 if (lockedBlocks[i].isEqual(direction(falling.occupiedSquares()[j])))
