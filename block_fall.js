@@ -155,7 +155,7 @@ var BlockFall = Class.extend({
     isGameOver: function() {
         var found = false;
         $.each(this.fallingShape.occupiedSquares(), function(index, block) {
-            if (block.y < 4)
+            if (block.y < 3)
                 found = true;
         });
         return found;
