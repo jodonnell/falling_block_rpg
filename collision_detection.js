@@ -16,6 +16,10 @@ var CollisionDetection = Class.extend({
         return this.collisionDetection(falling, lockedBlocks, function(block) { return block.bottom() });
     },
 
+    doesCollide: function(falling, lockedBlocks) {
+        return false;
+    },
+
     isAtBottom: function(falling) {
         for (var i = 0; i < falling.occupiedSquares().length; i++) {
             if (falling.occupiedSquares()[i].y == this.bottomBound)
@@ -35,6 +39,14 @@ var CollisionDetection = Class.extend({
     isAtLeftBound: function(falling) {
         for (var i = 0; i < falling.occupiedSquares().length; i++) {
             if (falling.occupiedSquares()[i].x == 1)
+                return true;
+        }
+        return false;
+    },
+
+    collidesWithBound: function(falling) {
+        for (var i = 0; i < falling.occupiedSquares().length; i++) {
+            if (falling.occupiedSquares()[i].x == 0 || falling.occupiedSquares()[i].x == this.rightBound + 1 || falling.occupiedSquares()[i].y == this.bottomBound)
                 return true;
         }
         return false;

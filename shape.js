@@ -32,5 +32,11 @@ var Shape = Class.extend({
         this.rotatedPosition++;
         if (this.rotatedPosition === this.rotatePositions)
             this.rotatedPosition = 0;
+    },
+
+    reverseRotate: function() {
+        this.rotatedPosition--;
+        if (this.rotatedPosition === -1)
+            this.rotatedPosition = this.rotatePositions - 1;
     }
 });

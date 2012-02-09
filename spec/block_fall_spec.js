@@ -40,7 +40,7 @@ describe("BlockFall", function() {
     });
 
     it("should stop shapes when they land on other blocks", function() {
-        blockFall.blocks = [new Block(7, 19)];
+        blockFall.blocks = [new Block(5, 19)];
 
         blockFall.fallingShape = blockFall.createShape.j();
 
@@ -54,21 +54,21 @@ describe("BlockFall", function() {
     it("should let you move right", function() {
         blockFall.fallingShape = blockFall.createShape.o();
         blockFall.moveRight();
-        expect(blockFall.fallingShape.block.x).toEqual(8);
+        expect(blockFall.fallingShape.block.x).toEqual(6);
     });
 
     it("should not let you move right through another object", function() {
-        blockFall.blocks = [new Block(9, 1)];
+        blockFall.blocks = [new Block(7, 1)];
         blockFall.fallingShape = blockFall.createShape.o();
         blockFall.moveRight();
-        expect(blockFall.fallingShape.block.x).toEqual(7);
+        expect(blockFall.fallingShape.block.x).toEqual(5);
     });
 
     it("should not let you move left through another object", function() {
-        blockFall.blocks = [new Block(6, 1)];
+        blockFall.blocks = [new Block(4, 1)];
         blockFall.fallingShape = blockFall.createShape.o();
         blockFall.moveLeft();
-        expect(blockFall.fallingShape.block.x).toEqual(7);
+        expect(blockFall.fallingShape.block.x).toEqual(5);
     });
 
     it("should not let you move right through wall", function() {
@@ -103,6 +103,14 @@ describe("BlockFall", function() {
 
         blockFall.completedLines();
         expect(blockFall.blocks[0].y).toEqual(20);
+    });
+
+    it("should not let you rotate through a wall", function() {
+        blockFall.fallingShape = new J(new Block(8, 1));
+        blockFall.rotate();
+        blockFall.moveRight();
+        blockFall.rotate();
+        expect(blockFall.fallingShape.rotatedPosition).toEqual(1);
     });
 
 });

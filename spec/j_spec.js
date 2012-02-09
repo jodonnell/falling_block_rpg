@@ -25,4 +25,16 @@ describe("J", function() {
         expect(j.occupiedSquares()).toContainBlock(new Block(4, 1));
     });
 
+    it("can reverse rotate", function() {
+        j.reverseRotate();
+        expect(j.rotatedPosition).toEqual(3);
+        j.reverseRotate();
+        expect(j.rotatedPosition).toEqual(2);
+        j.reverseRotate();
+        expect(j.rotatedPosition).toEqual(1);
+        j.reverseRotate();
+        expect(j.rotatedPosition).toEqual(0);
+    });
+
+    
 });

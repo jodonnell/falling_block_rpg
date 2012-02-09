@@ -88,6 +88,8 @@ var BlockFall = Class.extend({
 
     rotate: function() {
         this.fallingShape.rotate();
+        if (this.collisionDetection.doesCollide(this.fallingShape, this.blocks) || this.collisionDetection.collidesWithBound(this.fallingShape))
+            this.fallingShape.reverseRotate();
     },
 
     completedLines: function() {
