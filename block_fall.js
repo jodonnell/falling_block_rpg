@@ -1,4 +1,7 @@
 var BlockFall = Class.extend({
+    RIGHT_BOUND: 14,
+    BOTTOM_BOUND: 24,
+
     init: function() {
         this.createCanvas();
         this.blocks = [];
@@ -7,7 +10,7 @@ var BlockFall = Class.extend({
 
         this.draw = new Draw();
         this.createShape = new CreateShape();
-        this.collisionDetection = new CollisionDetection();
+        this.collisionDetection = new CollisionDetection(this.RIGHT_BOUND, this.BOTTOM_BOUND);
     },
 
     createCanvas: function() {
@@ -47,8 +50,8 @@ var BlockFall = Class.extend({
         this.fall(speedFall);
 
         if (this.isFallingShapeLocked()) {
-            this.completedLines();
             this.breakIntoBlocks();
+            this.completedLines();
             this.fallingShape = this.createShape.randomShape();
         }
     },
@@ -81,12 +84,50 @@ var BlockFall = Class.extend({
     },
 
     completedLines: function() {
+        for (var row = 1; row <= this.BOTTOM_BOUND; row++) {
+            if (this.isLineComplete(row)) {
+                this.removeLine(row);
+                this.sinkLinesAbove(row);
+            }
+        }
+    },
 
+    isLineComplete: function(row) {
+        for (var column = 1; column <= this.RIGHT_BOUND; column++) {
+            if (!this.blocksContain(new Block(column, row)))
+                return false;
+        }
+        return true;
+    },
+
+    blocksContain: function(block) {
+        for (var i = 0; i < this.blocks.length; i++) {
+            if (this.blocks[i].isEqual(block))
+                return true;
+        }
+        return false;
+    },
+
+    removeLine: function(row) {
+        this.blocks = $.grep(this.blocks, function(block) {
+            if (block.y === row)
+                return false;
+            return true;
+        })
     },
 
     breakIntoBlocks: function() {
         var blocks = this.fallingShape.occupiedSquares();
         for (var i = 0; i < blocks.length; i++)
             this.blocks.push(blocks[i]);
+    },
+
+    sinkLinesAbove: function(row) {
+        for (var i = row; i >= 0; i--) {
+            $.each(this.blocks, function(index, block) {
+                if (block.y === i)
+                    block.y++;
+            })
+        }
     }
 });

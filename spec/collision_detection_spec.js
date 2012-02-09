@@ -2,7 +2,7 @@ describe("CollisionDetection", function() {
     var collisionDetection;
 
     beforeEach(function() {
-        collisionDetection = new CollisionDetection();
+        collisionDetection = new CollisionDetection(14, 24);
     });
 
     it("should have left collision detection", function() {

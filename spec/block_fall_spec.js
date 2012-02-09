@@ -79,22 +79,30 @@ describe("BlockFall", function() {
     });
 
     it("should be able to remove completed lines", function() {
-        blockFall.blocks = [new Block(1, 1),
-                            new Block(2, 1),
-                            new Block(3, 1),
-                            new Block(4, 1),
-                            new Block(5, 1),
-                            new Block(6, 1),
-                            new Block(7, 1),
-                            new Block(8, 1),
-                            new Block(9, 1),
-                            new Block(10, 1),
-                            new Block(11, 1),
-                            new Block(12, 1),
-                            new Block(13, 1),
-                            new Block(14, 1)
-                           ];
+        for (var i = 1; i <= blockFall.RIGHT_BOUND; i++)
+            blockFall.blocks.push(new Block(i, 1))
+
+        expect(blockFall.isLineComplete(1)).toBeTruthy();
         blockFall.completedLines();
-//        expect(blockFall.shapes.length).toEqual(0);
+        expect(blockFall.blocks.length).toEqual(0);
     });
+
+    it("blocksContain", function() {
+        for (var i = 1; i <= blockFall.RIGHT_BOUND; i++)
+            blockFall.blocks.push(new Block(i, 1))
+
+        expect(blockFall.blocksContain(new Block(14, 1))).toBeTruthy();
+    });
+
+    it("should sink down above when you complete a line", function() {
+        for (var i = 1; i <= blockFall.RIGHT_BOUND; i++)
+            blockFall.blocks.push(new Block(i, 20))
+
+        for (var i = 1; i <= blockFall.RIGHT_BOUND - 3; i++)
+            blockFall.blocks.push(new Block(i, 19))
+
+        blockFall.completedLines();
+        expect(blockFall.blocks[0].y).toEqual(20);
+    });
+
 });

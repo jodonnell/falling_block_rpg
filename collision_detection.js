@@ -1,5 +1,7 @@
 var CollisionDetection = Class.extend({
-    init: function() {
+    init: function(rightBound, bottomBound) {
+        this.rightBound = rightBound;
+        this.bottomBound = bottomBound;
     },
 
     doesLeftCollide: function(falling, lockedBlocks) {
@@ -16,7 +18,7 @@ var CollisionDetection = Class.extend({
 
     isAtBottom: function(falling) {
         for (var i = 0; i < falling.occupiedSquares().length; i++) {
-            if (falling.occupiedSquares()[i].y == 24)
+            if (falling.occupiedSquares()[i].y == this.bottomBound)
                 return true;
         }
         return false;
@@ -24,7 +26,7 @@ var CollisionDetection = Class.extend({
 
     isAtRightBound: function(falling) {
         for (var i = 0; i < falling.occupiedSquares().length; i++) {
-            if (falling.occupiedSquares()[i].x == 14)
+            if (falling.occupiedSquares()[i].x == this.rightBound)
                 return true;
         }
         return false;
