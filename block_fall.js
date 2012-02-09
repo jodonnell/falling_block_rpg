@@ -2,6 +2,7 @@ var BlockFall = Class.extend({
     init: function() {
         this.createCanvas();
         this.shapes = [];
+        this.blocks = [];
         this.frameSkipCounter = 0;
 
         this.draw = new Draw();
@@ -32,6 +33,14 @@ var BlockFall = Class.extend({
 
     update: function(speedFall) {
         this.frameSkipCounter++;
+
+        this.process(speedFall);
+
+        if (this.frameSkipCounter == 60)
+            this.frameSkipCounter = 0;
+    },
+
+    process: function(speedFall) {
         if (this.shapes.length == 0)
             this.addShape(this.createShape.randomShape());
 
@@ -40,10 +49,8 @@ var BlockFall = Class.extend({
         if (this.isFallingShapeLocked()) {
             this.completedLines();
             this.addShape(this.createShape.randomShape());
+            this.breakIntoBlocks();
         }
-
-        if (this.frameSkipCounter == 60)
-            this.frameSkipCounter = 0;
     },
 
     shouldFall: function(speedFall) {
@@ -83,5 +90,11 @@ var BlockFall = Class.extend({
 
     completedLines: function() {
 
+    },
+
+    breakIntoBlocks: function() {
+        var blocks = this.fallingShape().occupiedSquares();
+        for (var i = 0; i < blocks.length; i++)
+            this.blocks.push(blocks[i]);
     }
 });
