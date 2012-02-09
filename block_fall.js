@@ -1,6 +1,6 @@
 var BlockFall = Class.extend({
-    RIGHT_BOUND: 14,
-    BOTTOM_BOUND: 24,
+    RIGHT_BOUND: 10,
+    BOTTOM_BOUND: 20,
 
     init: function() {
         this.createCanvas();
@@ -8,7 +8,7 @@ var BlockFall = Class.extend({
         this.fallingShape = null;
         this.frameSkipCounter = 0;
 
-        this.draw = new Draw();
+        this.draw = new Draw(this.RIGHT_BOUND, this.BOTTOM_BOUND);
         this.createShape = new CreateShape();
         this.collisionDetection = new CollisionDetection(this.RIGHT_BOUND, this.BOTTOM_BOUND);
     },

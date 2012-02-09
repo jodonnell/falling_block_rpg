@@ -2,7 +2,7 @@ describe("Draw", function() {
     var draw;
 
     beforeEach(function() {
-        draw = new Draw();
+        draw = new Draw(10, 20);
         sinon.stub(draw.context, "fillRect");
         sinon.stub(draw.context, "strokeRect");
     });
@@ -14,7 +14,7 @@ describe("Draw", function() {
 
     it("draws the border", function() {
         draw.border();
-        expect(draw.context.fillRect.callCount).toEqual(80);
+        expect(draw.context.fillRect.callCount).toEqual(66);
     });
 
     it("draw a block", function() {

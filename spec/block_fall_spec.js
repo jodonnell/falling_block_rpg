@@ -22,13 +22,13 @@ describe("BlockFall", function() {
     it("should have shapes fall every 1/3 of a second", function() {
         for (var i = 0; i <= 20; i++)
             blockFall.update(false);
-        expect(blockFall.fallingShape.block.y).toEqual(2);
+        expect(blockFall.fallingShape.block.y).toNotEqual(1);
     });
 
     it("update should work", function() {
         for (var i = 0; i <= 1000; i++)
             blockFall.update(false);
-        expect(blockFall.blocks).toContainBlock(new Block(7, 23));
+        expect(blockFall.blocks).toContainBlock(new Block(7, 19));
     });
 
     it("should stop blocks when they hit the ground", function() {
@@ -36,11 +36,11 @@ describe("BlockFall", function() {
         for (var i = 0; i <= 24; i++)
             blockFall.fall(false);
 
-        expect(blockFall.fallingShape.block.y).toEqual(23);
+        expect(blockFall.fallingShape.block.y).toEqual(19);
     });
 
     it("should stop shapes when they land on other blocks", function() {
-        blockFall.blocks = [new Block(7, 23)];
+        blockFall.blocks = [new Block(7, 19)];
 
         blockFall.fallingShape = blockFall.createShape.j();
 
@@ -48,7 +48,7 @@ describe("BlockFall", function() {
         for (var i = 0; i <= 25; i++)
             blockFall.fall(false);
 
-        expect(blockFall.fallingShape.block.y).toEqual(22);
+        expect(blockFall.fallingShape.block.y).toEqual(18);
     });
 
     it("should let you move right", function() {
@@ -73,9 +73,9 @@ describe("BlockFall", function() {
 
     it("should not let you move right through wall", function() {
         blockFall.fallingShape = blockFall.createShape.o();
-        for (var i = 0; i <= 20; i++)
+        for (var i = 0; i <= 15; i++)
             blockFall.moveRight();
-        expect(blockFall.fallingShape.block.x).toEqual(13);
+        expect(blockFall.fallingShape.block.x).toEqual(9);
     });
 
     it("should be able to remove completed lines", function() {
@@ -91,7 +91,7 @@ describe("BlockFall", function() {
         for (var i = 1; i <= blockFall.RIGHT_BOUND; i++)
             blockFall.blocks.push(new Block(i, 1))
 
-        expect(blockFall.blocksContain(new Block(14, 1))).toBeTruthy();
+        expect(blockFall.blocksContain(new Block(10, 1))).toBeTruthy();
     });
 
     it("should sink down above when you complete a line", function() {

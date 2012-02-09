@@ -7,7 +7,7 @@ describe("CreateShape", function() {
 
     it("random shape should work alright", function() {
         sinon.stub(Math, "random").returns(0.5);
-        expect(createShape.randomShape().color).toEqual("blue");
+        expect(createShape.randomShape().color).toEqual("green");
         sinon.stub(Math.random.restore());
     });
     
