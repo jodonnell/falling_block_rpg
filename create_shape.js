@@ -21,30 +21,30 @@ var CreateShape = Class.extend({
     },
 
     j: function() {
-        return new J(new Block(7, 1, "red"));
+        return new J(new Block(5, 1, "red"));
     },
 
     o: function() {
-        return new O(new Block(7, 1, "blue"));
+        return new O(new Block(5, 1, "blue"));
     },
 
     l: function() {
-        return new L(new Block(7, 1, "green"));
+        return new L(new Block(5, 1, "green"));
     },
     
     t: function() {
-        return new T(new Block(7, 2, "orange"));
+        return new T(new Block(5, 2, "orange"));
     },
 
     i: function() {
-        return new I(new Block(7, 1, "magenta"));
+        return new I(new Block(5, 1, "magenta"));
     },
 
     s: function() {
-        return new S(new Block(7, 2, "brown"));
+        return new S(new Block(5, 2, "brown"));
     },
 
     z: function() {
-        return new Z(new Block(7, 2, "white"));
+        return new Z(new Block(5, 2, "white"));
     }
 });
