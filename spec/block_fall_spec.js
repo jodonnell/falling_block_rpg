@@ -121,4 +121,10 @@ describe("BlockFall", function() {
         expect(blockFall.fallingShape.rotatedPosition).toEqual(1);
     });
 
+    it("should be able to detect game over", function() {
+        for (var i = 0; i <= 400; i++)
+            blockFall.update(true);
+        expect(blockFall.gameOver).toBeTruthy();
+    });
+
 });

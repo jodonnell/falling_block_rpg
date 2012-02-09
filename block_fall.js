@@ -8,6 +8,7 @@ var BlockFall = Class.extend({
         this.fallingShape = null;
         this.frameSkipCounter = 0;
         this.lastFellAt = 0;
+        this.gameOver = false;
 
         this.draw = new Draw(this.RIGHT_BOUND, this.BOTTOM_BOUND);
         this.createShape = new CreateShape();
@@ -38,7 +39,8 @@ var BlockFall = Class.extend({
     update: function(speedFall) {
         this.frameSkipCounter++;
 
-        this.process(speedFall);
+        if (!this.gameOver)
+            this.process(speedFall);
 
         if (this.frameSkipCounter == 60)
             this.frameSkipCounter = 0;
@@ -51,6 +53,7 @@ var BlockFall = Class.extend({
         this.fall(speedFall);
 
         if (this.isFallFrame() && this.frameSkipCounter != this.lastFellAt && this.isFallingShapeLocked()) {
+            this.gameOver = this.isGameOver();
             this.breakIntoBlocks();
             this.completedLines();
             this.fallingShape = this.createShape.randomShape();
@@ -138,5 +141,14 @@ var BlockFall = Class.extend({
                     block.y++;
             })
         }
+    },
+
+    isGameOver: function() {
+        var found = false;
+        $.each(this.fallingShape.occupiedSquares(), function(index, block) {
+            if (block.y < 4)
+                found = true;
+        });
+        return found;
     }
 });

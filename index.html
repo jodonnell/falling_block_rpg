@@ -56,10 +56,8 @@ window.onEachFrame(function() {
 
     game_engine.drawScreen(); 
 
-    if (control.isMovingDown())
-        game_engine.update(true);
-    else
-        game_engine.update(false);
+    var speedFall = control.isMovingDown();
+    game_engine.update(speedFall);
 
 });
 
