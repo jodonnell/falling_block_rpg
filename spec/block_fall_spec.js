@@ -106,9 +106,17 @@ describe("BlockFall", function() {
     });
 
     it("should not let you rotate through a wall", function() {
-        blockFall.fallingShape = new J(new Block(8, 1));
+        blockFall.fallingShape = new J(new Block(9, 1));
         blockFall.rotate();
         blockFall.moveRight();
+        blockFall.rotate();
+        expect(blockFall.fallingShape.rotatedPosition).toEqual(1);
+    });
+
+    it("should not let you rotate through another peice", function() {
+        blockFall.blocks = [new Block(5, 19), new Block(5, 18), new Block(5, 17), new Block(5, 16)];
+        blockFall.fallingShape = new T(new Block(6, 18));
+        blockFall.fallingShape.rotatedPosition = 1;
         blockFall.rotate();
         expect(blockFall.fallingShape.rotatedPosition).toEqual(1);
     });

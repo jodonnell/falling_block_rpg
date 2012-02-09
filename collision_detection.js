@@ -17,7 +17,7 @@ var CollisionDetection = Class.extend({
     },
 
     doesCollide: function(falling, lockedBlocks) {
-        return false;
+        return this.collisionDetection(falling, lockedBlocks, function(block) { return block });
     },
 
     isAtBottom: function(falling) {
