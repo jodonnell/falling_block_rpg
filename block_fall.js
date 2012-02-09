@@ -7,6 +7,7 @@ var BlockFall = Class.extend({
         this.blocks = [];
         this.fallingShape = null;
         this.frameSkipCounter = 0;
+        this.lastFellAt = 0;
 
         this.draw = new Draw(this.RIGHT_BOUND, this.BOTTOM_BOUND);
         this.createShape = new CreateShape();
@@ -49,7 +50,7 @@ var BlockFall = Class.extend({
 
         this.fall(speedFall);
 
-        if (this.isFallingShapeLocked()) {
+        if (this.isFallFrame() && this.frameSkipCounter != this.lastFellAt && this.isFallingShapeLocked()) {
             this.breakIntoBlocks();
             this.completedLines();
             this.fallingShape = this.createShape.randomShape();
@@ -57,12 +58,18 @@ var BlockFall = Class.extend({
     },
 
     shouldFall: function(speedFall) {
-        return ((this.frameSkipCounter % 20) == 0 || speedFall) && !this.isFallingShapeLocked();
+        return (this.isFallFrame() || speedFall) && !this.isFallingShapeLocked();
+    },
+
+    isFallFrame: function() {
+        return (this.frameSkipCounter % 20) == 0;
     },
 
     fall: function(speedFall) {
-        if (this.shouldFall(speedFall))
+        if (this.shouldFall(speedFall)) {
+            this.lastFellAt = this.frameSkipCounter;
             this.fallingShape.fall();
+        }
     },
 
     isFallingShapeLocked: function() {
