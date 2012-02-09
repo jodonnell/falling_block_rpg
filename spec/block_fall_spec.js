@@ -2,6 +2,16 @@ describe("BlockFall", function() {
     var blockFall;
 
     beforeEach(function() {
+        this.addMatchers({
+            toContainGrid: function(expected) {
+                for (var i = 0; i < this.actual.length; i++) {
+                    if (this.actual[i].isEqual(expected))
+                        return true;
+                }
+                return false;
+            }
+        });
+
         blockFall = new BlockFall();
     });
 
@@ -23,7 +33,7 @@ describe("BlockFall", function() {
     it("update should work", function() {
         for (var i = 0; i <= 1000; i++)
             blockFall.update(false);
-        expect(true).toBeTruthy();
+        expect(blockFall.blocks).toContainGrid(new Grid(7, 23));
     });
 
     it("should stop blocks when they hit the ground", function() {
@@ -39,7 +49,9 @@ describe("BlockFall", function() {
         for (var i = 0; i <= 25; i++)
             blockFall.fall(false);
 
+        blockFall.breakIntoBlocks();
         blockFall.addShape(blockFall.createShape.j());
+
         blockFall.moveRight();
         for (var i = 0; i <= 25; i++)
             blockFall.fall(false);
@@ -51,6 +63,22 @@ describe("BlockFall", function() {
         blockFall.addShape(blockFall.createShape.o());
         blockFall.moveRight();
         expect(blockFall.fallingShape().grid.x).toEqual(8);
+    });
+
+    it("should not let you move right through another object", function() {
+        blockFall.addShape(new O(new Grid(9, 1)));
+        blockFall.breakIntoBlocks();
+        blockFall.addShape(blockFall.createShape.o());
+        blockFall.moveRight();
+        expect(blockFall.fallingShape().grid.x).toEqual(7);
+    });
+
+    it("should not let you move left through another object", function() {
+        blockFall.addShape(new O(new Grid(5, 1)));
+        blockFall.breakIntoBlocks();
+        blockFall.addShape(blockFall.createShape.o());
+        blockFall.moveLeft();
+        expect(blockFall.fallingShape().grid.x).toEqual(7);
     });
 
     it("should not let you move right through wall", function() {

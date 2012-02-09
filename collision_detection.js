@@ -2,23 +2,16 @@ var CollisionDetection = Class.extend({
     init: function() {
     },
 
-    doesLeftCollide: function(falling, locked) {
-        for (var i = 0; i < locked.length; i++) {
-            if (this.isShapeToLeft(falling, locked[i]))
-                return true;
-        }
-        return false;
+    doesLeftCollide: function(falling, lockedBlocks) {
+        return this.collisionDetection2(falling, lockedBlocks, function(grid) { return grid.left() });
     },
 
-    doesRightCollide: function(falling, locked) {
-        for (var i = 0; i < locked.length; i++) {
-            if (this.isShapeToRight(falling, locked[i]))
-                return true;
-        }
-        return false;
+    doesRightCollide: function(falling, lockedBlocks) {
+        return this.collisionDetection2(falling, lockedBlocks, function(grid) { return grid.right() });
     },
 
-    doesBottomCollide: function(falling, locked) {
+    doesBottomCollide: function(falling, lockedBlocks) {
+        return this.collisionDetection2(falling, lockedBlocks, function(grid) { return grid.bottom() });
         for (var i = 0; i < locked.length; i++) {
             if (this.isShapeBelow(falling, locked[i]))
                 return true;
@@ -74,5 +67,14 @@ var CollisionDetection = Class.extend({
 
     },
 
+    collisionDetection2: function(falling, lockedBlocks, direction) {
+        for (var i = 0; i < lockedBlocks.length; i++) {
+            for (var j = 0; j < falling.occupiedSquares().length; j++) {
+                if (lockedBlocks[i].isEqual(direction(falling.occupiedSquares()[j])))
+                    return true;
+            }
+        }
+        return false;
+    },
 
 });
