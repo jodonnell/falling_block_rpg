@@ -40,8 +40,7 @@ var Draw = Class.extend({
         this.context.fillRect(0, 0, this.BOTTOM_BOUND, this.RIGHT_BOUND);
     },
 
-    shapes: function(shapesArray) {
-        for (var i = 0; i < shapesArray.length; i++)
-            this.blocks(shapesArray[i].drawShape());
+    shapes: function(shape) {
+        this.blocks(shape.drawShape());
     }
 });

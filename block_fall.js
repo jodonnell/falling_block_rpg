@@ -1,8 +1,8 @@
 var BlockFall = Class.extend({
     init: function() {
         this.createCanvas();
-        this.shapes = [];
         this.blocks = [];
+        this.fallingShape = null;
         this.frameSkipCounter = 0;
 
         this.draw = new Draw();
@@ -21,14 +21,19 @@ var BlockFall = Class.extend({
         $("#drawCanvas").css('left', '0px');
     },
 
-    addShape: function(shape) {
-        this.shapes.push(shape);
-    },
-
     drawScreen: function() {
         this.draw.background();
         this.draw.border();
-        this.draw.shapes(this.shapes);
+        if (this.fallingShape)
+            this.draw.shapes(this.fallingShape);
+
+
+        var array = [];
+        for (var i = 0; i < this.blocks.length; i++) {
+            array.push([this.blocks[i], "red"]);
+        }
+
+        this.draw.blocks(array);
     },
 
     update: function(speedFall) {
@@ -41,15 +46,15 @@ var BlockFall = Class.extend({
     },
 
     process: function(speedFall) {
-        if (this.shapes.length == 0)
-            this.addShape(this.createShape.randomShape());
+        if (!this.fallingShape)
+            this.fallingShape = this.createShape.randomShape();
 
         this.fall(speedFall);
 
         if (this.isFallingShapeLocked()) {
             this.completedLines();
             this.breakIntoBlocks();
-            this.addShape(this.createShape.randomShape());
+            this.fallingShape = this.createShape.randomShape();
         }
     },
 
@@ -59,33 +64,25 @@ var BlockFall = Class.extend({
 
     fall: function(speedFall) {
         if (this.shouldFall(speedFall))
-            this.fallingShape().fall();
+            this.fallingShape.fall();
     },
 
     isFallingShapeLocked: function() {
-        return this.collisionDetection.isAtBottom(this.fallingShape()) || this.collisionDetection.doesBottomCollide(this.fallingShape(), this.blocks);
-    },
-
-    fallingShape: function() {
-        return this.shapes[this.shapes.length - 1];
-    },
-
-    lockedShapes: function() {
-        return this.shapes.slice(0, this.shapes.length - 1);
+        return this.collisionDetection.isAtBottom(this.fallingShape) || this.collisionDetection.doesBottomCollide(this.fallingShape, this.blocks);
     },
 
     moveRight: function() {
-        if (!this.collisionDetection.doesRightCollide(this.fallingShape(), this.blocks) && !this.collisionDetection.isAtRightBound(this.fallingShape()))
-            this.fallingShape().moveRight();
+        if (!this.collisionDetection.doesRightCollide(this.fallingShape, this.blocks) && !this.collisionDetection.isAtRightBound(this.fallingShape))
+            this.fallingShape.moveRight();
     },
 
     moveLeft: function() {
-        if (!this.collisionDetection.doesLeftCollide(this.fallingShape(), this.blocks) && !this.collisionDetection.isAtLeftBound(this.fallingShape()))
-            this.fallingShape().moveLeft();
+        if (!this.collisionDetection.doesLeftCollide(this.fallingShape, this.blocks) && !this.collisionDetection.isAtLeftBound(this.fallingShape))
+            this.fallingShape.moveLeft();
     },
 
     rotate: function() {
-        this.fallingShape().rotate();
+        this.fallingShape.rotate();
     },
 
     completedLines: function() {
@@ -93,7 +90,7 @@ var BlockFall = Class.extend({
     },
 
     breakIntoBlocks: function() {
-        var blocks = this.fallingShape().occupiedSquares();
+        var blocks = this.fallingShape.occupiedSquares();
         for (var i = 0; i < blocks.length; i++)
             this.blocks.push(blocks[i]);
     }

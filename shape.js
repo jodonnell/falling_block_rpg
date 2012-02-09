@@ -4,10 +4,6 @@ var Shape = Class.extend({
         this.rotatedPosition = 0;
     },
 
-    drawShape: function() {
-        // must override
-    },
-
     occupiedSquares: function() {
         // must override
     },
