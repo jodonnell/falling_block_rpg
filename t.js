@@ -1,5 +1,6 @@
 var T = Shape.extend({
     color: "orange",
+    rotatePositions: 4,
 
     occupiedSquares: function() {
         if (this.rotatedPosition === 0)

@@ -30,7 +30,7 @@ var Shape = Class.extend({
 
     rotate: function() {
         this.rotatedPosition++;
-        if (this.rotatedPosition === 4)
+        if (this.rotatedPosition === this.rotatePositions)
             this.rotatedPosition = 0;
     }
 });
