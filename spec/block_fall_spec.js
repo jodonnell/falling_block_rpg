@@ -127,4 +127,12 @@ describe("BlockFall", function() {
         expect(blockFall.gameOver).toBeTruthy();
     });
 
+    it("should keep score", function() {
+        for (var i = 1; i <= blockFall.RIGHT_BOUND; i++)
+            blockFall.blocks.push(new Block(i, 1))
+
+        blockFall.completedLines();
+        expect(blockFall.score).toEqual(100);
+    });
+
 });

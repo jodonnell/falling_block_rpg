@@ -64,5 +64,11 @@ var Draw = Class.extend({
         shape.block.x = 13;
         this.shapes(shape);
         shape.block.x = oldX;
+    },
+
+    score: function(score) {
+        this.context.fillStyle = "black";
+        this.context.font = "bold 18px sans-serif";
+        this.context.fillText(score, 248, 125);
     }
 });
