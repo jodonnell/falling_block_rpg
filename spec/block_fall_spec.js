@@ -135,4 +135,34 @@ describe("BlockFall", function() {
         expect(blockFall.score).toEqual(100);
     });
 
+    function drawMock() {
+        return {
+            background: function() {},
+            border: function() {},
+            nextShape: function() {},
+            shapes: function() {},
+            score: function() {},
+            block: function() {}
+        };
+    };
+
+    it("should draw the next shape", function() {
+        var dMock = drawMock();
+        var mock = sinon.mock(dMock).expects("nextShape");
+        blockFall.draw = dMock;
+        blockFall._createFallingShape();
+        blockFall.drawScreen();
+        mock.verify();
+    });
+
+    it("the next block should be the next block", function() {
+        blockFall.process(true);
+        var nextBlock = blockFall.createShape.newBlock();
+        
+        for (var i = 0; i < 20; i++)
+            blockFall.update(true);
+
+        expect(blockFall.fallingShape.color).toEqual(nextBlock.color);
+    });
+
 });
