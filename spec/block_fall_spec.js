@@ -156,13 +156,13 @@ describe("BlockFall", function() {
     });
 
     it("the next block should be the next block", function() {
-        blockFall.process(true);
-        var nextBlock = blockFall.createShape.newBlock();
+        blockFall.update(true);
+        var nextShape = blockFall.createShape.nextShape;
         
         for (var i = 0; i < 20; i++)
             blockFall.update(true);
 
-        expect(blockFall.fallingShape.color).toEqual(nextBlock.color);
+        expect(blockFall.fallingShape.color).toEqual(nextShape.color);
     });
 
 });

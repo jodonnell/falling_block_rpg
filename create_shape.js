@@ -1,9 +1,13 @@
 var CreateShape = Class.extend({
     init: function() {
-        this.createNextBlock();
+        this.createNextShape();
     },
 
-    randomShape: function() {
+    createNextShape: function() {
+        this.nextShape = this._randomShape();
+    },
+
+    _randomShape: function() {
         var randomNumber = Math.floor(Math.random()*7);
         if (randomNumber === 1)
             return this.o();
@@ -21,13 +25,6 @@ var CreateShape = Class.extend({
             return this.j();
     },
 
-    createNextBlock: function() {
-        this.nextBlock = this.randomShape();
-    },
-
-    newBlock: function() {
-        return this.nextBlock;
-    },
 
     j: function() {
         return new J(new Block(5, 1, "red"));
