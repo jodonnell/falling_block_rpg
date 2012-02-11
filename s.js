@@ -1,6 +1,7 @@
 var S = Shape.extend({
     color: "brown",
     rotatePositions: 2,
+    startingYPos: 0,
 
     occupiedSquares: function() {
         if (this.rotatedPosition === 0)

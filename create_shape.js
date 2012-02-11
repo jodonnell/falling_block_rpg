@@ -9,11 +9,13 @@ var CreateShape = Class.extend({
 
     nextShapeDrawable: function() {
         this.nextShape.block.x = 13;
+        this.nextShape.block.y = 2;
         return this.nextShape;
     },
 
     nextShapePlayable: function() {
         this.nextShape.block.x = 5;
+        this.nextShape.block.y = this.nextShape.startingYPos;
         return this.nextShape;
     },
 
@@ -37,30 +39,30 @@ var CreateShape = Class.extend({
 
 
     j: function() {
-        return new J(new Block(5, 1, "red"));
+        return new J(new Block(5, -1, "red"));
     },
 
     o: function() {
-        return new O(new Block(5, 1, "blue"));
+        return new O(new Block(5, -1, "blue"));
     },
 
     l: function() {
-        return new L(new Block(5, 1, "green"));
+        return new L(new Block(5, -1, "green"));
     },
     
     t: function() {
-        return new T(new Block(5, 2, "orange"));
+        return new T(new Block(5, 0, "orange"));
     },
 
     i: function() {
-        return new I(new Block(5, 1, "magenta"));
+        return new I(new Block(5, 0, "magenta"));
     },
 
     s: function() {
-        return new S(new Block(5, 2, "brown"));
+        return new S(new Block(5, 0, "brown"));
     },
 
     z: function() {
-        return new Z(new Block(5, 2, "white"));
+        return new Z(new Block(5, 0, "white"));
     }
 });

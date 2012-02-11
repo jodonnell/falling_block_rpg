@@ -20,9 +20,11 @@ describe("BlockFall", function() {
     });
 
     it("should have shapes fall every 1/3 of a second", function() {
+        blockFall.update(false);
+        var startingY = blockFall.fallingShape.block.y;
         for (var i = 0; i <= 20; i++)
             blockFall.update(false);
-        expect(blockFall.fallingShape.block.y).toNotEqual(1);
+        expect(blockFall.fallingShape.block.y).toNotEqual(startingY);
     });
 
     it("update should work", function() {
@@ -58,14 +60,14 @@ describe("BlockFall", function() {
     });
 
     it("should not let you move right through another object", function() {
-        blockFall.blocks = [new Block(7, 1)];
+        blockFall.blocks = [new Block(7, 0)];
         blockFall.fallingShape = blockFall.createShape.o();
         blockFall.moveRight();
         expect(blockFall.fallingShape.block.x).toEqual(5);
     });
 
     it("should not let you move left through another object", function() {
-        blockFall.blocks = [new Block(4, 1)];
+        blockFall.blocks = [new Block(4, 0)];
         blockFall.fallingShape = blockFall.createShape.o();
         blockFall.moveLeft();
         expect(blockFall.fallingShape.block.x).toEqual(5);
@@ -122,8 +124,10 @@ describe("BlockFall", function() {
     });
 
     it("should be able to detect game over", function() {
-        for (var i = 0; i <= 400; i++)
+        blockFall.blocks = [new Block(5, 1)];
+        for (var i = 0; i < 50; i++)
             blockFall.update(true);
+
         expect(blockFall.gameOver).toBeTruthy();
     });
 
@@ -159,7 +163,7 @@ describe("BlockFall", function() {
         blockFall.update(true);
         var nextShape = blockFall.createShape.nextShape;
         
-        for (var i = 0; i < 20; i++)
+        for (var i = 0; i < 50; i++)
             blockFall.update(true);
 
         expect(blockFall.fallingShape.color).toEqual(nextShape.color);

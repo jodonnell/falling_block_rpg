@@ -32,13 +32,15 @@ var BlockFall = Class.extend({
             return;
 
         this.draw.background();
-        this.draw.border();
         this.draw.nextShape(this.createShape.nextShapeDrawable());
         this.draw.shapes(this.fallingShape);
+
         this.draw.score(this.score);
 
         for (var i = 0; i < this.blocks.length; i++)
             this.draw.block(this.blocks[i]);
+
+        this.draw.border();
     },
 
     update: function(speedFall) {
@@ -59,10 +61,11 @@ var BlockFall = Class.extend({
         this.fall(speedFall);
 
         if (this.isFallFrame() && this.frameSkipCounter != this.lastFellAt && this.isFallingShapeLocked()) {
-            this.gameOver = this.isGameOver();
             this.breakIntoBlocks();
             this.completedLines();
-            this._createFallingShape();
+            this.gameOver = this.isGameOver();
+            if (!this.gameOver)
+                this._createFallingShape();
         }
     },
 
@@ -158,7 +161,7 @@ var BlockFall = Class.extend({
     isGameOver: function() {
         var found = false;
         $.each(this.fallingShape.occupiedSquares(), function(index, block) {
-            if (block.y < 3)
+            if (block.y == 0)
                 found = true;
         });
         return found;
