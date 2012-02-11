@@ -59,10 +59,7 @@ var Draw = Class.extend({
         for (var i = 0; i <= 4; i++)
             this.block(new Block(this.rightBorder + 6, i, "grey"));
         
-        var oldX = shape.block.x;
-        shape.block.x = 13;
         this.shapes(shape);
-        shape.block.x = oldX;
     },
 
     score: function(score) {

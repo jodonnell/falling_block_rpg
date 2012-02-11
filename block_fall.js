@@ -33,7 +33,7 @@ var BlockFall = Class.extend({
 
         this.draw.background();
         this.draw.border();
-        this.draw.nextShape(this.createShape.nextShape);
+        this.draw.nextShape(this.createShape.nextShapeDrawable());
         this.draw.shapes(this.fallingShape);
         this.draw.score(this.score);
 
@@ -75,7 +75,7 @@ var BlockFall = Class.extend({
     },
 
     _createFallingShape: function() {
-        this.fallingShape = this.createShape.nextShape;
+        this.fallingShape = this.createShape.nextShapePlayable();
         this.createShape.createNextShape();
     },
 

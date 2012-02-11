@@ -7,6 +7,16 @@ var CreateShape = Class.extend({
         this.nextShape = this._randomShape();
     },
 
+    nextShapeDrawable: function() {
+        this.nextShape.block.x = 13;
+        return this.nextShape;
+    },
+
+    nextShapePlayable: function() {
+        this.nextShape.block.x = 5;
+        return this.nextShape;
+    },
+
     _randomShape: function() {
         var randomNumber = Math.floor(Math.random()*7);
         if (randomNumber === 1)
