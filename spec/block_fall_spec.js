@@ -2,7 +2,7 @@ describe("BlockFall", function() {
     var blockFall;
 
     beforeEach(function() {
-        blockFall = new BlockFall();
+        blockFall = new BlockFall(new CreateShape(true));
     });
 
     it("should have a canvas element", function() {

@@ -21,7 +21,7 @@
   </head>
   <body>
     <script type="text/javascript">
-var game_engine = new window.BlockFall();
+var blockFall = new window.BlockFall(new CreateShape());
 
 (function() {
     var onEachFrame;
@@ -47,22 +47,22 @@ var game_engine = new window.BlockFall();
 var control = new Control();
 window.onEachFrame(function() {
     if (control.isMovingRight())
-        game_engine.moveRight();
+        blockFall.moveRight();
     if (control.isMovingLeft())
-        game_engine.moveLeft();
+        blockFall.moveLeft();
     if (control.isRotatingClockwise())
-        game_engine.rotate();
+        blockFall.rotate();
     if (control.isRotatingCounterClockwise())
-        game_engine.rotateCounterClockwise();
+        blockFall.rotateCounterClockwise();
 
     if (control.isHardDropping())
-        game_engine.hardDrop();
+        blockFall.hardDrop();
 
 
-    game_engine.drawScreen(); 
+    blockFall.drawScreen(); 
 
     var speedFall = control.isSoftDropping();
-    game_engine.update(speedFall);
+    blockFall.update(speedFall);
 
 });
 

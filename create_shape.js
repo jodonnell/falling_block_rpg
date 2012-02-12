@@ -1,5 +1,6 @@
 var CreateShape = Class.extend({
-    init: function() {
+    init: function(randomOff) {
+        this.randomOff = randomOff;
         this.createNextShape();
     },
 
@@ -20,6 +21,9 @@ var CreateShape = Class.extend({
     },
 
     _randomShape: function() {
+        if (this.randomOff)
+            return this.j();
+
         var randomNumber = Math.floor(Math.random()*7);
         if (randomNumber === 1)
             return this.o();
