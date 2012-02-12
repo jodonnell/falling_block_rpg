@@ -109,6 +109,12 @@ var BlockFall = Class.extend({
             this.fallingShape.reverseRotate();
     },
 
+    rotateCounterClockwise: function() {
+        this.fallingShape.reverseRotate();
+        if (this.collisionDetection.doesCollide(this.fallingShape, this.blocks) || this.collisionDetection.collidesWithBound(this.fallingShape))
+            this.fallingShape.rotate();
+    },
+
     completedLines: function() {
         for (var row = 1; row <= this.BOTTOM_BOUND; row++) {
             if (this.isLineComplete(row)) {

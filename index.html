@@ -50,8 +50,10 @@ window.onEachFrame(function() {
         game_engine.moveRight();
     if (control.isMovingLeft())
         game_engine.moveLeft();
-    if (control.isRotating())
+    if (control.isRotatingClockwise())
         game_engine.rotate();
+    if (control.isRotatingCounterClockwise())
+        game_engine.rotateCounterClockwise();
 
 
     game_engine.drawScreen(); 

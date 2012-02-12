@@ -115,6 +115,14 @@ describe("BlockFall", function() {
         expect(blockFall.fallingShape.rotatedPosition).toEqual(1);
     });
 
+    it("should not let you reverse rotate through a wall", function() {
+        blockFall.fallingShape = new T(new Block(9, 1));
+        blockFall.rotateCounterClockwise();
+        blockFall.moveRight();
+        blockFall.rotateCounterClockwise();
+        expect(blockFall.fallingShape.rotatedPosition).toEqual(3);
+    });
+
     it("should not let you rotate through another peice", function() {
         blockFall.blocks = [new Block(5, 19), new Block(5, 18), new Block(5, 17), new Block(5, 16)];
         blockFall.fallingShape = new T(new Block(6, 18));
