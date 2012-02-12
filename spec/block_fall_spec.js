@@ -177,4 +177,11 @@ describe("BlockFall", function() {
         expect(blockFall.fallingShape.color).toEqual(nextShape.color);
     });
 
+    it("should let you hard drop", function() {
+        blockFall.update();
+        blockFall.hardDrop();
+        expect(blockFall.blocks.length).toNotEqual(0);
+        expect(blockFall.blocks).toContainBlock(new Block(5, 19));
+    });
+
 });

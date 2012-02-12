@@ -11,7 +11,8 @@ var Control = Class.extend({
     init: function() {
         this.left = 0;
         this.right = 0;
-        this.down = 0;
+        this.softDrop = 0;
+        this.hardDrop = 0;
         this.rotatingClockwise = 0;
         this.rotatingCounterClockwise = 0;
         this.getKey();
@@ -22,9 +23,10 @@ var Control = Class.extend({
             switch (event.keyCode) {
             case this.LEFT_KEY: this.left = 1; break;
             case this.RIGHT_KEY: this.right = 1; break;
-            case this.DOWN_KEY: this.down = 1; break;
 
-            case this.UP_KEY: this.rotatingClockwise = 1; break;
+            case this.DOWN_KEY: this.softDrop = 1; break;
+            case this.UP_KEY: this.hardDrop = 1; break;
+
             case this.Z_KEY: this.rotatingCounterClockwise = 1; break;
             case this.Z_DVORAK: this.rotatingCounterClockwise = 1; break;
 
@@ -37,8 +39,8 @@ var Control = Class.extend({
             switch (event.keyCode) {
             case this.LEFT_KEY: ; break;
             case this.RIGHT_KEY: ; break;
-            case this.UP_KEY: ; break;
-            case this.DOWN_KEY: this.down = 0; break;
+            case this.UP_KEY: this.hardDrop = 0; break;
+            case this.DOWN_KEY: this.softDrop = 0; break;
             }
         }, this));
     },
@@ -67,7 +69,13 @@ var Control = Class.extend({
         return old_up;
     },
 
-    isMovingDown: function() {
-        return this.down;
+    isSoftDropping: function() {
+        return this.softDrop;
+    },
+
+    isHardDropping: function() {
+        var old_up = this.hardDrop;
+        this.hardDrop = 0;
+        return old_up;
     }
 });

@@ -55,10 +55,13 @@ window.onEachFrame(function() {
     if (control.isRotatingCounterClockwise())
         game_engine.rotateCounterClockwise();
 
+    if (control.isHardDropping())
+        game_engine.hardDrop();
+
 
     game_engine.drawScreen(); 
 
-    var speedFall = control.isMovingDown();
+    var speedFall = control.isSoftDropping();
     game_engine.update(speedFall);
 
 });
