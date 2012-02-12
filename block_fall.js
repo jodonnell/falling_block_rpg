@@ -20,11 +20,11 @@ var BlockFall = Class.extend({
         var width = $(document).width();
         var height = $(document).height();
 
-        var canvas = '<canvas id="drawCanvas" width="' + width + '" height="' + height + '"></canvas>';
+        var canvas = '<canvas id="gameCanvas" width="' + width + '" height="' + height + '"></canvas>';
         $('body').append(canvas);
-        $("#drawCanvas").css('position', 'absolute');
-        $("#drawCanvas").css('top', '0px');
-        $("#drawCanvas").css('left', '0px');
+        $("#gameCanvas").css('position', 'absolute');
+        $("#gameCanvas").css('top', '0px');
+        $("#gameCanvas").css('left', '0px');
     },
 
     drawScreen: function() {

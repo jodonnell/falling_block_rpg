@@ -3,7 +3,7 @@ var Draw = Class.extend({
     BOTTOM_BOUND: 440,
 
     init: function(rightBorder, bottomBorder) {
-        this.context = $('#drawCanvas').get(0).getContext("2d");
+        this.context = $('#gameCanvas').get(0).getContext("2d");
         this.rightBorder = rightBorder;
         this.bottomBorder = bottomBorder;
     },

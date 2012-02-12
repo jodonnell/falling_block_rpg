@@ -6,7 +6,7 @@ describe("BlockFall", function() {
     });
 
     it("should have a canvas element", function() {
-        expect($('#drawCanvas').length).toEqual(1);
+        expect($('#gameCanvas').length).toEqual(1);
     });
 
     it("should have shapes fall every 1/3 of a second", function() {
