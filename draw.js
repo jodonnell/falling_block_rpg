@@ -2,20 +2,22 @@ var Draw = Class.extend({
     RIGHT_BOUND: 240,
     BOTTOM_BOUND: 440,
 
-    init: function(rightBorder, bottomBorder) {
+    init: function(rightBorder, bottomBorder, offsetX, offsetY) {
         this.context = $('#gameCanvas').get(0).getContext("2d");
         this.rightBorder = rightBorder;
         this.bottomBorder = bottomBorder;
+        this.offsetX = offsetX;
+        this.offsetY = offsetY;
     },
 
     block: function(block) {
         var x = block.getX();
         var y = block.getY();
         this.context.fillStyle = block.color;
-        this.context.fillRect(x, y, 20, 20);
+        this.context.fillRect(x + this.offsetX, y + this.offsetY, 20, 20);
 
         this.context.strokeStyle = "black";
-        this.context.strokeRect(x, y, 20, 20);
+        this.context.strokeRect(x + this.offsetX, y + this.offsetY, 20, 20);
     },
 
     blocks: function(blocks) {
@@ -39,7 +41,7 @@ var Draw = Class.extend({
 
     background: function() {
         this.context.fillStyle = "black";
-        this.context.fillRect(0, 0, this.RIGHT_BOUND, this.BOTTOM_BOUND);
+        this.context.fillRect(0 + this.offsetX, 0 + this.offsetY, this.RIGHT_BOUND, this.BOTTOM_BOUND);
     },
 
     shapes: function(shape) {
@@ -48,7 +50,7 @@ var Draw = Class.extend({
 
     nextShape: function(shape) {
         this.context.fillStyle = "black";
-        this.context.fillRect(this.RIGHT_BOUND, 0, 100, 100);
+        this.context.fillRect(this.RIGHT_BOUND + this.offsetX, 0 + this.offsetY, 100, 100);
 
         for (var i = this.rightBorder + 1; i <= this.rightBorder + 6; i++)
             this.block(new Block(i, 0, "grey"));
@@ -64,10 +66,10 @@ var Draw = Class.extend({
 
     score: function(score) {
         this.context.fillStyle = "white";
-        this.context.fillRect(this.RIGHT_BOUND + 5, 105, 100, 100);
+        this.context.fillRect(this.RIGHT_BOUND + 5 + this.offsetX, 105 + this.offsetY, 100, 100);
 
         this.context.fillStyle = "black";
         this.context.font = "bold 18px sans-serif";
-        this.context.fillText(score, 248, 125);
+        this.context.fillText(score, 248 + this.offsetX, 125 + this.offsetY);
     }
 });

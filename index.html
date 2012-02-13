@@ -17,11 +17,14 @@
     <script src="block_fall.js" type="text/javascript" charset="utf-8"></script>
     <script src="create_shape.js" type="text/javascript" charset="utf-8"></script>
     <script src="collision_detection.js" type="text/javascript" charset="utf-8"></script>
+    <script src="game_init.js" type="text/javascript" charset="utf-8"></script>
     <title>Game</title>
   </head>
   <body>
     <script type="text/javascript">
-var blockFall = new window.BlockFall(new CreateShape());
+var gameInit = new GameInit();
+var draw = new Draw(gameInit.RIGHT_BOUND, gameInit.BOTTOM_BOUND, 0, 0);
+var blockFall = new window.BlockFall(new CreateShape(), draw);
 
 (function() {
     var onEachFrame;
@@ -63,7 +66,6 @@ window.onEachFrame(function() {
 
     var speedFall = control.isSoftDropping();
     blockFall.update(speedFall);
-
 });
 
     </script>

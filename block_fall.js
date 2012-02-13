@@ -2,8 +2,7 @@ var BlockFall = Class.extend({
     RIGHT_BOUND: 10,
     BOTTOM_BOUND: 20,
 
-    init: function(createShape) {
-        this.createCanvas();
+    init: function(createShape, draw) {
         this.blocks = [];
         this.fallingShape = null;
         this.frameSkipCounter = 0;
@@ -11,20 +10,9 @@ var BlockFall = Class.extend({
         this.gameOver = false;
         this.score = 0;
 
-        this.draw = new Draw(this.RIGHT_BOUND, this.BOTTOM_BOUND);
+        this.draw = draw;
         this.createShape = createShape;
         this.collisionDetection = new CollisionDetection(this.RIGHT_BOUND, this.BOTTOM_BOUND);
-    },
-
-    createCanvas: function() {
-        var width = $(document).width();
-        var height = $(document).height();
-
-        var canvas = '<canvas id="gameCanvas" width="' + width + '" height="' + height + '"></canvas>';
-        $('body').append(canvas);
-        $("#gameCanvas").css('position', 'absolute');
-        $("#gameCanvas").css('top', '0px');
-        $("#gameCanvas").css('left', '0px');
     },
 
     drawScreen: function() {

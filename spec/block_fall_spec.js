@@ -5,10 +5,6 @@ describe("BlockFall", function() {
         blockFall = new BlockFall(new CreateShape(true));
     });
 
-    it("should have a canvas element", function() {
-        expect($('#gameCanvas').length).toEqual(1);
-    });
-
     it("should have shapes fall every 1/3 of a second", function() {
         blockFall.update(false);
         var startingY = blockFall.fallingShape.block.y;

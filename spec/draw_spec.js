@@ -2,7 +2,8 @@ describe("Draw", function() {
     var draw;
 
     beforeEach(function() {
-        draw = new Draw(10, 20);
+        gameInit = new GameInit();
+        draw = new Draw(10, 20, 0, 0);
         sinon.stub(draw.context, "fillRect");
         sinon.stub(draw.context, "strokeRect");
     });
