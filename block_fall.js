@@ -94,28 +94,28 @@ var BlockFall = Class.extend({
     },
 
     isFallingShapeLocked: function() {
-        return this.collisionDetection.isAtBottom(this.fallingShape) || this.collisionDetection.doesBottomCollide(this.fallingShape, this.blocks);
+        return this.collisionDetection.doesBottomCollide(this.fallingShape, this.blocks);
     },
 
     moveRight: function() {
-        if (!this.collisionDetection.doesRightCollide(this.fallingShape, this.blocks) && !this.collisionDetection.isAtRightBound(this.fallingShape))
+        if (!this.collisionDetection.doesRightCollide(this.fallingShape, this.blocks))
             this.fallingShape.moveRight();
     },
 
     moveLeft: function() {
-        if (!this.collisionDetection.doesLeftCollide(this.fallingShape, this.blocks) && !this.collisionDetection.isAtLeftBound(this.fallingShape))
+        if (!this.collisionDetection.doesLeftCollide(this.fallingShape, this.blocks))
             this.fallingShape.moveLeft();
     },
 
     rotate: function() {
         this.fallingShape.rotate();
-        if (this.collisionDetection.doesCollide(this.fallingShape, this.blocks) || this.collisionDetection.collidesWithBound(this.fallingShape))
+        if (this.collisionDetection.doesCollide(this.fallingShape, this.blocks))
             this.fallingShape.reverseRotate();
     },
 
     rotateCounterClockwise: function() {
         this.fallingShape.reverseRotate();
-        if (this.collisionDetection.doesCollide(this.fallingShape, this.blocks) || this.collisionDetection.collidesWithBound(this.fallingShape))
+        if (this.collisionDetection.doesCollide(this.fallingShape, this.blocks))
             this.fallingShape.rotate();
     },
 

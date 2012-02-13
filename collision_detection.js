@@ -4,19 +4,35 @@ var CollisionDetection = Class.extend({
         this.bottomBound = bottomBound;
     },
 
-    doesLeftCollide: function(falling, lockedBlocks) {
+    doesLeftCollide: function(fallingShape, lockedBlocks) {
+        return this.doesLeftCollideWithBlocks(fallingShape, lockedBlocks) || this.isAtLeftBound(fallingShape);
+    },
+
+    doesRightCollide: function(fallingShape, lockedBlocks) {
+        return this.doesRightCollideWithBlocks(fallingShape, lockedBlocks) || this.isAtRightBound(fallingShape);
+    },
+
+    doesBottomCollide: function(fallingShape, lockedBlocks) {
+        return this.doesBottomCollideWithBlocks(fallingShape, lockedBlocks) || this.isAtBottom(fallingShape);
+    },
+
+    doesCollide: function(fallingShape, lockedBlocks) {
+        return this.doesCollideWithBlocks(fallingShape, lockedBlocks) || this.collidesWithBound(fallingShape)
+    },
+
+    doesLeftCollideWithBlocks: function(falling, lockedBlocks) {
         return this.collisionDetection(falling, lockedBlocks, function(block) { return block.left() });
     },
 
-    doesRightCollide: function(falling, lockedBlocks) {
+    doesRightCollideWithBlocks: function(falling, lockedBlocks) {
         return this.collisionDetection(falling, lockedBlocks, function(block) { return block.right() });
     },
 
-    doesBottomCollide: function(falling, lockedBlocks) {
+    doesBottomCollideWithBlocks: function(falling, lockedBlocks) {
         return this.collisionDetection(falling, lockedBlocks, function(block) { return block.bottom() });
     },
 
-    doesCollide: function(falling, lockedBlocks) {
+    doesCollideWithBlocks: function(falling, lockedBlocks) {
         return this.collisionDetection(falling, lockedBlocks, function(block) { return block });
     },
 

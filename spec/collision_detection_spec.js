@@ -9,30 +9,30 @@ describe("CollisionDetection", function() {
         var locked = [new Block(6, 1)];
         var falling = new O(new Block(7, 1));
 
-        expect(collisionDetection.doesLeftCollide(falling, locked)).toBeTruthy();
+        expect(collisionDetection.doesLeftCollideWithBlocks(falling, locked)).toBeTruthy();
 
         falling = new O(new Block(5, 1));
-        expect(collisionDetection.doesLeftCollide(falling, locked)).toBeFalsy();
+        expect(collisionDetection.doesLeftCollideWithBlocks(falling, locked)).toBeFalsy();
     });
 
     it("should have right collision detection", function() {
         var locked = [new Block(9, 1)];
         var falling = new O(new Block(7, 1));
 
-        expect(collisionDetection.doesRightCollide(falling, locked)).toBeTruthy();
+        expect(collisionDetection.doesRightCollideWithBlocks(falling, locked)).toBeTruthy();
 
         falling = new O(new Block(6, 1));
-        expect(collisionDetection.doesRightCollide(falling, locked)).toBeFalsy();
+        expect(collisionDetection.doesRightCollideWithBlocks(falling, locked)).toBeFalsy();
     });
 
     it("should have bottom collision detection", function() {
         var locked = [new Block(7, 4)];
         var falling = new O(new Block(7, 2));
 
-        expect(collisionDetection.doesBottomCollide(falling, locked)).toBeTruthy();
+        expect(collisionDetection.doesBottomCollideWithBlocks(falling, locked)).toBeTruthy();
 
         falling = new O(new Block(7, 1));
-        expect(collisionDetection.doesBottomCollide(falling, locked)).toBeFalsy();
+        expect(collisionDetection.doesBottomCollideWithBlocks(falling, locked)).toBeFalsy();
     });
 
     it("is at bottom", function() {
