@@ -18,13 +18,14 @@
     <script src="create_shape.js" type="text/javascript" charset="utf-8"></script>
     <script src="collision_detection.js" type="text/javascript" charset="utf-8"></script>
     <script src="game_init.js" type="text/javascript" charset="utf-8"></script>
+    <script src="field.js" type="text/javascript" charset="utf-8"></script>
     <title>Game</title>
   </head>
   <body>
     <script type="text/javascript">
 var gameInit = new GameInit();
-var draw = new Draw(gameInit.RIGHT_BOUND, gameInit.BOTTOM_BOUND, 0, 0);
-var blockFall = new window.BlockFall(new CreateShape(), draw);
+var control = new Control();
+var field = new Field(gameInit, control);
 
 (function() {
     var onEachFrame;
@@ -47,25 +48,9 @@ var blockFall = new window.BlockFall(new CreateShape(), draw);
     window.onEachFrame = onEachFrame;
 })();
 
-var control = new Control();
+
 window.onEachFrame(function() {
-    if (control.isMovingRight())
-        blockFall.moveRight();
-    if (control.isMovingLeft())
-        blockFall.moveLeft();
-    if (control.isRotatingClockwise())
-        blockFall.rotate();
-    if (control.isRotatingCounterClockwise())
-        blockFall.rotateCounterClockwise();
-
-    if (control.isHardDropping())
-        blockFall.hardDrop();
-
-
-    blockFall.drawScreen(); 
-
-    var speedFall = control.isSoftDropping();
-    blockFall.update(speedFall);
+field.update();
 });
 
     </script>
