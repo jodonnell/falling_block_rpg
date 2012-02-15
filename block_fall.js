@@ -13,12 +13,10 @@ var BlockFall = Class.extend({
         this.draw = draw;
         this.createShape = createShape;
         this.collisionDetection = new CollisionDetection(this.RIGHT_BOUND, this.BOTTOM_BOUND);
+        this._createFallingShape();
     },
 
     drawScreen: function() {
-        if (!this.fallingShape)
-            return;
-
         this.draw.background();
         this.draw.nextShape(this.createShape.nextShapeDrawable());
         this.draw.shapes(this.fallingShape);
@@ -42,10 +40,6 @@ var BlockFall = Class.extend({
     },
 
     process: function(speedFall) {
-        if (!this.fallingShape) {
-            this._createFallingShape();
-        }
-
         this.fall(speedFall);
 
         if (this.isFallFrame() && this.frameSkipCounter != this.lastFellAt && this.isFallingShapeLocked()) {

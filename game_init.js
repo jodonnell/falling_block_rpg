@@ -2,8 +2,10 @@ var GameInit = Class.extend({
     RIGHT_BOUND: 10,
     BOTTOM_BOUND: 20,
 
-    init: function(createShape, draw) {
+    init: function(hide) {
         this.createCanvas();
+        if (hide)
+            this.hide = true;
     },
 
     createCanvas: function() {
@@ -15,5 +17,11 @@ var GameInit = Class.extend({
         $("#gameCanvas").css('position', 'absolute');
         $("#gameCanvas").css('top', '0px');
         $("#gameCanvas").css('left', '0px');
+        if (this.hide)
+            $("#gameCanvas").css('visibilty', 'hidden');
+    },
+
+    destroyCanvas: function() {
+        $("#gameCanvas").remove();
     }
 });

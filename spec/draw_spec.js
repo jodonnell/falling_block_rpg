@@ -1,8 +1,9 @@
 describe("Draw", function() {
     var draw;
+    var gameInit;
 
     beforeEach(function() {
-        gameInit = new GameInit();
+        gameInit = new GameInit(true);
         draw = new Draw(10, 20, 0, 0);
         sinon.stub(draw.context, "fillRect");
         sinon.stub(draw.context, "strokeRect");
@@ -11,6 +12,8 @@ describe("Draw", function() {
     afterEach(function() {
         sinon.stub(draw.context.fillRect.restore());
         sinon.stub(draw.context.strokeRect.restore());
+
+        gameInit.destroyCanvas();
     });
 
     it("draws the border", function() {

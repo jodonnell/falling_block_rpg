@@ -18,14 +18,14 @@
     <script src="create_shape.js" type="text/javascript" charset="utf-8"></script>
     <script src="collision_detection.js" type="text/javascript" charset="utf-8"></script>
     <script src="game_init.js" type="text/javascript" charset="utf-8"></script>
-    <script src="field.js" type="text/javascript" charset="utf-8"></script>
+    <script src="arenas.js" type="text/javascript" charset="utf-8"></script>
     <title>Game</title>
   </head>
   <body>
     <script type="text/javascript">
 var gameInit = new GameInit();
 var control = new Control();
-var field = new Field(gameInit, control);
+var arenas = new Arenas(gameInit.RIGHT_BOUND, gameInit.BOTTOM_BOUND, control);
 
 (function() {
     var onEachFrame;
@@ -50,7 +50,7 @@ var field = new Field(gameInit, control);
 
 
 window.onEachFrame(function() {
-field.update();
+arenas.update();
 });
 
     </script>

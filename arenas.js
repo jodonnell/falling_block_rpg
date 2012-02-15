@@ -1,9 +1,9 @@
-var Field = Class.extend({
-    init: function(gameInit, control) {
-        var draw = new Draw(gameInit.RIGHT_BOUND, gameInit.BOTTOM_BOUND, 0, 0);
+var Arenas = Class.extend({
+    init: function(rightBound, bottomBound, control) {
+        var draw = new Draw(rightBound, bottomBound, 0, 0);
         this.playerArena = new BlockFall(new CreateShape(), draw);
 
-        draw = new Draw(gameInit.RIGHT_BOUND, gameInit.BOTTOM_BOUND, 400, 0);
+        draw = new Draw(rightBound, bottomBound, 400, 0);
         this.enemyArena = new BlockFall(new CreateShape(), draw);
 
         this.control = control;
@@ -11,15 +11,13 @@ var Field = Class.extend({
 
     update: function() {
         this.respondToControls();
+        this.ai();
 
         this.playerArena.drawScreen(); 
         this.enemyArena.drawScreen();
 
         this.playerArena.update(this.control.isSoftDropping());
         this.enemyArena.update(false);
-
-        this.ai();
-
     },
 
     ai: function() {
