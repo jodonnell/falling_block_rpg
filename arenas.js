@@ -7,11 +7,12 @@ var Arenas = Class.extend({
         this.enemyArena = new BlockFall(new CreateShape(), draw);
 
         this.control = control;
+        this.ai = new AI(this.enemyArena);
     },
 
     update: function() {
         this.respondToControls();
-        this.ai();
+        this.respondToAI();
 
         this.playerArena.drawScreen(); 
         this.enemyArena.drawScreen();
@@ -20,21 +21,25 @@ var Arenas = Class.extend({
         this.enemyArena.update(false);
     },
 
-    ai: function() {
-        this.enemyArena.moveRight();
+    respondToControls: function() {
+        this.respondToInput(this.control);
     },
 
-    respondToControls: function() {
-        if (this.control.isMovingRight())
+    respondToAI: function() {
+        this.respondToInput(this.ai);
+    },
+
+    respondToInput: function(input) {
+        if (input.isMovingRight())
             this.playerArena.moveRight();
-        if (this.control.isMovingLeft())
+        if (input.isMovingLeft())
             this.playerArena.moveLeft();
-        if (this.control.isRotatingClockwise())
+        if (input.isRotatingClockwise())
             this.playerArena.rotate();
-        if (this.control.isRotatingCounterClockwise())
+        if (input.isRotatingCounterClockwise())
             this.playerArena.rotateCounterClockwise();
 
-        if (this.control.isHardDropping())
+        if (input.isHardDropping())
             this.playerArena.hardDrop();
     }
 
