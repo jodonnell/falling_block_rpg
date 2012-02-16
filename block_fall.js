@@ -80,13 +80,21 @@ var BlockFall = Class.extend({
     },
 
     moveRight: function() {
-        if (!this.collisionDetection.doesRightCollide(this.fallingShape, this.blocks))
+        if (this.canMoveRight())
             this.fallingShape.moveRight();
     },
 
+    canMoveRight: function() {
+        return !this.collisionDetection.doesRightCollide(this.fallingShape, this.blocks);
+    },
+
     moveLeft: function() {
-        if (!this.collisionDetection.doesLeftCollide(this.fallingShape, this.blocks))
+        if (this.canMoveLeft())
             this.fallingShape.moveLeft();
+    },
+
+    canMoveLeft: function() {
+        return !this.collisionDetection.doesLeftCollide(this.fallingShape, this.blocks);
     },
 
     rotate: function() {

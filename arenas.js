@@ -22,25 +22,25 @@ var Arenas = Class.extend({
     },
 
     respondToControls: function() {
-        this.respondToInput(this.control);
+        this.respondToInput(this.control, this.playerArena);
     },
 
     respondToAI: function() {
-        this.respondToInput(this.ai);
+        this.respondToInput(this.ai, this.enemyArena);
     },
 
-    respondToInput: function(input) {
+    respondToInput: function(input, arena) {
         if (input.isMovingRight())
-            this.playerArena.moveRight();
+            arena.moveRight();
         if (input.isMovingLeft())
-            this.playerArena.moveLeft();
+            arena.moveLeft();
         if (input.isRotatingClockwise())
-            this.playerArena.rotate();
+            arena.rotate();
         if (input.isRotatingCounterClockwise())
-            this.playerArena.rotateCounterClockwise();
+            arena.rotateCounterClockwise();
 
         if (input.isHardDropping())
-            this.playerArena.hardDrop();
+            arena.hardDrop();
     }
 
 });
