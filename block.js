@@ -29,6 +29,10 @@ var Block = Class.extend({
         return new Block(this.x, this.y - 1, this.color);
     },
 
+    copy: function() {
+        return new Block(this.x, this.y, this.color);
+    },
+
     bottomRight: function() {
         return new Block(this.x + 1, this.y + 1, this.color);
     },

@@ -3,6 +3,6 @@ var O = Shape.extend({
     startingYPos: -1,
 
     occupiedSquares: function() {
-        return [this.block, this.block.right(), this.block.bottom(), this.block.bottomRight()];
+        return [this.block.copy(), this.block.right(), this.block.bottom(), this.block.bottomRight()];
     }
 });

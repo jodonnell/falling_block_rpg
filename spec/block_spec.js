@@ -9,4 +9,10 @@ describe("Block", function() {
         expect(block.getY()).toEqual(20);
     });
 
+    it("should be able to make a copy", function() {
+        var block = new Block(0, 0, 'red');
+        expect(block.copy().x).toEqual(0);
+        expect(block.copy().y).toEqual(0);
+    });
+
 });
