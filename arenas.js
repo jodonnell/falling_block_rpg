@@ -18,7 +18,7 @@ var Arenas = Class.extend({
         this.enemyArena.drawScreen();
 
         this.playerArena.update(this.control.isSoftDropping());
-        this.enemyArena.update(false);
+        this.enemyArena.update(this.ai.isSoftDropping());
     },
 
     respondToControls: function() {
@@ -26,8 +26,10 @@ var Arenas = Class.extend({
     },
 
     respondToAI: function() {
-        if (this.enemyArena.isFallFrame())
+        if (this.enemyArena.isFallFrame()) {
+            this.ai.calcOptimalSpot();
             this.respondToInput(this.ai, this.enemyArena);
+        }
     },
 
     respondToInput: function(input, arena) {

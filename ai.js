@@ -4,31 +4,37 @@ var AI = Class.extend({
     },
 
     isMovingRight: function() {
-        var bestMove = this.getOptimalSpot();
-        if (bestMove[0].x > this.enemyArena.fallingShape.block.x)
+        if (this.optimalSpot.x > this.enemyArena.fallingShape.block.x)
             return true;
         return false;
     },
 
     isMovingLeft: function() {
-        var bestMove = this.getOptimalSpot();
-        if (bestMove[0].x < this.enemyArena.fallingShape.block.x)
+        if (this.optimalSpot.x < this.enemyArena.fallingShape.block.x)
             return true;
         return false;
     },
 
     isRotatingClockwise: function() {
+        if (this.enemyArena.fallingShape.rotatedPosition != this.rotation)
+            return true;
+        return false;
     },
 
     isRotatingCounterClockwise: function() {
     },
 
     isSoftDropping: function() {
+        return this.optimalSpot.x == this.enemyArena.fallingShape.block.x;
     },
 
     isHardDropping: function() {
-        this.getOptimalSpot();
+        //this.getOptimalSpot();
         return false;
+    },
+
+    calcOptimalSpot: function() {
+        this.optimalSpot = this.getOptimalSpot();
     },
 
     getOptimalSpot: function() {
@@ -37,39 +43,50 @@ var AI = Class.extend({
         // rotate, repeat
 
         this.currentBlock = this.enemyArena.fallingShape.block;
-        
+        this.currentRotation = this.enemyArena.fallingShape.rotatedPosition;
 
         this.highestScore = 0;
         this.bestMove = null;
+        this.rotation = null;
 
         for(this._moveFarLeft(); this.enemyArena.canMoveRight(); this.enemyArena.moveRight()) {
-            this.calculateScore();
+            this.calculateScoreForEachRotation();
         }
-        this.calculateScore();
+        this.calculateScoreForEachRotation();
 
         this.enemyArena.fallingShape.block.x = this.currentBlock.x;
+        this.enemyArena.fallingShape.rotatedPosition = this.currentRotation;
+
         return this.bestMove;
+    },
+
+    calculateScoreForEachRotation: function() {
+        for (var i = 0; i < this.enemyArena.fallingShape.rotatePositions; i++) {
+            this.calculateScore();
+            this.enemyArena.rotate();
+        }
     },
 
     calculateScore: function() {
         this.enemyArena._fallAsFarAsPossible();
-        // var score = 
+
         var score = this.score();
         if (score > this.highestScore) {
             this.highestScore = score;
-            this.bestMove = this.enemyArena.fallingShape.occupiedSquares();
+            this.bestMove = this.enemyArena.fallingShape.block;
+            this.rotation = this.enemyArena.fallingShape.rotatedPosition;
         }
 
         this.enemyArena.fallingShape.block.y = this.currentBlock.y;
     },
 
     score: function() {
-        var height = this.enemyArena.fallingShape.block.y; // should get highest block in shape
+        var height = this.enemyArena.fallingShape.highestBlock().y;
         return height * this.snugness();
-        return height;
     },
 
     snugness: function() {
+        
         return 1;
     },
     

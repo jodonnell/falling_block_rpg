@@ -5,6 +5,7 @@ describe("AI", function() {
     beforeEach(function() {
         blockFall = new BlockFall(new CreateShape(true));
         ai = new AI(blockFall);
+        ai.calcOptimalSpot();
     });
 
     it("should start by dropping rotated j against left wall", function() {
