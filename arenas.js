@@ -21,6 +21,14 @@ var Arenas = Class.extend({
         this.enemyArena.update(this.ai.isSoftDropping());
     },
 
+    updateWithTime: function() {
+        var startTime = new Date().getTime();
+        this.update();
+        var time = new Date().getTime() - startTime;
+        if (time > 5)
+            console.log(time)
+    },
+
     respondToControls: function() {
         this.respondToInput(this.control, this.playerArena);
     },
