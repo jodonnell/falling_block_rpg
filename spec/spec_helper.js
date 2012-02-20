@@ -8,4 +8,16 @@ beforeEach(function() {
             return false;
         }
     });
+
+    this.addMatchers({
+        toContainBlocks: function(expected) {
+            var found = true;
+            for (var i = 0; i < expected.length; i++) {
+                if (this.toContainBlock(expected[i]))
+                    found = false;
+            }
+            return found;
+        }
+    });
+
 });

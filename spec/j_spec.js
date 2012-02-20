@@ -6,13 +6,13 @@ describe("J", function() {
     });
 
     it("can rotate", function() {
-        expect(j.occupiedSquares()).toContainBlock(new Block(6, 1));
+        expect(j.occupiedSquares()).toContainBlocks([new Block(6, 1), new Block(5, 1), new Block(4, 1), new Block(6, 2)]);
 
         j.rotate();
-        expect(j.occupiedSquares()).toContainBlock(new Block(4, 2));
+        expect(j.occupiedSquares()).toContainBlocks([new Block(4, 2), new Block(5, 0), new Block(5, 1), new Block(5, 2)]);
 
         j.rotate();
-        expect(j.occupiedSquares()).toContainBlock(new Block(4, 1));
+        expect(j.occupiedSquares()).toContainBlocks([new Block(4, 1), new Block(5, 1), new Block(6, 1), new Block(4, 0)]);
     });
 
     it("can reverse rotate", function() {

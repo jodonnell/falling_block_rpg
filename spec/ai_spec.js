@@ -11,4 +11,8 @@ describe("Arenas", function() {
         expect(ai.isHardDropping()).toBeTruthy();
     });
 
+    it("should start by dropping rotated j against left wall", function() {
+        expect(ai.getOptimalSpot()).toContainBlocks([new Block(1, 19), new Block(2, 19), new Block(3, 19), new Block(1, 18)]);
+    });
+
 });
