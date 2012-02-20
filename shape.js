@@ -38,5 +38,17 @@ var Shape = Class.extend({
         this.rotatedPosition--;
         if (this.rotatedPosition === -1)
             this.rotatedPosition = this.rotatePositions - 1;
+    },
+
+    highestBlock: function() {
+        var highestY = 21;
+        var highestBlock = null;
+        $.each(this.occupiedSquares(), function(index, block){
+            if (block.y < highestY) {
+                highestY = block.y;
+                highestBlock = block;
+            }
+        });
+        return highestBlock;
     }
 });

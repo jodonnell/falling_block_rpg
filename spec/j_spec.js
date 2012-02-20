@@ -26,5 +26,11 @@ describe("J", function() {
         expect(j.rotatedPosition).toEqual(0);
     });
 
+    it("can get the highest block", function() {
+        expect(j.highestBlock().y).toEqual(1);
+        j.rotate();
+        expect(j.highestBlock().y).toEqual(0);
+    });
+
     
 });
