@@ -1,7 +1,7 @@
 var Arenas = Class.extend({
     init: function(rightBound, bottomBound, control) {
         var draw = new Draw(rightBound, bottomBound, 0, 0);
-        this.playerArena = new BlockFall(new CreateShape(), draw);
+        this.playerArena = new BlockFall(new CreateShape(true), draw);
 
         draw = new Draw(rightBound, bottomBound, 400, 0);
         this.enemyArena = new BlockFall(new CreateShape(), draw);
@@ -26,7 +26,8 @@ var Arenas = Class.extend({
     },
 
     respondToAI: function() {
-        this.respondToInput(this.ai, this.enemyArena);
+        if (this.enemyArena.isFallFrame())
+            this.respondToInput(this.ai, this.enemyArena);
     },
 
     respondToInput: function(input, arena) {

@@ -4,9 +4,17 @@ var AI = Class.extend({
     },
 
     isMovingRight: function() {
+        var bestMove = this.getOptimalSpot();
+        if (bestMove[0].x > this.enemyArena.fallingShape.block.x)
+            return true;
+        return false;
     },
 
     isMovingLeft: function() {
+        var bestMove = this.getOptimalSpot();
+        if (bestMove[0].x < this.enemyArena.fallingShape.block.x)
+            return true;
+        return false;
     },
 
     isRotatingClockwise: function() {
@@ -20,7 +28,7 @@ var AI = Class.extend({
 
     isHardDropping: function() {
         this.getOptimalSpot();
-        return true;
+        return false;
     },
 
     getOptimalSpot: function() {
@@ -28,36 +36,43 @@ var AI = Class.extend({
         // go far left, move right one at a time and calc score
         // rotate, repeat
 
-        var currentBlock = this.enemyArena.fallingShape.block;
-        this._moveFarLeft();
+        this.currentBlock = this.enemyArena.fallingShape.block;
+        
 
-        var highestScore = 0;
-        var bestMove = null;
+        this.highestScore = 0;
+        this.bestMove = null;
 
-        do {
-            this.enemyArena._fallAsFarAsPossible();
-            // var score = 
-            debugger;
-            var score = this.score();
-            if (score > highestScore) {
-                highestScore = score;
-                bestMove = this.enemyArena.fallingShape.occupiedSquares();
-            }
-                
+        for(this._moveFarLeft(); this.enemyArena.canMoveRight(); this.enemyArena.moveRight()) {
+            this.calculateScore();
+        }
+        this.calculateScore();
 
+        this.enemyArena.fallingShape.block.x = this.currentBlock.x;
+        return this.bestMove;
+    },
 
-            this.enemyArena.fallingShape.block.y = currentBlock.y;
+    calculateScore: function() {
+        this.enemyArena._fallAsFarAsPossible();
+        // var score = 
+        var score = this.score();
+        if (score > this.highestScore) {
+            this.highestScore = score;
+            this.bestMove = this.enemyArena.fallingShape.occupiedSquares();
+        }
 
-            this.enemyArena.moveRight();
-        } while(this.enemyArena.canMoveRight())
-        return bestMove;
+        this.enemyArena.fallingShape.block.y = this.currentBlock.y;
     },
 
     score: function() {
-        var height = this.enemyArena.fallingShape.block.y;
+        var height = this.enemyArena.fallingShape.block.y; // should get highest block in shape
+        return height * this.snugness();
         return height;
     },
 
+    snugness: function() {
+        return 1;
+    },
+    
     _moveFarLeft: function() {
         while (this.enemyArena.canMoveLeft())
             this.enemyArena.moveLeft();
