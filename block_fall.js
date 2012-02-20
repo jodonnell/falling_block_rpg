@@ -168,10 +168,12 @@ var BlockFall = Class.extend({
     },
 
     hardDrop: function() {
+        this._fallAsFarAsPossible();
+        this.shapeHitGround();
+    },
+
+    _fallAsFarAsPossible: function() {
         while (!this.isFallingShapeLocked())
             this.fall(true);
-        
-        this.shapeHitGround();
-  
     }
 });

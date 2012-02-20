@@ -32,10 +32,12 @@ var AI = Class.extend({
         this._moveFarLeft();
         
         do {
+            this.enemyArena._fallAsFarAsPossible();
             // var score = 
 
             this.enemyArena.moveRight();
         } while(this.enemyArena.canMoveRight())
+        return this.enemyArena.fallingShape.occupiedSquares();
     },
 
     _moveFarLeft: function() {

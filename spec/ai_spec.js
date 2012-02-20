@@ -1,4 +1,4 @@
-describe("Arenas", function() {
+describe("AI", function() {
     var ai;
     var blockFall;
 
