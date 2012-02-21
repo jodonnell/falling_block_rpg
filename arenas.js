@@ -4,7 +4,7 @@ var Arenas = Class.extend({
         this.playerArena = new BlockFall(new CreateShape(true), draw);
 
         draw = new Draw(rightBound, bottomBound, 400, 0);
-        this.enemyArena = new BlockFall(new CreateShape(), draw);
+        this.enemyArena = new BlockFall(new CreateShape(true), draw);
 
         this.control = control;
         this.ai = new AI(this.enemyArena);
@@ -18,15 +18,13 @@ var Arenas = Class.extend({
         this.enemyArena.drawScreen();
 
         this.playerArena.update(this.control.isSoftDropping());
-        this.enemyArena.update(this.ai.isSoftDropping());
+        this.enemyArena.update(false);
     },
 
     updateWithTime: function() {
         var startTime = new Date().getTime();
         this.update();
-        var time = new Date().getTime() - startTime;
-        if (time > 5)
-            console.log(time)
+        return new Date().getTime() - startTime;
     },
 
     respondToControls: function() {

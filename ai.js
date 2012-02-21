@@ -29,8 +29,7 @@ var AI = Class.extend({
     },
 
     isHardDropping: function() {
-        //this.getOptimalSpot();
-        return false;
+        return this.optimalSpot.x == this.enemyArena.fallingShape.block.x;
     },
 
     calcOptimalSpot: function() {
@@ -42,6 +41,7 @@ var AI = Class.extend({
         // go far left, move right one at a time and calc score
         // rotate, repeat
 
+        debugger;
         this.currentBlock = this.enemyArena.fallingShape.block;
         this.currentRotation = this.enemyArena.fallingShape.rotatedPosition;
 
@@ -81,13 +81,15 @@ var AI = Class.extend({
     },
 
     score: function() {
-        var height = this.enemyArena.fallingShape.highestBlock().y;
-        return height * this.snugness();
+        return (this.height() / 40) + (this.snugness() / 18);
+    },
+
+    height: function() {
+        return this.enemyArena.fallingShape.highestBlock().y;
     },
 
     snugness: function() {
-        
-        return 1;
+        return this.enemyArena.howManyTouches();
     },
     
     _moveFarLeft: function() {

@@ -175,5 +175,9 @@ var BlockFall = Class.extend({
     _fallAsFarAsPossible: function() {
         while (!this.isFallingShapeLocked())
             this.fall(true);
+    },
+
+    howManyTouches: function() {
+        return this.collisionDetection.doesLeftCollide(this.fallingShape, this.blocks) + this.collisionDetection.doesRightCollide(this.fallingShape, this.blocks) + this.collisionDetection.doesBottomCollide(this.fallingShape, this.blocks);
     }
 });

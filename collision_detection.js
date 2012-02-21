@@ -5,15 +5,15 @@ var CollisionDetection = Class.extend({
     },
 
     doesLeftCollide: function(fallingShape, lockedBlocks) {
-        return this.doesLeftCollideWithBlocks(fallingShape, lockedBlocks) || this.isAtLeftBound(fallingShape);
+        return this.doesLeftCollideWithBlocks(fallingShape, lockedBlocks) + this.isAtLeftBound(fallingShape);
     },
 
     doesRightCollide: function(fallingShape, lockedBlocks) {
-        return this.doesRightCollideWithBlocks(fallingShape, lockedBlocks) || this.isAtRightBound(fallingShape);
+        return this.doesRightCollideWithBlocks(fallingShape, lockedBlocks) + this.isAtRightBound(fallingShape);
     },
 
     doesBottomCollide: function(fallingShape, lockedBlocks) {
-        return this.doesBottomCollideWithBlocks(fallingShape, lockedBlocks) || this.isAtBottom(fallingShape);
+        return this.doesBottomCollideWithBlocks(fallingShape, lockedBlocks) + this.isAtBottom(fallingShape);
     },
 
     doesCollide: function(fallingShape, lockedBlocks) {
@@ -53,11 +53,12 @@ var CollisionDetection = Class.extend({
     },
 
     isAtLeftBound: function(falling) {
+        var numberTouches = 0;
         for (var i = 0; i < falling.occupiedSquares().length; i++) {
             if (falling.occupiedSquares()[i].x == 1)
-                return true;
+                numberTouches++;
         }
-        return false;
+        return numberTouches;
     },
 
     collidesWithBound: function(falling) {
@@ -69,13 +70,14 @@ var CollisionDetection = Class.extend({
     },
 
     collisionDetection: function(falling, lockedBlocks, direction) {
+        var numberTouches = 0;
         for (var i = 0; i < lockedBlocks.length; i++) {
             for (var j = 0; j < falling.occupiedSquares().length; j++) {
                 if (lockedBlocks[i].isEqual(direction(falling.occupiedSquares()[j])))
-                    return true;
+                    numberTouches++;
             }
         }
-        return false;
+        return numberTouches;
     },
 
 });
