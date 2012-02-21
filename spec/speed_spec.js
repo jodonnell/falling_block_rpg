@@ -5,6 +5,6 @@ describe("Speed", function() {
         var arenas = new Arenas(gameInit.RIGHT_BOUND, gameInit.BOTTOM_BOUND, control);
 
         for (var i = 0; i < 300; i++)
-            expect(arenas.updateWithTime()).toBeLessThan(17);
+            expect(arenas.updateWithTime()).toBeLessThan(36);
     });
 });
