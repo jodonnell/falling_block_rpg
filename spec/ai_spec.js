@@ -13,7 +13,8 @@ describe("AI", function() {
     });
 
     it("first move should be far left corner", function() {
-        expect(ai.getOptimalSpot()).toContainBlocks([new Block(1, 19), new Block(2, 19), new Block(3, 19), new Block(1, 18)]);
+        expect(ai.bestMove).blockEqual(new Block(2, 20));
+        expect(ai.rotation).toEqual(2);
     });
 
 });

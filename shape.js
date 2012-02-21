@@ -1,6 +1,6 @@
 var Shape = Class.extend({
     init: function(block) {
-        this.block = block;
+        this.block = block.copy();
         this.rotatedPosition = 0;
     },
 

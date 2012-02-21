@@ -37,43 +37,51 @@ var CollisionDetection = Class.extend({
     },
 
     isAtBottom: function(falling) {
-        for (var i = 0; i < falling.occupiedSquares().length; i++) {
-            if (falling.occupiedSquares()[i].y == this.bottomBound)
-                return true;
+        var numberTouches = 0;
+        var occupiedSquares = falling.occupiedSquares();
+        for (var i = 0; i < occupiedSquares.length; i++) {
+            if (occupiedSquares[i].y == this.bottomBound)
+                numberTouches++;
         }
-        return false;
+        return numberTouches;
     },
 
     isAtRightBound: function(falling) {
-        for (var i = 0; i < falling.occupiedSquares().length; i++) {
-            if (falling.occupiedSquares()[i].x == this.rightBound)
-                return true;
+        var numberTouches = 0;
+        var occupiedSquares = falling.occupiedSquares();
+        for (var i = 0; i < occupiedSquares.length; i++) {
+            if (occupiedSquares[i].x == this.rightBound)
+                numberTouches++;
         }
-        return false;
+        return numberTouches;
     },
 
     isAtLeftBound: function(falling) {
         var numberTouches = 0;
-        for (var i = 0; i < falling.occupiedSquares().length; i++) {
-            if (falling.occupiedSquares()[i].x == 1)
+        var occupiedSquares = falling.occupiedSquares();
+        for (var i = 0; i < occupiedSquares.length; i++) {
+            if (occupiedSquares[i].x == 1)
                 numberTouches++;
         }
         return numberTouches;
     },
 
     collidesWithBound: function(falling) {
-        for (var i = 0; i < falling.occupiedSquares().length; i++) {
-            if (falling.occupiedSquares()[i].x == 0 || falling.occupiedSquares()[i].x == this.rightBound + 1 || falling.occupiedSquares()[i].y == this.bottomBound)
-                return true;
+        var numberTouches = 0;
+        var occupiedSquares = falling.occupiedSquares();
+        for (var i = 0; i < occupiedSquares.length; i++) {
+            if (occupiedSquares[i].x == 0 || occupiedSquares[i].x == this.rightBound + 1 || occupiedSquares[i].y == this.bottomBound)
+                numberTouches++;
         }
-        return false;
+        return numberTouches;
     },
 
     collisionDetection: function(falling, lockedBlocks, direction) {
         var numberTouches = 0;
+        var occupiedSquares = falling.occupiedSquares();
         for (var i = 0; i < lockedBlocks.length; i++) {
-            for (var j = 0; j < falling.occupiedSquares().length; j++) {
-                if (lockedBlocks[i].isEqual(direction(falling.occupiedSquares()[j])))
+            for (var j = 0; j < occupiedSquares.length; j++) {
+                if (lockedBlocks[i].isEqual(direction(occupiedSquares[j])))
                     numberTouches++;
             }
         }

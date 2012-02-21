@@ -20,4 +20,10 @@ beforeEach(function() {
         }
     });
 
+    this.addMatchers({
+        blockEqual: function(expected) {
+            return expected.isEqual(this.actual);
+        }
+    });
+
 });

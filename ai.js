@@ -29,6 +29,7 @@ var AI = Class.extend({
     },
 
     isHardDropping: function() {
+        return false;
         return this.optimalSpot.x == this.enemyArena.fallingShape.block.x;
     },
 
@@ -41,8 +42,7 @@ var AI = Class.extend({
         // go far left, move right one at a time and calc score
         // rotate, repeat
 
-        debugger;
-        this.currentBlock = this.enemyArena.fallingShape.block;
+        this.currentBlock = this.enemyArena.fallingShape.block.copy();
         this.currentRotation = this.enemyArena.fallingShape.rotatedPosition;
 
         this.highestScore = 0;
@@ -73,7 +73,7 @@ var AI = Class.extend({
         var score = this.score();
         if (score > this.highestScore) {
             this.highestScore = score;
-            this.bestMove = this.enemyArena.fallingShape.block;
+            this.bestMove = this.enemyArena.fallingShape.block.copy();
             this.rotation = this.enemyArena.fallingShape.rotatedPosition;
         }
 
@@ -81,7 +81,7 @@ var AI = Class.extend({
     },
 
     score: function() {
-        return (this.height() / 40) + (this.snugness() / 18);
+        return (this.height() / 3) + (this.snugness() / 18);
     },
 
     height: function() {
