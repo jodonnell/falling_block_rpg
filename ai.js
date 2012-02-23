@@ -49,22 +49,20 @@ var AI = Class.extend({
         this.bestMove = null;
         this.rotation = null;
 
-        for(this._moveFarLeft(); this.enemyArena.canMoveRight(); this.enemyArena.moveRight()) {
-            this.calculateScoreForEachRotation();
+        for (var i = 0; i < this.enemyArena.fallingShape.rotatePositions; i++) {
+            for(this._moveFarLeft(); this.enemyArena.canMoveRight(); this.enemyArena.moveRight()) {
+                this.calculateScore();
+            }
+            this.calculateScore();
+
+            this.enemyArena.moveLeft(); // because can not always rotate on far right
+            this.enemyArena.rotate();
         }
-        this.calculateScoreForEachRotation();
 
         this.enemyArena.fallingShape.block.x = this.currentBlock.x;
         this.enemyArena.fallingShape.rotatedPosition = this.currentRotation;
 
         return this.bestMove;
-    },
-
-    calculateScoreForEachRotation: function() {
-        for (var i = 0; i < this.enemyArena.fallingShape.rotatePositions; i++) {
-            this.calculateScore();
-            this.enemyArena.rotate();
-        }
     },
 
     calculateScore: function() {
