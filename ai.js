@@ -34,8 +34,8 @@ var AI = Class.extend({
     },
 
     getOptimalSpot: function() {
-        this.currentBlock = this.enemyArena.fallingShape.block.copy();
-        this.currentRotation = this.enemyArena.fallingShape.rotatedPosition;
+        var currentX = this.enemyArena.fallingShape.block.x;
+        var currentRotation = this.enemyArena.fallingShape.rotatedPosition;
 
         this.highestScore = 0;
         this.optimalSpot = null;
@@ -47,15 +47,20 @@ var AI = Class.extend({
             }
             this.calculateScore();
 
-            this.enemyArena.moveLeft(); // because can not always rotate on far right
-            this.enemyArena.rotate();
+            this.rotateToNextPos();
         }
 
-        this.enemyArena.fallingShape.block.x = this.currentBlock.x;
-        this.enemyArena.fallingShape.rotatedPosition = this.currentRotation;
+        this.enemyArena.fallingShape.block.x = currentX;
+        this.enemyArena.fallingShape.rotatedPosition = currentRotation;
+    },
+
+    rotateToNextPos: function() {
+        this.enemyArena.moveLeft(); // because can not always rotate on far right
+        this.enemyArena.rotate();
     },
 
     calculateScore: function() {
+        var startingY = this.enemyArena.fallingShape.block.y;
         this.enemyArena._fallAsFarAsPossible();
 
         var score = this.score();
@@ -65,7 +70,7 @@ var AI = Class.extend({
             this.rotation = this.enemyArena.fallingShape.rotatedPosition;
         }
 
-        this.enemyArena.fallingShape.block.y = this.currentBlock.y;
+        this.enemyArena.fallingShape.block.y = startingY;
     },
 
     score: function() {
@@ -83,7 +88,5 @@ var AI = Class.extend({
     _moveFarLeft: function() {
         while (this.enemyArena.canMoveLeft())
             this.enemyArena.moveLeft();
-    },
-
-    
+    }
 });
