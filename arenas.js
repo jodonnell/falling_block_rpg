@@ -33,7 +33,7 @@ var Arenas = Class.extend({
 
     respondToAI: function() {
         if (this.enemyArena.isFallFrame()) {
-            this.ai.calcOptimalSpot();
+            this.ai.getOptimalSpot();
             this.respondToInput(this.ai, this.enemyArena);
         }
     },

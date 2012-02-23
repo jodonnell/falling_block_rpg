@@ -33,10 +33,6 @@ var AI = Class.extend({
         return this.optimalSpot.x == this.enemyArena.fallingShape.block.x;
     },
 
-    calcOptimalSpot: function() {
-        this.optimalSpot = this.getOptimalSpot();
-    },
-
     getOptimalSpot: function() {
         this.currentBlock = this.enemyArena.fallingShape.block.copy();
         this.currentRotation = this.enemyArena.fallingShape.rotatedPosition;
@@ -58,6 +54,7 @@ var AI = Class.extend({
         this.enemyArena.fallingShape.block.x = this.currentBlock.x;
         this.enemyArena.fallingShape.rotatedPosition = this.currentRotation;
 
+        this.optimalSpot = this.bestMove;
         return this.bestMove;
     },
 

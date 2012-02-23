@@ -7,22 +7,22 @@ describe("AI", function() {
         ai = new AI(blockFall);
     });
 
-    // it("should start by dropping rotated j against left wall", function() {
-    //     ai.calcOptimalSpot();
-    //     expect(ai.isMovingLeft()).toBeTruthy();
-    // });
+    it("should start by dropping rotated j against left wall", function() {
+        ai.getOptimalSpot();
+        expect(ai.isMovingLeft()).toBeTruthy();
+    });
 
-    // it("first move should be far left corner", function() {
-    //     ai.calcOptimalSpot();
-    //     expect(ai.bestMove).blockEqual(new Block(2, 20));
-    //     expect(ai.rotation).toEqual(2);
-    // });
+    it("first move should be far left corner", function() {
+        ai.getOptimalSpot();
+        expect(ai.bestMove).blockEqual(new Block(2, 20));
+        expect(ai.rotation).toEqual(2);
+    });
 
     it("should test every position", function() {
         blockFall.fallingShape = blockFall.createShape.j();
         sinon.spy(ai, "calculateScore");
 
-        ai.calcOptimalSpot();
+        ai.getOptimalSpot();
         expect(ai.calculateScore.callCount).toEqual((4 * 8) + 2);
 
         ai.calculateScore.restore();
