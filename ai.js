@@ -25,18 +25,24 @@ var AI = Class.extend({
     },
 
     isSoftDropping: function() {
-        return this.optimalSpot.x == this.enemyArena.fallingShape.block.x;
+        return false; return this.couldDrop();
     },
 
     isHardDropping: function() {
-        return false;
-        return this.optimalSpot.x == this.enemyArena.fallingShape.block.x;
+        return this.couldDrop();
+    },
+
+    couldDrop: function() {
+        return (this.optimalSpot.x == this.enemyArena.fallingShape.block.x) && (this.rotation == this.enemyArena.fallingShape.rotatedPosition);
     },
 
     getOptimalSpot: function() {
-        var currentX = this.enemyArena.fallingShape.block.x;
-        var currentRotation = this.enemyArena.fallingShape.rotatedPosition;
+        this.saveStartingPosition();
+        this.calcOptimalSpot();
+        this.restoreStartingPosition();
+    },
 
+    calcOptimalSpot: function() {
         this.highestScore = 0;
         this.optimalSpot = null;
         this.rotation = null;
@@ -45,16 +51,25 @@ var AI = Class.extend({
             for(this._moveFarLeft(); this.enemyArena.canMoveRight(); this.enemyArena.moveRight()) {
                 this.calculateScore();
             }
-            this.calculateScore();
+            this.calculateScore(); // loop ends one early
 
-            this.rotateToNextPos();
+            this.rotateShape();
         }
-
-        this.enemyArena.fallingShape.block.x = currentX;
-        this.enemyArena.fallingShape.rotatedPosition = currentRotation;
     },
 
-    rotateToNextPos: function() {
+    saveStartingPosition: function() {
+        this.currentX = this.enemyArena.fallingShape.block.x;
+        this.currentRotation = this.enemyArena.fallingShape.rotatedPosition;
+
+    },
+
+    restoreStartingPosition: function() {
+        this.enemyArena.fallingShape.block.x = this.currentX;
+        this.enemyArena.fallingShape.rotatedPosition = this.currentRotation;
+
+    },
+
+    rotateShape: function() {
         this.enemyArena.moveLeft(); // because can not always rotate on far right
         this.enemyArena.rotate();
     },

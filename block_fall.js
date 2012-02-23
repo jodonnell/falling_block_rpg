@@ -146,7 +146,7 @@ var BlockFall = Class.extend({
     breakIntoBlocks: function() {
         var blocks = this.fallingShape.occupiedSquares();
         for (var i = 0; i < blocks.length; i++)
-            this.blocks.push(blocks[i]);
+            this.addBlock(blocks[i]);
     },
 
     sinkLinesAbove: function(row) {
@@ -179,5 +179,9 @@ var BlockFall = Class.extend({
 
     howManyTouches: function() {
         return this.collisionDetection.doesLeftCollide(this.fallingShape, this.blocks) + this.collisionDetection.doesRightCollide(this.fallingShape, this.blocks) + this.collisionDetection.doesBottomCollide(this.fallingShape, this.blocks);
+    },
+    
+    addBlock: function(block) {
+        this.blocks.push(block)
     }
 });

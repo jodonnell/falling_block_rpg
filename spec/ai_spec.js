@@ -28,4 +28,20 @@ describe("AI", function() {
         ai.calculateScore.restore();
     });
 
+    it("should rotate before it drops", function() {
+        for (var row = 1; row < 5; row++)
+            for (var column = 17; column <= 20; column++)
+                blockFall.addBlock(new Block(row, column));
+
+        for (var row = 7; row < 10; row++)
+            for (var column = 17; column <= 20; column++)
+                blockFall.addBlock(new Block(row, column));
+
+        blockFall.addBlock(new Block(6, 20));
+        blockFall.addBlock(new Block(6, 19));
+
+        ai.getOptimalSpot();
+        expect(ai.isSoftDropping()).toBeFalsy();
+    });
+
 });
