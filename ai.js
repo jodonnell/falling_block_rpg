@@ -38,10 +38,6 @@ var AI = Class.extend({
     },
 
     getOptimalSpot: function() {
-        // try every combination
-        // go far left, move right one at a time and calc score
-        // rotate, repeat
-
         this.currentBlock = this.enemyArena.fallingShape.block.copy();
         this.currentRotation = this.enemyArena.fallingShape.rotatedPosition;
 
@@ -79,7 +75,7 @@ var AI = Class.extend({
     },
 
     score: function() {
-        return (this.height() / 3) + (this.snugness() / 18);
+        return (this.height() / 38) + (this.snugness() / 8);
     },
 
     height: function() {
