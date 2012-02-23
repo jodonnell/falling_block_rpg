@@ -38,7 +38,7 @@ var AI = Class.extend({
         this.currentRotation = this.enemyArena.fallingShape.rotatedPosition;
 
         this.highestScore = 0;
-        this.bestMove = null;
+        this.optimalSpot = null;
         this.rotation = null;
 
         for (var i = 0; i < this.enemyArena.fallingShape.rotatePositions; i++) {
@@ -53,9 +53,6 @@ var AI = Class.extend({
 
         this.enemyArena.fallingShape.block.x = this.currentBlock.x;
         this.enemyArena.fallingShape.rotatedPosition = this.currentRotation;
-
-        this.optimalSpot = this.bestMove;
-        return this.bestMove;
     },
 
     calculateScore: function() {
@@ -64,7 +61,7 @@ var AI = Class.extend({
         var score = this.score();
         if (score > this.highestScore) {
             this.highestScore = score;
-            this.bestMove = this.enemyArena.fallingShape.block.copy();
+            this.optimalSpot = this.enemyArena.fallingShape.block.copy();
             this.rotation = this.enemyArena.fallingShape.rotatedPosition;
         }
 

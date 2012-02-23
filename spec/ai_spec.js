@@ -14,7 +14,7 @@ describe("AI", function() {
 
     it("first move should be far left corner", function() {
         ai.getOptimalSpot();
-        expect(ai.bestMove).blockEqual(new Block(2, 20));
+        expect(ai.optimalSpot).blockEqual(new Block(2, 20));
         expect(ai.rotation).toEqual(2);
     });
 
