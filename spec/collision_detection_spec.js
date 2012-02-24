@@ -35,6 +35,16 @@ describe("CollisionDetection", function() {
         expect(collisionDetection.doesBottomCollideWithBlocks(falling, locked)).toBeFalsy();
     });
 
+    it("should have bottom hole detection", function() {
+        var locked = [new Block(7, 4)];
+        var falling = new O(new Block(7, 2));
+
+        expect(collisionDetection.doesBottomHaveHoles(falling, locked)).toEqual(1);
+
+        locked = [new Block(7, 4), new Block(8, 4)];
+        expect(collisionDetection.doesBottomHaveHoles(falling, locked)).toEqual(0);
+    });
+
     it("is at bottom", function() {
         var o = new O(new Block(7,1));
         expect(collisionDetection.isAtBottom(o)).toBeFalsy();

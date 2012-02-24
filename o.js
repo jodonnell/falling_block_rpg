@@ -5,5 +5,10 @@ var O = Shape.extend({
 
     occupiedSquares: function() {
         return [this.block.copy(), this.block.right(), this.block.bottom(), this.block.bottomRight()];
+    },
+
+    bottomSquares: function() {
+        return [this.block.bottom(), this.block.bottomRight()];
     }
+
 });

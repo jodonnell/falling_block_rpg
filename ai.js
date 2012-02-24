@@ -43,7 +43,7 @@ var AI = Class.extend({
     },
 
     calcOptimalSpot: function() {
-        this.highestScore = 0;
+        this.highestScore = -1000;
         this.optimalSpot = null;
         this.rotation = null;
 
@@ -89,7 +89,7 @@ var AI = Class.extend({
     },
 
     score: function() {
-        return (this.height() / 38) + (this.snugness() / 8);
+        return (this.height() / 38) + (this.snugness() / 8) - this.enemyArena.howManyHolesUnderneath();
     },
 
     height: function() {

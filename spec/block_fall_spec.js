@@ -170,4 +170,15 @@ describe("BlockFall", function() {
         expect(blockFall.blocks).toContainBlock(new Block(5, 19));
     });
 
+    it("should be able to count how many touches", function() {
+        blockFall.update();
+        blockFall._fallAsFarAsPossible();
+        expect(blockFall.howManyTouches()).toEqual(1);
+
+        blockFall.shapeHitGround();
+        blockFall.rotate();
+        blockFall._fallAsFarAsPossible();
+        expect(blockFall.howManyTouches()).toEqual(2);
+
+    });
 });

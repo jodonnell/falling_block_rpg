@@ -51,6 +51,7 @@ var BlockFall = Class.extend({
         this.breakIntoBlocks();
         this.completedLines();
         this.gameOver = this.isGameOver();
+
         if (!this.gameOver)
             this._createFallingShape();
     },
@@ -179,6 +180,10 @@ var BlockFall = Class.extend({
 
     howManyTouches: function() {
         return this.collisionDetection.doesLeftCollide(this.fallingShape, this.blocks) + this.collisionDetection.doesRightCollide(this.fallingShape, this.blocks) + this.collisionDetection.doesBottomCollide(this.fallingShape, this.blocks);
+    },
+
+    howManyHolesUnderneath: function() {
+        return this.collisionDetection.doesBottomHaveHoles(this.fallingShape, this.blocks);;
     },
     
     addBlock: function(block) {

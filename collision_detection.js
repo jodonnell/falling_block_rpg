@@ -32,6 +32,10 @@ var CollisionDetection = Class.extend({
         return this.collisionDetection(falling, lockedBlocks, function(block) { return block.bottom() });
     },
 
+    doesBottomHaveHoles: function(falling, lockedBlocks) {
+        return this.holesDetection(falling, lockedBlocks, function(block) { return block.bottom() }) - this.isAtBottom(falling);
+    },
+
     doesCollideWithBlocks: function(falling, lockedBlocks) {
         return this.collisionDetection(falling, lockedBlocks, function(block) { return block });
     },
@@ -87,5 +91,19 @@ var CollisionDetection = Class.extend({
         }
         return numberTouches;
     },
+
+    holesDetection: function(falling, lockedBlocks, direction) {
+        var numberTouches = 0;
+        var occupiedSquares = falling.bottomSquares();
+        for (var i = 0; i < lockedBlocks.length; i++) {
+            for (var j = 0; j < occupiedSquares.length; j++) {
+                if (lockedBlocks[i].isEqual(direction(occupiedSquares[j]))) {
+                    numberTouches++;
+                }
+            }
+        }
+        return occupiedSquares.length - numberTouches;
+
+    }
 
 });
