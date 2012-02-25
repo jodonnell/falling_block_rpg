@@ -130,7 +130,7 @@ describe("BlockFall", function() {
             blockFall.blocks.push(new Block(i, 1))
 
         blockFall.completedLines();
-        expect(blockFall.score).toEqual(100);
+        expect(blockFall.score).toEqual(1);
     });
 
     function drawMock() {
