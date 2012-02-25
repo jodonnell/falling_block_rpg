@@ -89,15 +89,19 @@ var AI = Class.extend({
     },
 
     score: function() {
-        return (this.height() / 38) + (this.snugness() / 8) - this.enemyArena.howManyHolesUnderneath();
+        return (this.height()) + (this.snugness() * 2) - (this.holes() * 3);
     },
 
     height: function() {
-        return this.enemyArena.fallingShape.highestBlock().y;
+        return this.enemyArena.fallingShape.highestBlock().y / 38;
     },
 
     snugness: function() {
-        return this.enemyArena.howManyTouches();
+        return this.enemyArena.howManyTouches() / 9;
+    },
+
+    holes: function() {
+        return this.enemyArena.howManyHolesUnderneath() / 4;
     },
     
     _moveFarLeft: function() {

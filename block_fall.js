@@ -115,7 +115,7 @@ var BlockFall = Class.extend({
             if (this.isLineComplete(row)) {
                 this.removeLine(row);
                 this.sinkLinesAbove(row);
-                this.score += 100;
+                this.score += 1;
             }
         }
     },
