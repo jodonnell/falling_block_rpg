@@ -21,10 +21,12 @@ describe("BlockFall", function() {
 
     it("should stop blocks when they hit the ground", function() {
         blockFall.fallingShape = blockFall.createShape.o();
-        for (var i = 0; i <= 24; i++)
-            blockFall.fall(false);
+        expect(blockFall.blocks.length).toEqual(0);
+        for (var i = 0; i <= 40; i++)
+            blockFall.update(true);
 
-        expect(blockFall.fallingShape.block.y).toEqual(19);
+        expect(blockFall.blocks.length).toNotEqual(0);
+        expect(blockFall.blocks).toContainBlock(new Block(6, 20));
     });
 
     it("should stop shapes when they land on other blocks", function() {
@@ -34,9 +36,9 @@ describe("BlockFall", function() {
 
         blockFall.moveRight();
         for (var i = 0; i <= 25; i++)
-            blockFall.fall(false);
+            blockFall.update(true);
 
-        expect(blockFall.fallingShape.block.y).toEqual(18);
+        expect(blockFall.blocks).toContainBlock(new Block(5, 18));
     });
 
     it("should let you move right", function() {

@@ -40,11 +40,15 @@ var BlockFall = Class.extend({
     },
 
     process: function(speedFall) {
-        this.fall(speedFall);
+        if (this.shouldFall(speedFall))
+            this.fall();
 
-        if (this.isFallFrame() && this.frameSkipCounter != this.lastFellAt && this.isFallingShapeLocked()) {
+        if (this.didShapeHitGround())
             this.shapeHitGround();
-        }
+    },
+
+    didShapeHitGround: function() {
+        return this.isFallFrame() && this.frameSkipCounter != this.lastFellAt && this.isFallingShapeLocked();
     },
 
     shapeHitGround: function() {
@@ -69,11 +73,9 @@ var BlockFall = Class.extend({
         this.createShape.createNextShape();
     },
 
-    fall: function(speedFall) {
-        if (this.shouldFall(speedFall)) {
-            this.lastFellAt = this.frameSkipCounter;
-            this.fallingShape.fall();
-        }
+    fall: function() {
+        this.lastFellAt = this.frameSkipCounter;
+        this.fallingShape.fall();
     },
 
     isFallingShapeLocked: function() {
@@ -175,7 +177,7 @@ var BlockFall = Class.extend({
 
     _fallAsFarAsPossible: function() {
         while (!this.isFallingShapeLocked())
-            this.fall(true);
+            this.fall();
     },
 
     howManyTouches: function() {
