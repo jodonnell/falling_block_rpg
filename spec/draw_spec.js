@@ -18,7 +18,7 @@ describe("Draw", function() {
 
     it("draws the border", function() {
         draw.border();
-        expect(draw.context.fillRect.callCount).toEqual(66);
+        expect(draw.context.fillRect.callCount).toEqual(83);
     });
 
     it("draw a block", function() {
@@ -38,7 +38,7 @@ describe("Draw", function() {
 
     it("draw next shape", function() {
         draw.nextShape(new O(new Block(14, 1)));
-        expect(draw.context.fillRect.callCount).toEqual(22);
+        expect(draw.context.fillRect.callCount).toEqual(5);
     });
 
 });

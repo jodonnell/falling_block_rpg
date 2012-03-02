@@ -5,8 +5,8 @@ describe("Block", function() {
         expect(block.getY()).toEqual(0);
 
         block = new Block(1, 1);
-        expect(block.getX()).toEqual(20);
-        expect(block.getY()).toEqual(20);
+        expect(block.getX()).toEqual(block.BLOCK_SIZE);
+        expect(block.getY()).toEqual(block.BLOCK_SIZE);
     });
 
     it("should be able to make a copy", function() {

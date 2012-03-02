@@ -1,4 +1,6 @@
 var Block = Class.extend({
+    BLOCK_SIZE: 30,
+
     init: function(x, y, color) {
         this.x = x;
         this.y = y;
@@ -6,11 +8,11 @@ var Block = Class.extend({
     },
 
     getX: function() {
-        return this.x * 20;
+        return this.x * this.BLOCK_SIZE;
     },
     
     getY: function() {
-        return this.y * 20;
+        return this.y * this.BLOCK_SIZE;
     },
 
     right: function() {

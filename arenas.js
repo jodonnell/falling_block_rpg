@@ -3,7 +3,7 @@ var Arenas = Class.extend({
         var draw = new Draw(rightBound, bottomBound, 0, 0);
         this.playerArena = new BlockFall(new CreateShape(), draw);
 
-        draw = new Draw(rightBound, bottomBound, 400, 0);
+        draw = new Draw(rightBound, bottomBound, 600, 0);
         this.enemyArena = new BlockFall(new CreateShape(), draw);
 
         this.control = control;
