@@ -10,12 +10,12 @@ describe("WorldMap", function() {
 
     afterEach(function() {
         sinon.spy(worldMap.context.drawImage.restore());
-        //gameInit.destroyCanvas();
+        gameInit.destroyCanvas();
     });
 
     it("should draw an image", function() {
         worldMap.draw();
-        expect(worldMap.context.drawImage.callCount).toEqual(300);
+        expect(worldMap.context.drawImage.callCount).toEqual(301);
     });
 
 });
