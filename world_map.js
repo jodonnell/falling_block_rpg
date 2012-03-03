@@ -1,12 +1,15 @@
 var WorldMap = Class.extend({
-    init: function() {
+    init: function(images) {
         this.context = $('#gameCanvas').get(0).getContext("2d");
-        var cat = new Image();
-        cat.src = "images/grassTile.jpg";
-        var me = this;
-        cat.onload = function() {
-            me.context.drawImage(cat, 10, 10);
-        };
+        this.images = images;
     },
+
+    draw: function() {
+        for (var i = 0; i < 20; i++)
+            for (var j = 0; j < 15; j++)
+            this.context.drawImage(this.images.grass, i * 60, j * 60);
+
+        this.context.drawImage(this.images.cecil, 0, 0, 60, 60, 9 * 60, 7 * 60, 60, 60);
+    }
 
 });

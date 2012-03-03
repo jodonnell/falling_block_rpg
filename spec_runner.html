@@ -46,9 +46,12 @@
   <script type="text/javascript" src="control.js"></script>
   <script type="text/javascript" src="ai.js"></script>
   <script type="text/javascript" src="world_map.js"></script>
+  <script type="text/javascript" src="images.js"></script>
 
   <script type="text/javascript">
-    (function() {
+    window.Images = new Images(
+    
+    function() {
       var jasmineEnv = jasmine.getEnv();
       jasmineEnv.updateInterval = 1000;
 
@@ -73,7 +76,7 @@
         jasmineEnv.execute();
       }
 
-    })();
+    });;
   </script>
 
 </head>
