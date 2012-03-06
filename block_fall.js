@@ -35,7 +35,7 @@ var BlockFall = Class.extend({
         if (!this.gameOver)
             this.process(speedFall);
 
-        if (this.frameSkipCounter == 60)
+        if (this.frameSkipCounter == 400)
             this.frameSkipCounter = 0;
     },
 
@@ -65,7 +65,7 @@ var BlockFall = Class.extend({
     },
 
     isFallFrame: function() {
-        return (this.frameSkipCounter % 20) == 0;
+        return (this.frameSkipCounter % 40) == 0;
     },
 
     _createFallingShape: function() {
