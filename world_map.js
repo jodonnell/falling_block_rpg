@@ -6,9 +6,10 @@ var WorldMap = Class.extend({
 
     init: function(images, control) {
         this.context = $('#gameCanvas').get(0).getContext("2d");
-        this.images = images;
+        this.images = new Images();
         this.control = control;
         this.direction = this.UP;
+        this.isBattleTime = false;
     },
 
     draw: function() {
@@ -32,14 +33,31 @@ var WorldMap = Class.extend({
     },
 
     respondToControls: function(input, arena) {
-        if (this.control.isMovingRight())
+        if (this.control.isMovingRight()) {
             this.moveRight();
-        if (this.control.isMovingLeft())
+            this.chanceOfRandomBattle();
+        }
+        if (this.control.isMovingLeft()) {
             this.moveLeft();
-        if (this.control.isHardDropping())
+            this.chanceOfRandomBattle();
+        }
+        if (this.control.isHardDropping()) {
             this.moveUp();
-        if (this.control.isSoftDropping())
+            this.chanceOfRandomBattle();
+        }
+        if (this.control.isSoftDropping()) {
             this.moveDown();
+            this.chanceOfRandomBattle();
+        }            
+    },
+
+    chanceOfRandomBattle: function() {
+        if (this.randomNumber() == 1)
+            this.isBattleTime = true;
+    },
+
+    randomNumber: function() {
+        return Math.floor(Math.random()*7);
     },
 
     cecilWalkUpFrame: function() {

@@ -22,15 +22,13 @@
     <script src="ai.js" type="text/javascript" charset="utf-8"></script>
     <script src="images.js" type="text/javascript" charset="utf-8"></script>
     <script src="world_map.js" type="text/javascript" charset="utf-8"></script>
+    <script src="game_controller.js" type="text/javascript" charset="utf-8"></script>
     <title>Game</title>
   </head>
   <body>
     <script type="text/javascript">
 var gameInit = new GameInit();
-var control = new Control();
-//var arenas = new Arenas(gameInit.RIGHT_BOUND, gameInit.BOTTOM_BOUND, control);
-var images = new Images();
-var worldMap = new WorldMap(images, control);
+var gameController = new GameController(gameInit);
 
 (function() {
     var onEachFrame;
@@ -55,9 +53,9 @@ var worldMap = new WorldMap(images, control);
 
 
 window.onEachFrame(function() {
-//var time = arenas.updateWithTime();
-worldMap.update();
-//if (time > 16) console.log(time)
+var time = gameController.updateWithTime();
+gameController.update();
+console.log(time)
 });
 
     </script>

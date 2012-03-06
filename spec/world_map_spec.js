@@ -5,22 +5,29 @@ describe("WorldMap", function() {
     beforeEach(function() {
         gameInit = new GameInit(true);
         worldMap = new WorldMap(window.Images, new Control());
-        sinon.spy(worldMap.context, "drawImage");
     });
 
     afterEach(function() {
-        sinon.spy(worldMap.context.drawImage.restore());
         gameInit.destroyCanvas();
     });
 
-    it("should draw an image", function() {
+    it("should draw an image", sinon.test(function() {
+        this.spy(worldMap.context, "drawImage");
         worldMap.draw();
         expect(worldMap.context.drawImage.callCount).toEqual(301);
-    });
+    }));
 
+    
+    it("should create random encouters", sinon.test(function() {
+        worldMap = stubControl.call(this, 'isMovingRight');
+        this.stub(worldMap, 'randomNumber').returns(1);
+        worldMap.update();
+        expect(worldMap.isBattleTime).toEqual(true);
+
+    }));
 
     it("should let you move left", sinon.test(function() {
-        var worldMap = stubControl.call(this, 'isMovingLeft');
+        worldMap = stubControl.call(this, 'isMovingLeft');
         this.stub(worldMap, 'cecilWalkLeftFrame');
         worldMap.update();
         expect(worldMap.cecilWalkLeftFrame.callCount).toEqual(1);
@@ -28,21 +35,21 @@ describe("WorldMap", function() {
     }));
 
     it("should let you move up", sinon.test(function() {
-        var worldMap = stubControl.call(this, 'isHardDropping');
+        worldMap = stubControl.call(this, 'isHardDropping');
         this.stub(worldMap, 'cecilWalkUpFrame');
         worldMap.update();
         expect(worldMap.cecilWalkUpFrame.callCount).toEqual(1);
     }));
 
     it("should let you move right", sinon.test(function() {
-        var worldMap = stubControl.call(this, 'isMovingRight');
+        worldMap = stubControl.call(this, 'isMovingRight');
         this.stub(worldMap, 'cecilWalkRightFrame');
         worldMap.update();
         expect(worldMap.cecilWalkRightFrame.callCount).toEqual(1);
     }));
 
     it("should let you move down", sinon.test(function() {
-        var worldMap = stubControl.call(this, 'isSoftDropping');
+        worldMap = stubControl.call(this, 'isSoftDropping');
         this.stub(worldMap, 'cecilWalkDownFrame');
         worldMap.update();
         expect(worldMap.cecilWalkDownFrame.callCount).toEqual(1);
@@ -50,7 +57,7 @@ describe("WorldMap", function() {
 
     function stubControl(directionMethod) {
         var control = new Control();
-        var stub = this.stub(control, directionMethod).returns(true);
+        this.stub(control, directionMethod).returns(true);
         return new WorldMap(window.Images, control);
     };
 

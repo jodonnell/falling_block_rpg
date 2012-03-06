@@ -8,6 +8,7 @@ var Arenas = Class.extend({
 
         this.control = control;
         this.ai = new AI(this.enemyArena);
+        this.gameOver = false;
     },
 
     update: function() {
@@ -19,6 +20,9 @@ var Arenas = Class.extend({
 
         this.playerArena.update(this.control.isSoftDropping());
         this.enemyArena.update(this.ai.isSoftDropping());
+
+        if (this.playerArena.gameOver || this.enemyArena.gameOver)
+            this.gameOver = true;
     },
 
     updateWithTime: function() {

@@ -16,15 +16,24 @@ describe("Arenas", function() {
         expect(arenas.enemyArena).toBeTruthy();
     });
 
-    it("should let you move right", function() {
+    it("should let you move right", sinon.test(function() {
         var control = new Control();
-        var stub = sinon.stub(control, 'isMovingRight').returns(true);
+        this.stub(control, 'isMovingRight').returns(true);
         arenas = new Arenas(10, 20, control);
 
         arenas.update();
         expect(arenas.playerArena.fallingShape.block.x).toEqual(6);
+    }));
 
-        stub.restore();
+    it("should be able to detect a game over", function() {
+        arenas.playerArena.gameOver = true;
+        arenas.update();
+        expect(arenas.gameOver).toBeTruthy();
+
+        arenas.playerArena.gameOver = false;
+        arenas.enemyArena.gameOver = true;
+        arenas.update();
+        expect(arenas.gameOver).toBeTruthy();
     });
 
 });
