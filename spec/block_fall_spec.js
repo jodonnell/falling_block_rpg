@@ -2,13 +2,13 @@ describe("BlockFall", function() {
     var blockFall;
 
     beforeEach(function() {
-        blockFall = new BlockFall(new CreateShape(true));
+        blockFall = new BlockFall(new CreateShape(true), null, new Combatant(10));
     });
 
-    it("should have shapes fall every 1/3 of a second", function() {
+    it("should have shapes fall periodically", function() {
         blockFall.update(false);
         var startingY = blockFall.fallingShape.block.y;
-        for (var i = 0; i <= 20; i++)
+        for (var i = 0; i <= 40; i++)
             blockFall.update(false);
         expect(blockFall.fallingShape.block.y).toNotEqual(startingY);
     });
@@ -35,7 +35,7 @@ describe("BlockFall", function() {
         blockFall.fallingShape = blockFall.createShape.j();
 
         blockFall.moveRight();
-        for (var i = 0; i <= 25; i++)
+        for (var i = 0; i <= 45; i++)
             blockFall.update(true);
 
         expect(blockFall.blocks).toContainBlock(new Block(5, 18));
@@ -132,7 +132,7 @@ describe("BlockFall", function() {
             blockFall.blocks.push(new Block(i, 1))
 
         blockFall.completedLines();
-        expect(blockFall.score).toEqual(1);
+        expect(blockFall.damageDone).toEqual(1);
     });
 
     function drawMock() {

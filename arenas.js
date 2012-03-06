@@ -1,10 +1,10 @@
 var Arenas = Class.extend({
-    init: function(rightBound, bottomBound, control) {
+    init: function(rightBound, bottomBound, control, hero) {
         var draw = new Draw(rightBound, bottomBound, 0, 0);
-        this.playerArena = new BlockFall(new CreateShape(), draw);
+        this.playerArena = new BlockFall(new CreateShape(), draw, hero);
 
         draw = new Draw(rightBound, bottomBound, 600, 0);
-        this.enemyArena = new BlockFall(new CreateShape(), draw);
+        this.enemyArena = new BlockFall(new CreateShape(), draw, new Combatant(10));
 
         this.control = control;
         this.ai = new AI(this.enemyArena);
@@ -21,8 +21,26 @@ var Arenas = Class.extend({
         this.playerArena.update(this.control.isSoftDropping());
         this.enemyArena.update(this.ai.isSoftDropping());
 
+        this.doDamage();
+
+        this.determineGameOver();
+    },
+
+    determineGameOver: function() {
         if (this.playerArena.gameOver || this.enemyArena.gameOver)
             this.gameOver = true;
+
+        if (this.playerArena.combatant.hp < 1 || this.enemyArena.combatant.hp < 1)
+            this.gameOver = true;
+
+    },
+
+    doDamage: function() {
+        this.enemyArena.combatant.hp -= this.playerArena.damageDone;
+        this.playerArena.damageDone = 0;
+
+        this.playerArena.combatant.hp -= this.enemyArena.damageDone;
+        this.enemyArena.damageDone = 0;
     },
 
     updateWithTime: function() {

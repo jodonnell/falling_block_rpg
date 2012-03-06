@@ -2,16 +2,17 @@ var BlockFall = Class.extend({
     RIGHT_BOUND: 10,
     BOTTOM_BOUND: 20,
 
-    init: function(createShape, draw) {
+    init: function(createShape, draw, combatant) {
         this.blocks = [];
         this.fallingShape = null;
         this.frameSkipCounter = 0;
         this.lastFellAt = 0;
         this.gameOver = false;
-        this.score = 0;
+        this.damageDone = 0;
 
         this.draw = draw;
         this.createShape = createShape;
+        this.combatant = combatant;
         this.collisionDetection = new CollisionDetection(this.RIGHT_BOUND, this.BOTTOM_BOUND);
         this._createFallingShape();
     },
@@ -21,8 +22,7 @@ var BlockFall = Class.extend({
         this.draw.nextShape(this.createShape.nextShapeDrawable());
         this.draw.shapes(this.fallingShape);
 
-        this.draw.score(this.score);
-
+        this.draw.score(this.combatant.hp);
         for (var i = 0; i < this.blocks.length; i++)
             this.draw.block(this.blocks[i]);
 
@@ -117,7 +117,7 @@ var BlockFall = Class.extend({
             if (this.isLineComplete(row)) {
                 this.removeLine(row);
                 this.sinkLinesAbove(row);
-                this.score += 1;
+                this.damageDone += 1;
             }
         }
     },

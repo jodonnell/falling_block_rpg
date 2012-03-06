@@ -4,7 +4,7 @@ describe("Arenas", function() {
 
     beforeEach(function() {
         gameInit = new GameInit(true);
-        arenas = new Arenas(10, 20, new Control());
+        arenas = new Arenas(10, 20, new Control(), new Combatant(20));
     });
 
     afterEach(function() {
@@ -19,7 +19,7 @@ describe("Arenas", function() {
     it("should let you move right", sinon.test(function() {
         var control = new Control();
         this.stub(control, 'isMovingRight').returns(true);
-        arenas = new Arenas(10, 20, control);
+        arenas = new Arenas(10, 20, control, new Combatant(20));
 
         arenas.update();
         expect(arenas.playerArena.fallingShape.block.x).toEqual(6);
@@ -34,6 +34,20 @@ describe("Arenas", function() {
         arenas.enemyArena.gameOver = true;
         arenas.update();
         expect(arenas.gameOver).toBeTruthy();
+
+        arenas.playerArena.gameOver = false;
+        arenas.enemyArena.gameOver = false;
+        arenas.enemyArena.combatant.hp = 0;
+        arenas.update();
+        expect(arenas.gameOver).toBeTruthy();
+    });
+
+    it("should be able to do damage", function() {
+        arenas.playerArena.damageDone = 2;
+        arenas.enemyArena.damageDone = 2;
+        arenas.update();
+        expect(arenas.enemyArena.combatant.hp).toEqual(8);
+        expect(arenas.playerArena.combatant.hp).toEqual(18);
     });
 
 });
