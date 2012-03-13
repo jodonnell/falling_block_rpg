@@ -39,4 +39,13 @@ describe("GameController", function() {
         expect(gameController.resetArena.calledOnce).toEqual(true);
     }));
 
+    it("should reset arena after a transition out", sinon.test(function() {
+        this.spy(gameController, 'resetArena');
+        this.spy(gameController.hero, 'addXp');
+        gameController.worldMap.isWorldMapScene = false;
+        gameController.arenas.gameOver = true;
+        gameController.update();
+        expect(gameController.hero.addXp.calledOnce).toEqual(true);
+    }));
+
 });

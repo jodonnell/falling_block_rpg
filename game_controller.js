@@ -11,21 +11,31 @@ var GameController = Class.extend({
 
     update: function() {
         if (this.worldMap.isBattleTime) {
-            this.isWorldMapScene = false;
-            this.clearScreen();
-            this.worldMap.isBattleTime = false;
+            this.switchToBattleTime();
         }
 
         if (this.arenas.gameOver) {
-            this.isWorldMapScene = true;
-            this.clearScreen();
-            this.resetArena();
+            this.switchToWorldMap();
         }
 
         if (this.isWorldMapScene)
             this.worldMap.update();
         else
             this.arenas.update();
+    },
+
+    switchToBattleTime: function() {
+        this.isWorldMapScene = false;
+        this.clearScreen();
+        this.worldMap.isBattleTime = false;
+    },
+
+    switchToWorldMap: function() {
+        this.isWorldMapScene = true;
+        this.clearScreen();
+        this.resetArena();
+
+        this.hero.addXp(10);
     },
 
     resetArena: function() {

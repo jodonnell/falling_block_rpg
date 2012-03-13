@@ -60,7 +60,6 @@ var AI = Class.extend({
     saveStartingPosition: function() {
         this.currentX = this.enemyArena.fallingShape.block.x;
         this.currentRotation = this.enemyArena.fallingShape.rotatedPosition;
-
     },
 
     restoreStartingPosition: function() {
