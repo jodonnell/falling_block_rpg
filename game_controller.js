@@ -5,37 +5,11 @@ var GameController = Class.extend({
         this.hero = new Combatant(100);
         this.arenas = new Arenas(this.gameInit.RIGHT_BOUND, this.gameInit.BOTTOM_BOUND, this.control, this.hero);
         this.images = new Images();
-        this.worldMap = new WorldMap(this.images, this.control);
-        this.isWorldMapScene = true;
+        this.clearScreen();
     },
 
     update: function() {
-        if (this.worldMap.isBattleTime) {
-            this.switchToBattleTime();
-        }
-
-        if (this.arenas.gameOver) {
-            this.switchToWorldMap();
-        }
-
-        if (this.isWorldMapScene)
-            this.worldMap.update();
-        else
-            this.arenas.update();
-    },
-
-    switchToBattleTime: function() {
-        this.isWorldMapScene = false;
-        this.clearScreen();
-        this.worldMap.isBattleTime = false;
-    },
-
-    switchToWorldMap: function() {
-        this.isWorldMapScene = true;
-        this.clearScreen();
-        this.resetArena();
-
-        this.hero.addXp(10);
+        this.arenas.update();
     },
 
     resetArena: function() {
