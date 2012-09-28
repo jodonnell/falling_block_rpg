@@ -29,17 +29,20 @@ describe("Arenas", function() {
         arenas.playerArena.gameOver = true;
         arenas.update();
         expect(arenas.gameOver).toBeTruthy();
+        expect(arenas.winner).toEqual('Player 2');
 
         arenas.playerArena.gameOver = false;
         arenas.enemyArena.gameOver = true;
         arenas.update();
         expect(arenas.gameOver).toBeTruthy();
+        expect(arenas.winner).toEqual('Player 1');
 
         arenas.playerArena.gameOver = false;
         arenas.enemyArena.gameOver = false;
         arenas.enemyArena.combatant.hp = 0;
         arenas.update();
         expect(arenas.gameOver).toBeTruthy();
+        expect(arenas.winner).toEqual('Player 1');
     });
 
     it("should be able to do damage", function() {
@@ -49,5 +52,4 @@ describe("Arenas", function() {
         expect(arenas.enemyArena.combatant.hp).toEqual(28);
         expect(arenas.playerArena.combatant.hp).toEqual(28);
     });
-
 });

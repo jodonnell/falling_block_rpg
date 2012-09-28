@@ -32,6 +32,14 @@ var Arenas = Class.extend({
         if (this.playerArena.combatant.hp < 1 || this.enemyArena.combatant.hp < 1)
             this.gameOver = true;
 
+        if (this.gameOver) {
+            if (this.playerArena.gameOver || this.playerArena.combatant.hp < 1)
+                this.winner = 'Player 2';
+            else
+                this.winner = 'Player 1';
+
+        }
+
     },
 
     doDamage: function() {
