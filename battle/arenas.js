@@ -37,17 +37,28 @@ var Arenas = Class.extend({
                 this.winner = 'Player 2';
             else
                 this.winner = 'Player 1';
-
         }
 
     },
 
     doDamage: function() {
         this.enemyArena.combatant.hp -= this.playerArena.damageDone;
+        this.addJunkRows(this.playerArena, this.enemyArena);
         this.playerArena.damageDone = 0;
 
         this.playerArena.combatant.hp -= this.enemyArena.damageDone;
+        this.addJunkRows(this.enemyArena, this.playerArena);
         this.enemyArena.damageDone = 0;
+    },
+
+    addJunkRows: function(damageDoer, damageTaker) {
+        if (damageDoer.damageDone == 2)
+            damageTaker.addJunkRows(2);
+        else if (damageDoer.damageDone == 3)
+            damageTaker.addJunkRows(5);
+        else if (damageDoer.damageDone == 4)
+            damageTaker.addJunkRows(8);
+
     },
 
     updateWithTime: function() {

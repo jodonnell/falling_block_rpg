@@ -52,4 +52,12 @@ describe("Arenas", function() {
         expect(arenas.enemyArena.combatant.hp).toEqual(28);
         expect(arenas.playerArena.combatant.hp).toEqual(28);
     });
+
+    it("should add junk to the other players arena", function() {
+        arenas.playerArena.damageDone = 2;
+        arenas.update();
+        expect(arenas.enemyArena.blocks.length).toBeGreaterThan(11);
+        expect(arenas.enemyArena.blocks.length).toBeLessThan(18);
+    });
+
 });

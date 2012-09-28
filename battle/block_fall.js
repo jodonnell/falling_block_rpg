@@ -190,5 +190,46 @@ var BlockFall = Class.extend({
     
     addBlock: function(block) {
         this.blocks.push(block)
+    },
+
+    addJunkRows: function(rows) {
+        for (var i = 0; i < rows; i++) {
+            this.moveBlocksUp();
+            this.addJunkRow();
+        }
+    },
+
+    addJunkRow: function() {
+        var colors = ['white', 'blue', 'green', 'orange', 'magenta', 'brown', 'red'];
+
+        var numJunkToCreate = this._getRandomInt(6, 8);
+        var elements = this._shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+        for (var i = 0; i < numJunkToCreate; i++) {
+            var color = colors[this._getRandomInt(0, colors.length)];
+            this.addBlock(new Block(elements[i], 20, color));            
+        }
+    },
+
+    moveBlocksUp: function() {
+        for (var i = 0; i < this.blocks.length; i++) {
+            this.blocks[i] = this.blocks[i].top();
+        }
+    },
+
+    _getRandomInt: function (min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    },
+
+    _shuffle: function(array) {
+        var tmp, current, top = array.length;
+
+        if(top) while(--top) {
+            current = Math.floor(Math.random() * (top + 1));
+            tmp = array[current];
+            array[current] = array[top];
+            array[top] = tmp;
+        }
+
+        return array;
     }
 });
