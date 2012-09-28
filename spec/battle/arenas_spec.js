@@ -4,7 +4,7 @@ describe("Arenas", function() {
 
     beforeEach(function() {
         gameInit = new GameInit(true);
-        arenas = new Arenas(10, 20, new Control());
+        arenas = new Arenas(10, 20, new Control1(), new Control2());
     });
 
     afterEach(function() {
@@ -17,9 +17,9 @@ describe("Arenas", function() {
     });
 
     it("should let you move right", sinon.test(function() {
-        var control = new Control();
+        var control = new Control1();
         this.stub(control, 'isMovingRight').returns(true);
-        arenas = new Arenas(10, 20, control);
+        arenas = new Arenas(10, 20, control, new Control2());
 
         arenas.update();
         expect(arenas.playerArena.fallingShape.block.x).toEqual(6);

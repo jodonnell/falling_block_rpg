@@ -1,25 +1,24 @@
 var Arenas = Class.extend({
-    init: function(rightBound, bottomBound, control, hero) {
+    init: function(rightBound, bottomBound, control1, control2) {
         var draw = new Draw(rightBound, bottomBound, 0, 0);
         this.playerArena = new BlockFall(new CreateShape(), draw, new Combatant(30));
 
         draw = new Draw(rightBound, bottomBound, 600, 0);
         this.enemyArena = new BlockFall(new CreateShape(), draw, new Combatant(30));
 
-        this.control = control;
-        this.ai = new AI(this.enemyArena);
+        this.control1 = control1;
+        this.control2 = control2;
         this.gameOver = false;
     },
 
     update: function() {
         this.respondToControls();
-        this.respondToAI();
 
         this.playerArena.drawScreen(); 
         this.enemyArena.drawScreen();
 
-        this.playerArena.update(this.control.isSoftDropping());
-        this.enemyArena.update(this.ai.isSoftDropping());
+        this.playerArena.update(this.control1.isSoftDropping());
+        this.enemyArena.update(this.control2.isSoftDropping());
 
         this.doDamage();
 
@@ -50,14 +49,8 @@ var Arenas = Class.extend({
     },
 
     respondToControls: function() {
-        this.respondToInput(this.control, this.playerArena);
-    },
-
-    respondToAI: function() {
-        if (this.enemyArena.isFallFrame()) {
-            this.ai.getOptimalSpot();
-            this.respondToInput(this.ai, this.enemyArena);
-        }
+        this.respondToInput(this.control1, this.playerArena);
+        this.respondToInput(this.control2, this.enemyArena);
     },
 
     respondToInput: function(input, arena) {

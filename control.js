@@ -1,13 +1,4 @@
 var Control = Class.extend({
-    LEFT_KEY: 37,
-    UP_KEY: 38,
-    RIGHT_KEY: 39,
-    DOWN_KEY: 40,
-    Z_KEY: 90,
-    X_KEY: 88,
-    Z_DVORAK: 186,
-    X_DVORAK: 81,
-
     init: function() {
         this.left = 0;
         this.right = 0;
@@ -25,13 +16,7 @@ var Control = Class.extend({
             case this.RIGHT_KEY: this.right = 1; break;
 
             case this.DOWN_KEY: this.softDrop = 1; break;
-            case this.UP_KEY: this.hardDrop = 1; break;
-
-            case this.Z_KEY: this.rotatingCounterClockwise = 1; break;
-            case this.Z_DVORAK: this.rotatingCounterClockwise = 1; break;
-
-            case this.X_KEY: this.rotatingClockwise = 1; break;
-            case this.X_DVORAK: this.rotatingClockwise = 1; break;
+            case this.UP_KEY: this.rotatingCounterClockwise = 1; break;
 
             }
         }, this));
@@ -39,7 +24,7 @@ var Control = Class.extend({
             switch (event.keyCode) {
             case this.LEFT_KEY: ; break;
             case this.RIGHT_KEY: ; break;
-            case this.UP_KEY: this.hardDrop = 0; break;
+            case this.UP_KEY: ; break;
             case this.DOWN_KEY: this.softDrop = 0; break;
             }
         }, this));
