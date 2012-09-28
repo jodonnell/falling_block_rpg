@@ -6,10 +6,24 @@ var GameController = Class.extend({
         this.arenas = new Arenas(this.gameInit.RIGHT_BOUND, this.gameInit.BOTTOM_BOUND, control1, control2);
         this.images = new Images();
         this.clearScreen();
+        this.hadGameOver = false;
     },
 
     update: function() {
-        this.arenas.update();
+        if (!this.arenas.gameOver)
+            this.arenas.update();
+        else if (!this.hadGameOver) {
+            this.displayWinner();
+            this.hadGameOver = true;
+        }
+    },
+
+    displayWinner: function() {
+        var context = $('#gameCanvas').get(0).getContext("2d");
+        context.fillStyle = "black";
+        context.font = "bold 18px sans-serif";
+        context.fillText(this.arenas.winner + ' Wins!', 400, 730);
+
     },
 
     resetArena: function() {
