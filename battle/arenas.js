@@ -1,7 +1,7 @@
 var Arenas = Class.extend({
     init: function(rightBound, bottomBound, control, hero) {
         var draw = new Draw(rightBound, bottomBound, 0, 0);
-        this.playerArena = new BlockFall(new CreateShape(), draw, hero);
+        this.playerArena = new BlockFall(new CreateShape(), draw, new Combatant(30));
 
         draw = new Draw(rightBound, bottomBound, 600, 0);
         this.enemyArena = new BlockFall(new CreateShape(), draw, new Combatant(30));

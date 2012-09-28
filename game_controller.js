@@ -2,8 +2,7 @@ var GameController = Class.extend({
     init: function(gameInit) {
         this.gameInit = gameInit;
         this.control = new Control();
-        this.hero = new Combatant(100);
-        this.arenas = new Arenas(this.gameInit.RIGHT_BOUND, this.gameInit.BOTTOM_BOUND, this.control, this.hero);
+        this.arenas = new Arenas(this.gameInit.RIGHT_BOUND, this.gameInit.BOTTOM_BOUND, this.control);
         this.images = new Images();
         this.clearScreen();
     },
@@ -13,7 +12,7 @@ var GameController = Class.extend({
     },
 
     resetArena: function() {
-        this.arenas = new Arenas(this.gameInit.RIGHT_BOUND, this.gameInit.BOTTOM_BOUND, this.control, this.hero);
+        this.arenas = new Arenas(this.gameInit.RIGHT_BOUND, this.gameInit.BOTTOM_BOUND, this.control);
     },
 
     clearScreen: function() {

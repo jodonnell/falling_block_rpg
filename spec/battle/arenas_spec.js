@@ -4,7 +4,7 @@ describe("Arenas", function() {
 
     beforeEach(function() {
         gameInit = new GameInit(true);
-        arenas = new Arenas(10, 20, new Control(), new Combatant(20));
+        arenas = new Arenas(10, 20, new Control());
     });
 
     afterEach(function() {
@@ -19,7 +19,7 @@ describe("Arenas", function() {
     it("should let you move right", sinon.test(function() {
         var control = new Control();
         this.stub(control, 'isMovingRight').returns(true);
-        arenas = new Arenas(10, 20, control, new Combatant(20));
+        arenas = new Arenas(10, 20, control);
 
         arenas.update();
         expect(arenas.playerArena.fallingShape.block.x).toEqual(6);
@@ -47,7 +47,7 @@ describe("Arenas", function() {
         arenas.enemyArena.damageDone = 2;
         arenas.update();
         expect(arenas.enemyArena.combatant.hp).toEqual(28);
-        expect(arenas.playerArena.combatant.hp).toEqual(18);
+        expect(arenas.playerArena.combatant.hp).toEqual(28);
     });
 
 });
