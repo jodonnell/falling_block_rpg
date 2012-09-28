@@ -46,7 +46,7 @@ describe("Arenas", function() {
         arenas.playerArena.damageDone = 2;
         arenas.enemyArena.damageDone = 2;
         arenas.update();
-        expect(arenas.enemyArena.combatant.hp).toEqual(8);
+        expect(arenas.enemyArena.combatant.hp).toEqual(28);
         expect(arenas.playerArena.combatant.hp).toEqual(18);
     });
 

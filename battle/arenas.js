@@ -4,7 +4,7 @@ var Arenas = Class.extend({
         this.playerArena = new BlockFall(new CreateShape(), draw, hero);
 
         draw = new Draw(rightBound, bottomBound, 600, 0);
-        this.enemyArena = new BlockFall(new CreateShape(), draw, new Combatant(10));
+        this.enemyArena = new BlockFall(new CreateShape(), draw, new Combatant(30));
 
         this.control = control;
         this.ai = new AI(this.enemyArena);
