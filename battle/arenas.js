@@ -1,5 +1,5 @@
 var Arenas = Class.extend({
-    init: function(rightBound, bottomBound, control1, control2) {
+    init: function(rightBound, bottomBound, control1, control2, junkOn) {
         var draw = new Draw(rightBound, bottomBound, 80, 0);
         this.playerArena = new BlockFall(new CreateShape(), draw, new Combatant(30));
 
@@ -9,6 +9,7 @@ var Arenas = Class.extend({
         this.control1 = control1;
         this.control2 = control2;
         this.gameOver = false;
+        this.junkOn = junkOn;
     },
 
     update: function() {
@@ -52,6 +53,9 @@ var Arenas = Class.extend({
     },
 
     addJunkRows: function(damageDoer, damageTaker) {
+        if (!this.junkOn)
+            return;
+
         if (damageDoer.damageDone == 2)
             damageTaker.addJunkRows(2);
         else if (damageDoer.damageDone == 3)

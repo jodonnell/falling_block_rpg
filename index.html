@@ -28,9 +28,19 @@
     <title>Game</title>
   </head>
   <body>
+    <label for="junk_on">Send Junk On:</label>
+    <input type="radio" name="junk" id="junk_on" value="on" checked>
+    <label for="junk_off">Send Junk Off:</label>
+    <input type="radio" name="junk" id="junk_off" value="off">
+    <input type="submit" id="startGame" value="Start">
+
     <script type="text/javascript">
+$('#startGame').click(function() {
+var junkOn = false;
+junkOn = $('#junk_on').is(':checked');
+
 var gameInit = new GameInit();
-var gameController = new GameController(gameInit);
+var gameController = new GameController(gameInit, junkOn);
 
 (function() {
     var onEachFrame;
@@ -59,6 +69,8 @@ var time = gameController.updateWithTime();
 gameController.update();
 console.log(time)
 });
+});
+
 
     </script>
   </body>

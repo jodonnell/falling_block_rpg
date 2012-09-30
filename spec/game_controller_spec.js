@@ -4,11 +4,12 @@ describe("GameController", function() {
 
     beforeEach(function() {
         gameInit = new GameInit(true);
-        gameController = new GameController(new Control());
+        gameController = new GameController(gameInit);
     });
 
     afterEach(function() {
         gameInit.destroyCanvas();
     });
+
 
 });

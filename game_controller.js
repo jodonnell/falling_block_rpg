@@ -1,9 +1,9 @@
 var GameController = Class.extend({
-    init: function(gameInit) {
+    init: function(gameInit, junkOn) {
         this.gameInit = gameInit;
         var control1 = new Control1();
         var control2 = new Control2();
-        this.arenas = new Arenas(this.gameInit.RIGHT_BOUND, this.gameInit.BOTTOM_BOUND, control1, control2);
+        this.arenas = new Arenas(this.gameInit.RIGHT_BOUND, this.gameInit.BOTTOM_BOUND, control1, control2, junkOn);
         this.images = new Images();
         this.clearScreen();
         this.hadGameOver = false;
