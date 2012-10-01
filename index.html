@@ -3,6 +3,7 @@
   <head>
     <script src="jquery.js" type="text/javascript" charset="utf-8"></script>
     <script src="class.js" type="text/javascript" charset="utf-8"></script>
+    <script src="options.js" type="text/javascript" charset="utf-8"></script>
     <script src="control.js" type="text/javascript" charset="utf-8"></script>
     <script src="control1.js" type="text/javascript" charset="utf-8"></script>
     <script src="control2.js" type="text/javascript" charset="utf-8"></script>
@@ -28,19 +29,43 @@
     <title>Game</title>
   </head>
   <body>
+    <div id="startForm">
     <label for="junk_on">Send Junk On:</label>
     <input type="radio" name="junk" id="junk_on" value="on" checked>
     <label for="junk_off">Send Junk Off:</label>
     <input type="radio" name="junk" id="junk_off" value="off">
-    <input type="submit" id="startGame" value="Start">
+    <br/>
+    <label for="line_1">1 line:</label>
+    <input type="text" name="line_1" id="line_1" value="0">
+    <br/>
+    <label for="line_2">2 line:</label>
+    <input type="text" name="line_2" id="line_2" value="2">
+    <br/>
+    <label for="line_3">3 line:</label>
+    <input type="text" name="line_3" id="line_3" value="5">
+    <br/>
+    <label for="line_4">4 line:</label>
+    <input type="text" name="line_4" id="line_4" value="8">
+    <br/>
 
+    <label for="player_1">Player 1 name:</label>
+    <input type="text" name="player_1" id="player_1" value="">
+    <br/>
+
+    <label for="player_1">Player 2 name:</label>
+    <input type="text" name="player_2" id="player_2" value="">
+    <br/>
+
+
+    <input type="submit" id="startGame" value="Start">
+    </div>
     <script type="text/javascript">
 $('#startGame').click(function() {
-var junkOn = false;
-junkOn = $('#junk_on').is(':checked');
-
+var junkLines = [$('#line_1').val(), $('#line_2').val(), $('#line_3').val(), $('#line_4').val()];
+var options = new Options($('#junk_on').is(':checked'), junkLines, $('#player_1').val(), $('#player_2').val());
+$('#startForm').hide();
 var gameInit = new GameInit();
-var gameController = new GameController(gameInit, junkOn);
+var gameController = new GameController(gameInit, options);
 
 (function() {
     var onEachFrame;

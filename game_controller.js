@@ -1,12 +1,14 @@
 var GameController = Class.extend({
-    init: function(gameInit, junkOn) {
+    init: function(gameInit, options) {
         this.gameInit = gameInit;
         var control1 = new Control1();
         var control2 = new Control2();
-        this.arenas = new Arenas(this.gameInit.RIGHT_BOUND, this.gameInit.BOTTOM_BOUND, control1, control2, junkOn);
+        this.arenas = new Arenas(this.gameInit.RIGHT_BOUND, this.gameInit.BOTTOM_BOUND, control1, control2, options);
         this.images = new Images();
         this.clearScreen();
         this.hadGameOver = false;
+
+        this.options = options;
     },
 
     update: function() {
@@ -14,8 +16,16 @@ var GameController = Class.extend({
             this.arenas.update();
         else if (!this.hadGameOver) {
             this.displayWinner();
+            this.submitWinner();
             this.hadGameOver = true;
         }
+    },
+
+    submitWinner: function() {
+        if (this.arenas.winner == 1)
+            $.post('/player_wins', {winner: this.options.player1Name, loser: this.options.player2Name});
+        else
+            $.post('/player_wins', {winner: this.options.player2Name, loser: this.options.player1Name});
     },
 
     displayWinner: function() {

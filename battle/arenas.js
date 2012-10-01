@@ -1,5 +1,5 @@
 var Arenas = Class.extend({
-    init: function(rightBound, bottomBound, control1, control2, junkOn) {
+    init: function(rightBound, bottomBound, control1, control2, options) {
         var draw = new Draw(rightBound, bottomBound, 80, 0);
         this.playerArena = new BlockFall(new CreateShape(), draw, new Combatant(30));
 
@@ -9,7 +9,7 @@ var Arenas = Class.extend({
         this.control1 = control1;
         this.control2 = control2;
         this.gameOver = false;
-        this.junkOn = junkOn;
+        this.options = options;
     },
 
     update: function() {
@@ -35,9 +35,9 @@ var Arenas = Class.extend({
 
         if (this.gameOver) {
             if (this.playerArena.gameOver || this.playerArena.combatant.hp < 1)
-                this.winner = 'Player 2';
+                this.winner = 2;
             else
-                this.winner = 'Player 1';
+                this.winner = 1;
         }
 
     },
@@ -53,15 +53,17 @@ var Arenas = Class.extend({
     },
 
     addJunkRows: function(damageDoer, damageTaker) {
-        if (!this.junkOn)
+        if (!this.options.junkOn)
             return;
 
-        if (damageDoer.damageDone == 2)
-            damageTaker.addJunkRows(2);
+        if (damageDoer.damageDone == 1)
+            damageTaker.addJunkRows(this.options.junkLines[0]);
+        else if (damageDoer.damageDone == 2)
+            damageTaker.addJunkRows(this.options.junkLines[1]);
         else if (damageDoer.damageDone == 3)
-            damageTaker.addJunkRows(5);
+            damageTaker.addJunkRows(this.options.junkLines[2]);
         else if (damageDoer.damageDone == 4)
-            damageTaker.addJunkRows(8);
+            damageTaker.addJunkRows(this.options.junkLines[3]);
 
     },
 
