@@ -4,7 +4,8 @@ describe("Arenas", function() {
 
     beforeEach(function() {
         gameInit = new GameInit(true);
-        arenas = new Arenas(10, 20, new Control1(), new Control2());
+        options = new Options(true, [0, 2, 5, 8], 'Bob', 'Sally');
+        arenas = new Arenas(10, 20, new Control1(), new Control2(), options);
     });
 
     afterEach(function() {
@@ -19,7 +20,7 @@ describe("Arenas", function() {
     it("should let you move right", sinon.test(function() {
         var control = new Control1();
         this.stub(control, 'isMovingRight').returns(true);
-        arenas = new Arenas(10, 20, control, new Control2());
+        arenas = new Arenas(10, 20, control, new Control2(), options);
 
         arenas.update();
         expect(arenas.playerArena.fallingShape.block.x).toEqual(6);
@@ -29,20 +30,20 @@ describe("Arenas", function() {
         arenas.playerArena.gameOver = true;
         arenas.update();
         expect(arenas.gameOver).toBeTruthy();
-        expect(arenas.winner).toEqual('Player 2');
+        expect(arenas.winner).toEqual(2);
 
         arenas.playerArena.gameOver = false;
         arenas.enemyArena.gameOver = true;
         arenas.update();
         expect(arenas.gameOver).toBeTruthy();
-        expect(arenas.winner).toEqual('Player 1');
+        expect(arenas.winner).toEqual(1);
 
         arenas.playerArena.gameOver = false;
         arenas.enemyArena.gameOver = false;
         arenas.enemyArena.combatant.hp = 0;
         arenas.update();
         expect(arenas.gameOver).toBeTruthy();
-        expect(arenas.winner).toEqual('Player 1');
+        expect(arenas.winner).toEqual(1);
     });
 
     it("should be able to do damage", function() {
